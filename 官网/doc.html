@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>大模型能做什么、不能做什么 · 芽课</title>
+<meta name="description" content="芽课 · 193 格中的一格。读完只是变个颜色，只有你亲手写下的那句话才算证据。">
+<meta name="theme-color" content="#FAF8F2">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23231F20'/%3E%3Ccircle cx='11' cy='11' r='3.4' fill='%23F0EDDD'/%3E%3Ccircle cx='21' cy='11' r='3.4' fill='%23F0EDDD'/%3E%3Ccircle cx='16' cy='21' r='3.4' fill='%23FF4512'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@200;300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+:root{
+  --ink:#231F20;
+  --ink-2:#2C2728;
+  --cream:#F0EDDD;
+  --paper:#FAF8F2;
+  --accent:#FF4512;
+  --green:#5CBC6C;
+  --line:rgba(35,31,32,.14);
+  --serif:"Noto Serif SC","Instrument Serif","Songti SC","STSong","SimSun",serif;
+  --latin:"Instrument Serif","Times New Roman",serif;
+  --sans:"Inter","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  --pad:clamp(20px,4.6vw,64px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--accent);color:var(--cream)}
+
+/* ── 顶栏 ─────────────────────────────── */
+.bar{
+  position:fixed;top:0;left:0;right:0;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px var(--pad);
+  background:rgba(250,248,242,.72);backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid transparent;transition:border-color .4s var(--ease),background .4s var(--ease);
+}
+.bar.solid{border-bottom-color:var(--line);background:rgba(250,248,242,.94)}
+.bar-back,.bar-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11.5px;letter-spacing:.1em;color:rgba(35,31,32,.66);
+  transition:color .35s var(--ease);
+}
+.bar-back svg,.bar-cta svg{width:12px;height:12px}
+.bar-back:hover,.bar-cta:hover{color:var(--accent)}
+.bar-brand{
+  font-family:var(--serif);font-weight:400;font-size:16px;letter-spacing:.34em;
+  position:absolute;left:50%;transform:translateX(-50%);opacity:.9;
+}
+.bar-brand span{color:var(--accent)}
+@media (max-width:640px){.bar-brand{display:none}.bar-cta{font-size:11px}}
+
+/* 阅读进度 */
+.prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:41;width:0;transition:width .12s linear}
+
+/* ── 布局 ─────────────────────────────── */
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad)}
+.doc{display:grid;grid-template-columns:minmax(0,1fr) 276px;gap:clamp(36px,6vw,88px);align-items:start;padding-top:104px}
+.article{max-width:68ch;min-width:0}
+
+/* ── 文章头 ───────────────────────────── */
+.kick{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(35,31,32,.5);
+}
+.kick b{font-weight:500;color:var(--accent)}
+.kick i{font-style:normal;width:22px;height:1px;background:rgba(35,31,32,.24)}
+h1{
+  font-family:var(--serif);font-weight:300;font-size:clamp(30px,4.4vw,46px);
+  line-height:1.28;letter-spacing:-.01em;margin:18px 0 0;
+}
+.claim{
+  font-family:var(--serif);font-weight:300;font-size:clamp(17px,1.9vw,21px);line-height:1.85;
+  color:rgba(35,31,32,.9);border-left:2px solid var(--accent);
+  padding:4px 0 4px 20px;margin:26px 0 0;
+}
+.meta{
+  display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:26px;padding-top:18px;
+  border-top:1px solid var(--line);
+  font-size:11.5px;letter-spacing:.06em;color:rgba(35,31,32,.52);
+  font-variant-numeric:tabular-nums;
+}
+.meta b{font-weight:500;color:var(--ink)}
+.lede{margin-top:30px}
+.lede p{
+  font-family:var(--serif);font-size:16.5px;line-height:2;color:rgba(35,31,32,.78);
+}
+.lede p + p{margin-top:14px}
+
+/* ── 正文 ─────────────────────────────── */
+.body{margin-top:26px}
+.body h2{
+  font-family:var(--serif);font-weight:400;font-size:clamp(20px,2.2vw,24px);
+  line-height:1.5;margin:46px 0 0;letter-spacing:-.005em;
+}
+.body h2:first-child{margin-top:34px}
+.body h2 .no{
+  display:inline-block;font-family:var(--sans);font-weight:400;font-size:10.5px;
+  letter-spacing:.16em;color:var(--accent);vertical-align:middle;margin-right:12px;
+  transform:translateY(-2px);
+}
+.body p{margin-top:14px;font-size:15.5px;line-height:1.95;color:rgba(35,31,32,.84)}
+.body p:first-of-type{margin-top:12px}
+.body ul{margin-top:14px;list-style:none}
+.body ul li{
+  position:relative;padding-left:18px;margin-top:10px;
+  font-size:15px;line-height:1.9;color:rgba(35,31,32,.84);
+}
+.body ul li::before{
+  content:"";position:absolute;left:2px;top:.86em;
+  width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.75;
+}
+.body ul li strong,.body p strong{font-weight:600;color:var(--ink)}
+.body em{font-style:normal;background:linear-gradient(transparent 62%,rgba(255,69,18,.18) 0)}
+
+/* 判断清单 */
+.slate{
+  margin:48px 0 0;border:1px solid rgba(35,31,32,.2);background:var(--cream);
+  padding:clamp(22px,3vw,32px);
+}
+.slate .lab{
+  display:flex;align-items:center;gap:10px;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(35,31,32,.52);
+}
+.slate .lab i{flex:1;height:1px;background:rgba(35,31,32,.16)}
+.slate ol{list-style:none;counter-reset:c;margin-top:18px}
+.slate li{
+  counter-increment:c;position:relative;padding-left:34px;margin-top:14px;
+  font-size:14.5px;line-height:1.8;
+}
+.slate li::before{
+  content:counter(c,decimal-leading-zero);position:absolute;left:0;top:.28em;
+  font-size:10.5px;letter-spacing:.1em;color:var(--accent);
+  font-variant-numeric:tabular-nums;
+}
+.slate li:first-child{margin-top:0}
+
+/* 常见错法 */
+.trap{
+  margin-top:26px;padding:18px 20px;border-left:1px solid rgba(35,31,32,.2);
+  background:rgba(35,31,32,.02);
+}
+.trap h3{
+  font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.02em;
+  color:var(--ink);display:flex;align-items:center;gap:9px;
+}
+.trap h3::before{content:"×";color:var(--accent);font-size:15px;line-height:1;font-weight:400}
+.trap p{margin-top:8px;font-size:14px;line-height:1.85;color:rgba(35,31,32,.7)}
+
+/* 一句话带走 */
+.take{
+  margin:52px 0 0;padding:34px 0 0;border-top:1px solid var(--line);
+}
+.take .lab{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(35,31,32,.46)}
+.take p{
+  font-family:var(--serif);font-weight:300;font-size:clamp(19px,2.3vw,25px);
+  line-height:1.8;margin-top:14px;color:var(--ink);
+}
+
+/* ── 写下你的一句 ─────────────────────── */
+.write{
+  margin:56px 0 0;border:1px solid rgba(35,31,32,.2);background:#fff;
+}
+.write-h{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:16px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap;
+}
+.write-h .t{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(35,31,32,.62)}
+.write-h .ev{
+  font-size:10.5px;letter-spacing:.1em;color:rgba(35,31,32,.5);
+  display:inline-flex;align-items:center;gap:7px;
+}
+.write-h .ev b{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green)}
+.write-in{padding:20px}
+.modes{display:flex;gap:8px;flex-wrap:wrap}
+.mode{
+  border:1px solid rgba(35,31,32,.22);border-radius:100px;padding:7px 13px;
+  font-size:12px;color:rgba(35,31,32,.72);transition:.3s var(--ease);
+}
+.mode:hover{border-color:rgba(35,31,32,.5)}
+.mode.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+textarea{
+  width:100%;margin-top:14px;min-height:104px;resize:vertical;
+  border:0;border-bottom:1px solid rgba(35,31,32,.2);background:transparent;
+  font-family:var(--serif);font-size:15.5px;line-height:1.9;color:var(--ink);
+  padding:6px 0 10px;outline:none;transition:border-color .3s var(--ease);
+}
+textarea::placeholder{color:rgba(35,31,32,.32);font-family:var(--sans);font-size:13.5px}
+textarea:focus{border-bottom-color:var(--accent)}
+.w-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;flex-wrap:wrap}
+.w-hint{font-size:11.5px;line-height:1.7;color:rgba(35,31,32,.46);max-width:38ch}
+.w-hint.warn{color:var(--accent)}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:var(--cream);
+  border-radius:100px;padding:11px 20px;font-size:12px;letter-spacing:.08em;
+  transition:.4s var(--ease);border:1px solid var(--ink);
+}
+.btn:hover{background:var(--accent);border-color:var(--accent)}
+.btn[disabled]{opacity:.35;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink);border-color:rgba(35,31,32,.28)}
+.btn.ghost:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.btn svg{width:12px;height:12px}
+
+/* 已留下的句子 */
+.notes{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+.notes .n-h{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(35,31,32,.46)}
+.note{
+  margin-top:12px;padding-left:14px;border-left:2px solid rgba(255,69,18,.35);
+}
+.note p{font-family:var(--serif);font-size:14.5px;line-height:1.85;color:rgba(35,31,32,.86);white-space:pre-wrap}
+.note .n-m{margin-top:5px;font-size:10.5px;letter-spacing:.08em;color:rgba(35,31,32,.42)}
+
+/* ── 上一格 / 下一格 ──────────────────── */
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:56px 0 0}
+.pager a{background:var(--paper);padding:20px clamp(16px,2vw,24px);transition:background .4s var(--ease)}
+.pager a:hover{background:var(--cream)}
+.pager .k{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(35,31,32,.42)}
+.pager .v{font-family:var(--serif);font-size:15.5px;line-height:1.5;margin-top:8px}
+.pager .next{text-align:right}
+.pager .na{opacity:.32;pointer-events:none}
+
+/* ── 侧栏 ─────────────────────────────── */
+aside{position:sticky;top:96px;padding-top:6px}
+.a-h{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(35,31,32,.44)}
+.a-mod{margin-top:12px;font-family:var(--serif);font-size:15px;line-height:1.5}
+.a-list{list-style:none;margin-top:16px;border-top:1px solid var(--line)}
+.a-list li{border-bottom:1px solid var(--line)}
+.a-list a{display:flex;gap:9px;align-items:flex-start;padding:10px 0;font-size:12.5px;line-height:1.6;color:rgba(35,31,32,.62);transition:color .3s var(--ease)}
+.a-list a:hover{color:var(--ink)}
+.a-list s{width:6px;height:6px;border-radius:50%;border:1px solid rgba(35,31,32,.3);flex:0 0 auto;margin-top:.5em}
+.a-list .live s{background:var(--accent);border-color:var(--accent)}
+.a-list .cur a{color:var(--ink);font-weight:500}
+.a-list .cur{background:rgba(255,69,18,.06)}
+.a-list .cur a{padding-left:8px;border-left:2px solid var(--accent)}
+.a-note{margin-top:22px;font-size:11.5px;line-height:1.85;color:rgba(35,31,32,.46)}
+.a-copy{margin-top:14px;display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.08em;color:rgba(35,31,32,.5);transition:color .3s var(--ease)}
+.a-copy:hover{color:var(--accent)}
+.a-copy svg{width:11px;height:11px}
+/* 首页「试一格」的入口：读完想动手的那一下，就在这里 */
+.a-try{display:flex;width:fit-content;text-decoration:none;color:var(--accent);margin:16px 0 2px}
+.a-try:hover{color:var(--ink)}
+.a-try svg{transition:transform .35s var(--ease)}
+.a-try:hover svg{transform:translateX(3px)}
+
+/* 手机上侧栏换成横向 chips */
+.strip{display:none}
+@media (max-width:980px){
+  .doc{grid-template-columns:1fr;padding-top:92px}
+  aside{display:none}
+  .strip{display:flex;gap:8px;overflow-x:auto;margin-top:22px;padding-bottom:10px;scrollbar-width:none}
+  .strip::-webkit-scrollbar{display:none}
+  .strip a{
+    flex:0 0 auto;border:1px solid var(--line);border-radius:100px;
+    padding:7px 13px;font-size:12px;color:rgba(35,31,32,.66);white-space:nowrap;
+  }
+  .strip a.cur{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+  .article{max-width:none}
+}
+@media (max-width:640px){
+  .body p{font-size:15px}
+  .slate{padding:20px}
+  .pager{grid-template-columns:1fr}
+  .pager .next{text-align:left;border-top:1px solid var(--line)}
+  .w-foot .btn{flex:1 1 100%;justify-content:center}
+}
+
+/* ── 未就绪状态 ───────────────────────── */
+.state{
+  margin-top:44px;border:1px solid rgba(35,31,32,.2);background:var(--cream);
+  padding:clamp(26px,4vw,44px);
+}
+.state .lab{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(35,31,32,.5)}
+.state h2{font-family:var(--serif);font-weight:300;font-size:clamp(22px,2.6vw,28px);line-height:1.6;margin-top:14px}
+.state p{margin-top:14px;font-size:14.5px;line-height:1.9;color:rgba(35,31,32,.72);max-width:52ch}
+.state .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.state .done{font-size:12px;color:rgba(35,31,32,.6)}
+
+footer{border-top:1px solid var(--line);margin-top:80px;padding:28px 0 40px}
+.f-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(35,31,32,.44)}
+.f-in a:hover{color:var(--accent)}
+.f-links{display:flex;gap:18px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+
+<div class="bar" id="bar">
+  <a class="bar-back" href="index.html#map">
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M11 6H1M5 2L1 6l4 4"/></svg>
+    课程地图
+  </a>
+  <a class="bar-brand" href="index.html">芽课<span>。</span></a>
+  <a class="bar-cta" href="bench.html">
+    工作台
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg>
+  </a>
+</div>
+
+<main class="wrap">
+  <div class="doc">
+    <article class="article" id="article"></article>
+    <aside id="aside"></aside>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap f-in">
+    <span>芽课 YACLASS · 一天一格</span>
+    <div class="f-links">
+      <a href="index.html#map">课程地图</a>
+      <a href="bench.html">工作台</a>
+      <a href="index.html#try">试一格</a>
+      <a href="index.html#waitlist">订阅</a>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="docs.js"></script>
+<script>
+/* ── 这一格是谁 ─────────────────────────── */
+const qs = new URLSearchParams(location.search);
+const rawId = qs.get('k');
+const node = NODE_BY_ID[rawId] || NODES[0];
+if (rawId !== node.id) history.replaceState(null, '', 'doc.html?k=' + node.id);
+
+/* 页脚的「试一格」带上当前格：手机上侧栏是隐藏的，这是唯一的入口 */
+try{
+  const tf = document.querySelector('footer a[href="index.html#try"]');
+  if (tf) tf.href = 'index.html?k=' + node.id + '#try';
+}catch(e){}
+
+const doc = DOCS[node.id] || null;
+const state = doc ? 'full' : docState(node);
+const mod = MODULES[node.mid];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* 字数：正文所有可见字符 */
+function words(d){
+  if (!d) return 0;
+  let s = d.claim + d.lede.join('');
+  d.secs.forEach(x => { s += x.h + (x.p || []).join('') + (x.ul || []).join(''); });
+  s += d.checks.join('') + d.traps.map(t => t.h + t.p.join('')).join('') + d.take;
+  return s.replace(/\s/g, '').length;
+}
+const W = words(doc);
+
+/* ── 渲染正文 ───────────────────────────── */
+const A = document.getElementById('article');
+const head = `
+  <div class="kick">
+    <span>${String(node.mid + 1).padStart(2, '0')} — ${mod.en}</span><i></i>
+    <b>${esc(node.dom)}</b><i></i>
+    <span>第 ${node.idx + 1} / ${mod.nodes.length} 格</span>
+  </div>
+  <h1>${esc(node.t)}</h1>
+  ${doc ? `<p class="claim">${esc(doc.claim)}</p>` : ''}
+  <div class="meta">
+    <span><b>${node.n}</b> 格</span>
+    <span>${node.read ? '已讲 <b>' + node.read + '</b> 格' : '还没开讲'}</span>
+    ${doc ? `<span>约 <b>${W}</b> 字</span><span><b>${doc.minutes}</b> 分钟</span>` : ''}
+    <span>${esc(mod.name)}</span>
+  </div>
+  <nav class="strip">
+    ${mod.nodes.map(n => `<a class="${n.id === node.id ? 'cur' : ''}" href="doc.html?k=${n.id}">${esc(n.t.length > 14 ? n.t.slice(0, 13) + '…' : n.t)}</a>`).join('')}
+  </nav>`;
+
+let bodyHTML = '';
+if (state === 'full'){
+  bodyHTML = `
+    <div class="lede">${doc.lede.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+    <div class="body">
+      ${doc.secs.map((s, i) => `
+        <h2><span class="no">${String(i + 1).padStart(2, '0')}</span>${esc(s.h)}</h2>
+        ${(s.p || []).map(p => `<p>${esc(p)}</p>`).join('')}
+        ${s.ul ? `<ul>${s.ul.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+      `).join('')}
+    </div>
+    <section class="slate">
+      <div class="lab"><span>判断清单 · Checklist</span><i></i></div>
+      <ol>${doc.checks.map(c => `<li>${esc(c)}</li>`).join('')}</ol>
+    </section>
+    ${doc.traps.map(t => `<div class="trap"><h3>${esc(t.h)}</h3>${t.p.map(p => `<p>${esc(p)}</p>`).join('')}</div>`).join('')}
+    <section class="take">
+      <div class="lab">一句话带走</div>
+      <p>${esc(doc.take)}</p>
+    </section>
+    <section class="write" id="write">
+      <div class="write-h">
+        <span class="t">写下你的一句</span>
+        <span class="ev"><b></b><span id="evLabel">这一格：0 条证据</span></span>
+      </div>
+      <div class="write-in">
+        <div class="modes" role="group" aria-label="你的这句话属于哪种">
+          <button class="mode" data-mode="不同意" type="button">我不同意其中一句</button>
+          <button class="mode" data-mode="复述" type="button">用我自己的话重说</button>
+          <button class="mode" data-mode="做过" type="button">我做过，并且是这样</button>
+        </div>
+        <textarea id="noteIn" placeholder="先选一个态度，再写。少于 6 个字不算。" maxlength="600"></textarea>
+        <div class="w-foot">
+          <span class="w-hint" id="hint">读完只是变个颜色。这一栏填完，这一格才算你的。</span>
+          <button class="btn" id="saveBtn" disabled>留下这一句
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg>
+          </button>
+        </div>
+        <div class="notes" id="notes" hidden></div>
+      </div>
+    </section>`;
+} else {
+  bodyHTML = `
+    <div class="state">
+      <div class="lab">这一格还没有正文</div>
+      <h2>${node.n} 格，还没来得及写。</h2>
+      <p>我们不写「即将上线」来占位。这一格什么时候写，取决于有多少人催它。</p>
+      <div class="row">
+        <button class="btn" id="urgeBtn" type="button">催更这一格</button>
+        <a class="btn ghost" href="doc.html?k=m0n0">从第一格开始读</a>
+      </div>
+    </div>`;
+}
+
+/* 上一格 / 下一格（跨模块，按大纲顺序） */
+const flat = NODES;
+const idx = flat.findIndex(n => n.id === node.id);
+const prev = idx > 0 ? flat[idx - 1] : null;
+const next = idx < flat.length - 1 ? flat[idx + 1] : null;
+const pager = `
+  <div class="pager">
+    ${prev ? `<a href="doc.html?k=${prev.id}"><div class="k">← 上一格</div><div class="v">${esc(prev.t)}</div></a>`
+           : `<a class="na" href="#"><div class="k">← 上一格</div><div class="v">已经是第一格</div></a>`}
+    ${next ? `<a class="next" href="doc.html?k=${next.id}"><div class="k">下一格 →</div><div class="v">${esc(next.t)}</div></a>`
+           : `<a class="na next" href="#"><div class="k">下一格 →</div><div class="v">已经是最后一格</div></a>`}
+  </div>`;
+
+A.innerHTML = head + bodyHTML + pager;
+
+/* ── 侧栏 ───────────────────────────────── */
+document.getElementById('aside').innerHTML = `
+  <div class="a-h">本模块 · ${esc(mod.en)}</div>
+  <div class="a-mod">${esc(mod.name)}</div>
+  <ul class="a-list">
+    ${mod.nodes.map(n => `
+      <li class="${n.id === node.id ? 'cur' : ''} ${n.read ? 'live' : ''}">
+        <a href="doc.html?k=${n.id}"><s aria-hidden="true"></s><span>${esc(n.t)}</span></a>
+      </li>`).join('')}
+  </ul>
+  <a class="a-copy a-try" href="index.html?k=${node.id}#try">在首页试这一格
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg>
+  </a>
+  <button class="a-copy" id="copyBtn" type="button">
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="1" y="1" width="7" height="7"/><path d="M4 10h7V4"/></svg>
+    复制这一格的链接
+  </button>
+  <p class="a-note">${node.read} / ${node.n} 格已讲<br>
+  ${state === 'full' ? '26 格全部开放，读完写一句才算你的。' : '还没开讲，可以先催更。'}</p>`;
+
+/* ── 写下你的一句：本地存档，不上传 ──────── */
+const K = 'yc_notes_v1';
+const load = () => { try { return JSON.parse(localStorage.getItem(K) || '{}'); } catch (e) { return {}; } };
+const store = load();
+let mode = '';
+const noteIn = document.getElementById('noteIn');
+const saveBtn = document.getElementById('saveBtn');
+const hint = document.getElementById('hint');
+const notesEl = document.getElementById('notes');
+const evLabel = document.getElementById('evLabel');
+
+if (noteIn){
+  document.querySelectorAll('.mode').forEach(b => b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    document.querySelectorAll('.mode').forEach(x => x.classList.toggle('on', x === b));
+    check();
+  }));
+  noteIn.addEventListener('input', check);
+  noteIn.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter' && !saveBtn.disabled) saveBtn.click();
+  });
+
+  function check(){
+    const n = noteIn.value.trim().length;
+    const ok = n >= 6 && !!mode;
+    saveBtn.disabled = !ok;
+    if (n > 0 && n < 6) { hint.className = 'w-hint warn'; hint.textContent = '还差 ' + (6 - n) + ' 个字。写一句能被将来的自己看懂的话。'; }
+    else if (n >= 6 && !mode) { hint.className = 'w-hint warn'; hint.textContent = '先选一个态度：不同意、重说、还是做过。'; }
+    else { hint.className = 'w-hint'; hint.textContent = '读完只是变个颜色。这一栏填完，这一格才算你的。'; }
+  }
+
+  saveBtn.addEventListener('click', () => {
+    const list = store[node.id] || (store[node.id] = []);
+    list.push({ t: noteIn.value.trim(), mode, ts: Date.now() });
+    try { localStorage.setItem(K, JSON.stringify(store)); } catch (e) {}
+    noteIn.value = ''; mode = '';
+    document.querySelectorAll('.mode').forEach(x => x.classList.remove('on'));
+    check();
+    renderNotes();
+    hint.className = 'w-hint';
+    hint.textContent = '留下了。这一格的状态从「读过」变成「写过」。';
+  });
+
+  function renderNotes(){
+    const list = store[node.id] || [];
+    evLabel.textContent = list.length ? `这一格：${list.length} 条证据` : '这一格：0 条证据';
+    if (!list.length){ notesEl.hidden = true; return; }
+    notesEl.hidden = false;
+    notesEl.innerHTML = `<div class="n-h">你在这里留下的（${list.length}）</div>` + list.map(x => {
+      const d = new Date(x.ts);
+      const t = `${d.getMonth() + 1}月${d.getDate()}日 ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+      // src:'home' 是首页「试一格」写进来的，标一下来源，否则用户会以为是自己在文档页写的
+      const from = x.src === 'home' ? '来自首页「试一格」 · ' : '';
+      return `<div class="note"><p>${esc(x.t)}</p><div class="n-m">${esc(x.mode)} · ${from}${t} · 仅存在这台设备上</div></div>`;
+    }).join('');
+  }
+  renderNotes();
+  check();
+}
+
+/* 催更 */
+const urgeBtn = document.getElementById('urgeBtn');
+if (urgeBtn){
+  const done = () => {
+    urgeBtn.textContent = '已记下 · 谢谢';
+    urgeBtn.disabled = true;
+  };
+  try {
+    if (JSON.parse(localStorage.getItem('yc_urge_k') || '[]').includes(node.id)) done();
+  } catch (e) {}
+  urgeBtn.addEventListener('click', () => {
+    try {
+      const l = JSON.parse(localStorage.getItem('yc_urge_k') || '[]');
+      if (!l.includes(node.id)) l.push(node.id);
+      localStorage.setItem('yc_urge_k', JSON.stringify(l));
+    } catch (e) {}
+    done();
+  });
+}
+
+/* 复制链接 */
+const copyBtn = document.getElementById('copyBtn');
+if (copyBtn) copyBtn.addEventListener('click', async () => {
+  const url = location.origin + location.pathname + '?k=' + node.id;
+  try { await navigator.clipboard.writeText(url); copyBtn.textContent = '已复制'; }
+  catch (e) { copyBtn.textContent = url; }
+});
+
+/* ── 标题、进度条、顶栏 ─────────────────── */
+document.title = node.t + ' · 芽课';
+const prog = document.getElementById('prog');
+const bar = document.getElementById('bar');
+function onScroll(){
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  prog.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  bar.classList.toggle('solid', h.scrollTop > 24);
+}
+addEventListener('scroll', onScroll, {passive: true});
+onScroll();
+
+/* 键盘：← → 翻格 */
+addEventListener('keydown', e => {
+  if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+  if (e.key === 'ArrowLeft' && prev) location.href = 'doc.html?k=' + prev.id;
+  if (e.key === 'ArrowRight' && next) location.href = 'doc.html?k=' + next.id;
+});
+</script>
+</body>
+</html>

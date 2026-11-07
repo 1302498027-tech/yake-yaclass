@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>芽课 · 个人工作库</title>
+<!-- 本工作台通过 WorkBuddy「资料库」skill 搭建、存储和部署 -->
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#F7F7F5; --card:#FFFFFF; --line:#E6E4DE; --line2:#EFEDE7;
+  --ink:#22221F; --ink2:#6B6A64; --ink3:#9A9890;
+  --accent:#0F6E56; --accent2:#1D9E75; --soft:#E1F5EE;
+  --red:#A32D2D; --redbg:#FCEBEB; --amber:#854F0B; --amberbg:#FAEEDA;
+  --l0:#C6C3B9; --l1:#9FE1CB; --l2:#5DCAA5; --l3:#0F6E56;
+  --r:12px; --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.card,.row,.card-top{min-width:0}
+.card-h,.card-p,.row-t,.alert-b,.alert-t{overflow-wrap:anywhere}
+.hide{display:none!important}
+button{font-family:inherit;font-size:14px;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea{font-family:inherit;font-size:16px}
+
+.shell{display:flex;min-height:100vh}
+.side{width:196px;flex:0 0 196px;border-right:1px solid var(--line);background:#FBFAF8;padding:20px 12px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:9px;padding:0 8px 18px}
+.brand-mark{width:26px;height:26px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center}
+.brand-name{font-size:15px;font-weight:500;letter-spacing:.3px}
+.brand-sub{font-size:11px;color:var(--ink3);margin-top:-2px}
+.nav{display:flex;flex-direction:column;gap:2px;margin-top:6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;color:var(--ink2);text-align:left;width:100%;min-height:40px}
+.nav-item:hover{background:#F1EFE9}
+.nav-item.on{background:var(--soft);color:var(--accent);font-weight:500}
+.nav-item svg{flex:0 0 16px}
+.nav-badge{margin-left:auto;font-size:11px;background:var(--redbg);color:var(--red);border-radius:9px;padding:0 6px;line-height:17px}
+.side-foot{margin-top:auto;padding:10px 8px 0;border-top:1px solid var(--line);font-size:11px;color:var(--ink3);line-height:1.7}
+
+.main{flex:1;min-width:0;padding:26px 32px 60px;max-width:1080px}
+.page-head{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+.page-title{font-size:20px;font-weight:500;margin:0}
+.page-sub{font-size:12px;color:var(--ink3)}
+
+.alert{display:flex;gap:10px;align-items:flex-start;background:var(--redbg);border:1px solid #F0C9C9;border-radius:var(--r);padding:12px 14px;margin:16px 0 18px}
+.alert-t{font-size:13px;font-weight:500;color:var(--red)}
+.alert-b{font-size:12px;color:#7A2626;margin-top:2px}
+.alert-x{margin-left:auto;color:#B06A6A;padding:2px 4px;font-size:16px;line-height:1}
+
+.grid3{display:grid;grid-template-columns:1fr;gap:14px;max-width:720px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.card-top{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tag{font-size:11px;padding:1px 7px;border-radius:20px;background:var(--soft);color:var(--accent);font-weight:500}
+.tag.gray{background:#F1EFE9;color:var(--ink2)}
+.tag.red{background:var(--redbg);color:var(--red)}
+.tag.amber{background:var(--amberbg);color:var(--amber)}
+.card-h{font-size:15px;font-weight:500;line-height:1.45;margin:0 0 6px}
+.card-meta{font-size:12px;color:var(--ink3);display:flex;flex-wrap:wrap;gap:10px}
+.card-p{font-size:13px;color:var(--ink2);margin:10px 0 0}
+.checks{margin:10px 0 0;display:flex;flex-direction:column;gap:7px}
+.check{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--ink2);background:#FCFCFA;border:1px solid var(--line2);border-radius:8px;padding:9px 11px;text-align:left;width:100%;min-height:44px}
+.check:hover{border-color:#D8D5CC}
+.check.on{color:var(--ink3);text-decoration:line-through}
+.check-box{flex:0 0 15px;width:15px;height:15px;border:1px solid #C9C6BC;border-radius:4px;margin-top:2px;display:flex;align-items:center;justify-content:center;background:#fff}
+.check.on .check-box{background:var(--accent);border-color:var(--accent)}
+.card-act{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.btn{padding:9px 14px;border-radius:9px;border:1px solid var(--line);background:#fff;min-height:38px;font-size:13px;color:var(--ink)}
+.btn:hover{border-color:#CFCBc1;background:#FBFAF7}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.pri:hover{background:#0B5A46}
+.btn.sm{padding:6px 10px;min-height:32px;font-size:12px}
+
+.sect{margin-top:30px}
+.sect-h{display:flex;align-items:center;gap:8px;margin:0 0 12px}
+.sect-t{font-size:14px;font-weight:500;margin:0}
+.sect-n{font-size:11px;color:var(--ink3)}
+
+.row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line2);font-size:13px}
+.row:last-child{border-bottom:none}
+.row-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:50%;flex:0 0 7px;background:var(--l0)}
+.dot.d1{background:var(--l1)} .dot.d2{background:var(--l2)} .dot.d3{background:var(--l3)}
+
+.listcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 12px}
+.chip{padding:6px 12px;border-radius:20px;border:1px solid var(--line);background:#fff;font-size:12px;color:var(--ink2);min-height:34px}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.search{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none;margin-bottom:4px}
+.search:focus{border-color:var(--accent2)}
+
+.heat{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:var(--r);background:var(--card);padding:14px 16px;overflow-x:auto;width:fit-content;max-width:100%}
+.heat-row{display:flex;align-items:center;gap:3px;min-width:max-content}
+.heat-lab{width:74px;flex:0 0 74px;font-size:11px;color:var(--ink2);text-align:right;padding-right:8px;white-space:nowrap}
+.cell{width:19px;height:19px;border-radius:4px;background:var(--l0);flex:0 0 19px}
+.cell.l1{background:var(--l1)} .cell.l2{background:var(--l2)} .cell.l3{background:var(--l3)}
+.cell.empty{background:#fff;border:1px dashed #D5D1C6}
+.cell.pad{background:transparent;border:none}
+.heat-legend{display:flex;gap:14px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line2);font-size:11px;color:var(--ink2);flex-wrap:wrap}
+.lg{display:flex;align-items:center;gap:5px}
+
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font-weight:400;font-size:11px;color:var(--ink3);padding:9px 12px;border-bottom:1px solid var(--line)}
+.tbl td{padding:11px 12px;border-bottom:1px solid var(--line2);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+
+.mask{position:fixed;inset:0;background:rgba(30,30,26,.34);display:flex;align-items:center;justify-content:center;padding:18px;z-index:50}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:520px;padding:20px;max-height:88vh;overflow:auto}
+.modal-h{font-size:15px;font-weight:500;margin:0 0 4px}
+.modal-s{font-size:12px;color:var(--ink3);margin:0 0 14px}
+.ta{width:100%;min-height:132px;padding:12px;border:1px solid var(--line);border-radius:10px;resize:vertical;line-height:1.65;outline:none}
+.ta:focus{border-color:var(--accent2)}
+.modal-f{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+.hint{font-size:11px;color:var(--ink3);margin-top:8px}
+
+.tabbar{display:none}
+.foot{padding:22px 0 0;font-size:11px;color:var(--ink3)}
+
+@media(max-width:767px){
+  .side{display:none}
+  .main{padding:18px 14px calc(74px + env(safe-area-inset-bottom))}
+  .page-title{font-size:18px}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:40}
+  .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 0 7px;font-size:10px;color:var(--ink3);min-height:52px}
+  .tab.on{color:var(--accent)}
+  .heat-lab{width:56px;flex:0 0 56px;font-size:10px}
+  .cell{width:15px;height:15px;flex:0 0 15px}
+  .tbl th:nth-child(2),.tbl td:nth-child(2){display:none}
+  .row{flex-wrap:wrap;gap:4px 8px;padding:12px}
+  .row-t{flex:1 1 100%;white-space:normal;line-height:1.5}
+  .row .page-sub{order:2}
+  .row .btn{order:3;margin-left:auto}
+  .card-act .btn{flex:1 1 auto;justify-content:center;text-align:center}
+  .card-act .btn.pri{flex:1 1 100%}
+  .heat{margin:0 -4px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 14V7" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/><path d="M8 7C8 4.5 6 3 3.5 3c0 2.5 2 4 4.5 4Z" fill="#fff"/><path d="M8 7c0-2.5 2-4 4.5-4 0 2.5-2 4-4.5 4Z" fill="#fff" opacity=".75"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">芽课</div>
+        <div class="brand-sub">个人工作库</div>
+      </div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="side-foot">
+      <div id="syncState">本机存储</div>
+      <div id="buildTime"></div>
+      <button class="btn sm" style="margin-top:8px;width:100%;font-size:11px" onclick="exportBackup()">导出备份</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-head">
+      <h1 class="page-title" id="viewTitle">今日</h1>
+      <span class="page-sub" id="viewSub"></span>
+    </div>
+
+    <section id="v-today"></section>
+    <section id="v-library" class="hide"></section>
+    <section id="v-profile" class="hide"></section>
+    <section id="v-ops" class="hide"></section>
+
+    <div class="foot">
+      数据快照 <span id="footBuild"></span> · 笔记来自 桌面/素材包 · 你的复述与勾选存在本机浏览器
+    </div>
+  </main>
+</div>
+
+<nav class="tabbar" id="tabbar"></nav>
+<div id="modalHost"></div>
+
+<script>
+const DATA = /*__PAYLOAD__*/null/*__END__*/;
+
+const ICONS = {
+  today:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.6" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3.2l2 1.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>',
+  library:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3.6h4.2c.4 0 .8.4.8.8v8.2c0-.4-.4-.8-.8-.8H3V3.6Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M13 3.6H8.8c-.4 0-.8.4-.8.8v8.2c0-.4.4-.8.8-.8H13V3.6Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>',
+  profile:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2.4" y="2.4" width="4.6" height="4.6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="2.4" width="4.6" height="4.6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="2.4" y="9" width="4.6" height="4.6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="9" width="4.6" height="4.6" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>',
+  ops:'<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.6h2.6l1.4-3 2 5.6 1.6-3h4.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+const VIEWS = [
+  {id:'today',  name:'今日',    sub:'今天只做三件事'},
+  {id:'library',name:'题库',    sub:'28 篇日记 · 46 个概念'},
+  {id:'profile',name:'能力剖面',sub:'193 格 · 四层证据'},
+  {id:'ops',    name:'运维',    sub:'12 个自动任务健康度'}
+];
+const LEVEL_NAME = ['讲过','复述/反驳','落地过','用过'];
+
+const S = { tab:'today', filter:'全部', q:'', opened:null };
+
+function storeKey(){ return 'wb_yake_v1'; }
+function loadStore(){
+  try{
+    const raw = localStorage.getItem(storeKey());
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return {digest:{}, read:{}, checks:{}, verdict:{}, applied:{}, rebut:{}};
+}
+let DB = loadStore();
+if(!DB.rebut) DB.rebut = {};
+function saveStore(){
+  try{
+    localStorage.setItem(storeKey(), JSON.stringify(DB));
+    document.getElementById('syncState').textContent = '已存本机';
+  }catch(e){
+    document.getElementById('syncState').textContent = '存储失败';
+  }
+}
+const DBID = 'YkMcLJUZ8vqF4BrazXmoKd';
+
+function dbapi(){ return (window.__SMART_PAGE__ && window.__SMART_PAGE__.database) ? window.__SMART_PAGE__.database : null; }
+function setSync(t, kind){
+  const el = $id('syncState');
+  if(!el) return;
+  el.textContent = t;
+  el.style.color = kind==='warn' ? 'var(--amber)' : (kind==='off' ? 'var(--ink3)' : 'var(--accent)');
+}
+function applyRow(row){
+  const k = row['键'], kind = row['类型'], v = row['内容'];
+  if(!k || !kind) return;
+  if(kind==='digest') DB.digest[k] = v;
+  else if(kind==='check') DB.checks[k] = (v==='1');
+  else if(kind==='read') DB.read[k] = v;
+  else if(kind==='verdict') DB.verdict[k] = v;
+  else if(kind==='applied') DB.applied[k] = parseInt(v||'0',10)||0;
+  else if(kind==='rebut') DB.rebut[k] = v;
+}
+function syncLoad(done){
+  const db = dbapi();
+  if(!db){ setSync('本机存储','off'); done(); return; }
+  setSync('同步中…');
+  let acc = [], guard = 0;
+  function page(cursor){
+    if(guard++ > 50){ finish(); return; }
+    db.query({databaseId:DBID, pageSize:200, startCursor:cursor}).then(function(r){
+      const rows = r.results || [];
+      acc = acc.concat(rows);
+      const nx = r.nextCursor;
+      if(r.hasMore && nx && nx!==cursor && rows.length) page(nx);
+      else finish();
+    }).catch(function(e){ console.warn('[sync] 拉取失败', e); setSync('离线 · 本机可用','warn'); done(); });
+  }
+  function finish(){
+    acc.forEach(applyRow);
+    try{ localStorage.setItem(storeKey(), JSON.stringify(DB)); }catch(e){}
+    setSync('已同步 · '+acc.length+' 条');
+    done();
+  }
+  page(undefined);
+}
+function syncPush(kind, k, v){
+  const db = dbapi();
+  if(!db){ setSync('本机存储','off'); return; }
+  db.addRecord({databaseId:DBID, properties:{
+    '键':{text:String(k)}, '类型':{text:kind}, '内容':{text:String(v)}, '时间':{text:new Date().toISOString()}
+  }}).then(function(){ setSync('已同步'); })
+   .catch(function(e){ console.warn('[sync] 写入失败', e); setSync('待重试 · 本机已存','warn'); });
+}
+
+function ekey(e){ return e.date + '|' + e.domain; }
+function level(e){
+  const k = ekey(e), d = DB.digest[k] || '', b = DB.rebut[k] || '';
+  const checks = Object.keys(DB.checks).filter(x=>x.indexOf(k+'#')===0 && DB.checks[x]).length;
+  const applied = DB.applied[k] || 0;
+  if(applied >= 3) return 3;
+  if(checks > 0 || applied > 0 || e.checksDone > 0) return 2;
+  if((d && d.replace(/\s/g,'').length >= 30) || e.digest) return 1;
+  if(b && b.replace(/\s/g,'').length >= 10) return 1;
+  return 0;
+}
+function levelOfText(t){ return (t||'').replace(/\s/g,'').length >= 30; }
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function $id(id){ return document.getElementById(id); }
+
+function renderNav(){
+  const html = VIEWS.map(v=>{
+    const badge = (v.id==='ops' && DATA.overdue.length) ? '<span class="nav-badge">'+DATA.overdue.length+'</span>' : '';
+    return '<button class="nav-item'+(S.tab===v.id?' on':'')+'" data-tab="'+v.id+'">'+ICONS[v.id]+'<span>'+v.name+'</span>'+badge+'</button>';
+  }).join('');
+  $id('nav').innerHTML = html;
+  $id('nav').querySelectorAll('.nav-item').forEach(b=>{ b.onclick = ()=>switchTab(b.dataset.tab); });
+  $id('tabbar').innerHTML = VIEWS.map(v=>
+    '<button class="tab'+(S.tab===v.id?' on':'')+'" data-tab="'+v.id+'">'+ICONS[v.id]+'<span>'+v.name+'</span></button>'
+  ).join('');
+  $id('tabbar').querySelectorAll('.tab').forEach(b=>{ b.onclick = ()=>switchTab(b.dataset.tab); });
+}
+
+function switchTab(id){
+  S.tab = id;
+  VIEWS.forEach(v=>{
+    const el = $id('v-'+v.id);
+    if(el) el.classList.toggle('hide', v.id!==id);
+  });
+  $id('viewTitle').textContent = (VIEWS.find(v=>v.id===id)||{}).name || '';
+  $id('viewSub').textContent = (VIEWS.find(v=>v.id===id)||{}).sub || '';
+  if(location.hash !== '#'+id){ try{ history.replaceState(null,'','#'+id); }catch(e){} }
+  refreshAll();
+}
+
+function renderAlert(){
+  const box = $id('alertBox');
+  if(!box) return;
+  if(!DATA.overdue.length){ box.innerHTML=''; box.classList.add('hide'); return; }
+  box.classList.remove('hide');
+  const names = DATA.overdue.map(o=>o.domain+(o.days>0?(' 已 '+o.days+' 天'):(o.gapDays>0?(' 停 '+o.gapDays+' 天'):' 今天未产出'))).join(' · ');
+  box.innerHTML = '<div class="alert" style="margin:14px 0 0">'
+    + '<div><div class="alert-t">'+DATA.overdue.length+' 个任务该跑没跑</div>'
+    + '<div class="alert-b">'+esc(names)+'　最晚一次应产出已过点，去「运维」看排期</div></div>'
+    + '<button class="alert-x" onclick="switchTab(\'ops\')">›</button></div>';
+}
+
+function pickRead(){
+  const base = DATA.today3.read;
+  if(base && !DB.digest[base.date+'|'+base.domain]) return base;
+  const rest = DATA.entries.filter(e=>!DB.digest[e.date+'|'+e.domain]);
+  if(!rest.length) return base;
+  rest.sort((a,b)=> (a.weight-b.weight) || (a.date<b.date?1:-1));
+  return rest[rest.length-1];
+}
+
+function renderToday(){
+  const t3 = DATA.today3, r = pickRead();
+  let html = '<div id="alertBox"></div>';
+  html += '<div class="grid3">';
+
+  if(r){
+    const lv = level(r), dg = DB.digest[ekey(r)] || '';
+    html += '<div class="card">'
+      + '<div class="card-top"><span class="tag">必读 1 期</span><span class="tag gray">'+esc(r.domain)+'</span>'
+      + '<span class="page-sub" style="margin-left:auto">第 '+r.grid+'/'+r.gridTotal+' 格</span></div>'
+      + '<h3 class="card-h">'+esc(r.gridName)+'</h3>'
+      + '<div class="card-meta"><span>'+esc(r.date)+'</span><span>'+(r.chars>=1000?(r.chars/1000).toFixed(1)+' 千字':r.chars+' 字')+'</span><span>'+r.sources+' 条来源</span><span>'+esc(r.chapter)+'</span></div>'
+      + '<p class="card-p">'+esc(r.brief||'')+'</p>'
+      + '<div class="card-act">'
+      + '<button class="btn pri" onclick="openReader(\''+esc(r.date)+'\',\''+esc(r.domain)+'\')">读并复述</button>'
+      + '<button class="btn sm" onclick="openReader(\''+esc(r.date)+'\',\''+esc(r.domain)+'\',true)">我不同意</button>'
+      + '<button class="btn sm" onclick="markRead(\''+ekey(r)+'\')">'+(DB.read[ekey(r)]?'已读':'标记读完')+'</button>'
+      + '<button class="btn sm" onclick="markSkip(\''+ekey(r)+'\')">'+(DB.verdict[ekey(r)]==='跳过'?'已跳过':'跳过')+'</button>'
+      + '</div>'
+      + (dg ? '<p class="hint">你的复述：'+esc(dg.slice(0,60))+'…</p>' : '')
+      + (DB.rebut[ekey(r)] ? '<p class="hint">你的反驳：'+esc(DB.rebut[ekey(r)].slice(0,60))+'</p>' : '')
+      + (!dg && !DB.rebut[ekey(r)] ? '<p class="hint">复述 ≥30 字，或反驳 ≥10 字，才算 L1</p>' : '')
+      + '</div>';
+  }
+
+  const doing = t3.doing;
+  if(doing){
+    html += '<div class="card">'
+      + '<div class="card-top"><span class="tag">动手 1 个</span><span class="tag gray">'+esc(doing.domain)+'</span>'
+      + '<span class="page-sub" style="margin-left:auto">≤15 分钟</span></div>'
+      + '<h3 class="card-h">做完这三条，今天才算落地</h3>'
+      + '<div class="checks">'
+      + doing.items.map((it,i)=>{
+          const k = doing.date+'|'+doing.domain+'#'+i;
+          const on = !!DB.checks[k];
+          return '<button class="check'+(on?' on':'')+'" onclick="toggleCheck(\''+k+'\')">'
+            + '<span class="check-box">'+(on?'<svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M1.5 5.2l2.3 2.3L8.5 2.8" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')+'</span>'
+            + '<span>'+esc(it)+'</span></button>';
+        }).join('')
+      + '</div></div>';
+  }
+
+  const rv = t3.review;
+  if(rv){
+    html += '<div class="card">'
+      + '<div class="card-top"><span class="tag">复习 1 个</span><span class="tag gray">'+esc(rv.domain)+'</span>'
+      + '<span class="page-sub" style="margin-left:auto">'+(rv.age?('间隔 '+rv.age+' 天'):'高频概念')+'</span></div>'
+      + '<h3 class="card-h">'+esc(rv.name)+'</h3>'
+      + '<p class="card-p">先在脑子里讲一遍它的机制和代价，讲不顺再翻笔记。</p>'
+      + '<div class="card-act"><button class="btn sm" onclick="openConcept(\''+esc(rv.name)+'\')">看笔记</button></div>'
+      + '</div>';
+  }
+
+  html += '</div>';
+
+  const all = DATA.entries.slice().sort((a,b)=> a.date<b.date?1:-1);
+  html += '<div class="sect"><div class="sect-h"><h2 class="sect-t">在库的全部产出</h2><span class="sect-n">'+all.length+' 篇 · 今天只有 1 篇需要精读</span></div>'
+    + '<div class="listcard">' + all.map(e=>{
+        const lv = level(e);
+        return '<div class="row"><span class="dot d'+lv+'"></span>'
+          + '<span class="row-t">'+esc(e.domain)+' · 第 '+e.grid+' 格 · '+esc(e.gridName)+'</span>'
+          + '<span class="page-sub">'+esc(e.date)+'</span>'
+          + '<button class="btn sm" onclick="openReader(\''+esc(e.date)+'\',\''+esc(e.domain)+'\')">打开</button></div>';
+      }).join('') + '</div></div>';
+
+  $id('v-today').innerHTML = html;
+  renderAlert();
+}
+
+function renderOps(){
+  const rank = {fail:0, due:1, ok:2};
+  const t = DATA.tasks.slice().sort((a,b)=> (rank[a.status]-rank[b.status]) || (b.overdueDays-a.overdueDays));
+  const rows = t.map(x=>{
+    const st = (!x.lastOk && x.status!=='ok') ? '<span class="tag red">从未产出</span>'
+      : (x.overdueDays>0 ? '<span class="tag red">超期 '+x.overdueDays+' 天</span>'
+      : (x.status==='due' ? '<span class="tag amber">今天未产出</span>' : '<span class="tag">正常</span>'));
+    const lastTxt = x.lastOk ? esc(x.lastOk) + (x.gapDays>0 ? '<div class="page-sub">停 '+x.gapDays+' 天</div>' : '') : '从未';
+    return '<tr><td><strong style="font-weight:500">'+esc(x.domain)+'</strong><div class="page-sub">'+esc(x.plan)+'</div></td>'
+      + '<td>'+lastTxt+'</td>'
+      + '<td>'+x.grids+'</td><td>'+x.entries+' 篇</td><td>'+st+'</td></tr>';
+  }).join('');
+  $id('v-ops').innerHTML =
+      '<p class="page-sub" style="margin:12px 0 14px">按超期天数排序。任务由 WorkBuddy 跑，这里只读结果——跑没跑、跑出几篇，一眼看到。</p>'
+    + '<div class="listcard"><table class="tbl"><thead><tr><th>领域 / 排期</th><th>最后产出</th><th>格数</th><th>笔记</th><th>状态</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    + '<div class="sect"><div class="sect-h"><h2 class="sect-t">怎么修</h2></div>'
+    + '<div class="listcard" style="padding:16px 18px;font-size:13px;color:var(--ink2);line-height:1.9">'
+    + '1. 打开 <code>桌面/素材包/&lt;领域&gt;/00_提示词.md</code>，确认文件在、能读<br>'
+    + '2. 到 WorkBuddy 的自动任务里看该任务是否 ACTIVE、上次运行是否报错<br>'
+    + '3. 补跑一次：把横线下面的指令整段贴给 AI，产出会自己落回章节<br>'
+    + '4. 修完告诉我，或自己在 04-源代码 里跑 <code>python daily_push.py</code>，这条状态会跟着变<br>'
+    + '5. 每天早上 08:30 会自动跑一次并推送到邮箱，所以这里的数据最多旧一天'
+    + '</div></div>';
+}
+
+function libRows(){
+  const q = S.q.trim().toLowerCase();
+  if(S.mode==='concept'){
+    const hit = DATA.concepts.filter(c=>
+      (S.filter==='全部' || c.domain===S.filter) &&
+      (!q || (c.name+c.chapter+c.domain).toLowerCase().indexOf(q)>=0)
+    );
+    return {n:hit.length, html:hit.map(c=>
+      '<div class="row"><span class="dot"></span>'
+      + '<span class="row-t">'+esc(c.name)+'</span>'
+      + '<span class="page-sub">'+esc(c.domain)+'</span>'
+      + '<span class="page-sub">'+esc(c.firstSeen)+'</span>'
+      + '<button class="btn sm" onclick="openConcept(\''+esc(c.name)+'\')">看</button></div>').join('')};
+  }
+  if(S.mode==='rebut'){
+    const list = Object.keys(DB.rebut).filter(k=>DB.rebut[k]).map(k=>{
+      const p = k.split('|');
+      const e = DATA.entries.find(x=>x.date===p[0] && x.domain===p[1]);
+      return {domain:p[1]||'', date:p[0]||'', text:DB.rebut[k], e:e};
+    }).filter(x=>
+      (S.filter==='全部' || x.domain===S.filter) &&
+      (!q || (x.text+x.domain+(x.e?x.e.gridName:'')).toLowerCase().indexOf(q)>=0)
+    ).sort((a,b)=> a.date<b.date?1:-1);
+    return {n:list.length, html:list.map(x=>
+      '<div class="row" style="align-items:flex-start"><span class="dot d1" style="margin-top:6px"></span>'
+      + '<span class="row-t" style="white-space:normal">'
+      + '<strong style="font-weight:500">'+esc(x.domain)+'</strong> · '+(x.e?('第 '+x.e.grid+' 格 · '+esc(x.e.gridName)):esc(x.date))
+      + '<div style="color:var(--ink2);font-size:13px;margin-top:4px;line-height:1.6">「'+esc(x.text)+'」</div>'
+      + '</span>'
+      + (x.e?('<button class="btn sm" onclick="openReader(\''+esc(x.date)+'\',\''+esc(x.domain)+'\',true)">改</button>'):'')
+      + '</div>').join('')};
+  }
+  const hit = DATA.entries.filter(e=>
+    (S.filter==='全部' || e.domain===S.filter) &&
+    (!q || (e.gridName+e.chapter+e.domain+e.brief).toLowerCase().indexOf(q)>=0)
+  ).sort((a,b)=> a.date<b.date?1:-1);
+  return {n:hit.length, html:hit.map(e=>{
+    const lv = level(e);
+    return '<div class="row"><span class="dot d'+lv+'"></span>'
+      + '<span class="row-t"><strong style="font-weight:500">'+esc(e.domain)+'</strong> · 第 '+e.grid+' 格 · '+esc(e.gridName)+'</span>'
+      + '<span class="page-sub">'+esc(e.date)+'</span>'
+      + '<button class="btn sm" onclick="openReader(\''+esc(e.date)+'\',\''+esc(e.domain)+'\')">'+(lv?LEVEL_NAME[lv]:'复述')+'</button></div>';
+  }).join('')};
+}
+
+function paintLibList(){
+  const r = libRows();
+  $id('libList').innerHTML = '<div class="listcard">' + (r.html || '<div class="row"><span class="row-t page-sub">没有匹配的条目</span></div>') + '</div>';
+  $id('libHint').textContent = r.n + ' 条 · 灰点=只讲过，青点=留过痕迹（复述或反驳）';
+}
+
+function renderLibrary(){
+  if(!S.mode) S.mode='entry';
+  const modes = [{id:'entry',name:'日记'},{id:'concept',name:'概念'},{id:'rebut',name:'我的反驳'}];
+  let html = '<input class="search" id="libQ" placeholder="搜标题、章节、概念名、你写过的反驳…" value="'+esc(S.q)+'">';
+  html += '<div class="filters">' + ['全部'].concat(DATA.progress.map(p=>p.domain)).map(d=>
+    '<button class="chip'+(S.filter===d?' on':'')+'" data-f="'+esc(d)+'">'+esc(d)+'</button>').join('') + '</div>';
+  html += '<div class="filters" style="margin-top:2px">' + modes.map(m=>
+    '<button class="chip'+(S.mode===m.id?' on':'')+'" data-m="'+m.id+'" style="'+(S.mode===m.id?'':'border-style:dashed')+'">'+m.name+'</button>').join('') + '</div>';
+  html += '<div id="libList"></div><p class="hint" id="libHint" style="margin-top:12px"></p>';
+  if(S.mode==='rebut') html += '';
+
+  $id('v-library').innerHTML = html;
+  const qi = $id('libQ');
+  qi.oninput = ()=>{ S.q = qi.value; paintLibList(); };
+  $id('v-library').querySelectorAll('[data-f]').forEach(b=>{ b.onclick = ()=>{ S.filter=b.dataset.f; renderLibrary(); }; });
+  $id('v-library').querySelectorAll('[data-m]').forEach(b=>{ b.onclick = ()=>{ S.mode=b.dataset.m; renderLibrary(); }; });
+  paintLibList();
+}
+
+function renderProfile(){
+  const cnt = {l0:0,l1:0,l2:0,l3:0};
+  DATA.entries.forEach(e=>{ cnt['l'+level(e)]++; });
+  const passed = DATA.progress.reduce((a,p)=>a+p.done,0);
+  const total = DATA.progress.reduce((a,p)=>a+p.total,0);
+
+  let html = '<div class="card" style="margin-top:14px"><div class="card-top"><span class="tag">能力账户</span>'
+    + '<span class="page-sub" style="margin-left:auto">'+passed+' / '+total+' 格讲过</span></div>'
+    + '<div style="display:flex;gap:26px;flex-wrap:wrap;margin-top:4px">'
+    + [['讲过',cnt.l0,'var(--ink3)'],['复述·反驳',cnt.l1,'#9FE1CB'],['落地过',cnt.l2,'#5DCAA5'],['用过',cnt.l3,'#0F6E56']]
+        .map(x=>'<div><div style="font-size:26px;font-weight:500;line-height:1.2;color:'+(x[1]===0?'var(--ink2)':x[2])+'">'+x[1]+'</div>'
+          +'<div class="page-sub">'+x[0]+'</div></div>').join('')
+    + '</div>'
+    + '<p class="hint" style="margin-top:14px">「讲过」是 AI 跑出来的，不计分。能力分只认后三层——复述或反驳任一条，就算 L1。所以现在这张表是 0 分，正好说明问题。</p>'
+    + '</div>';
+
+  const rows = DATA.progress.map(p=>{
+    let cells = '';
+    for(let g=1; g<=p.total; g++){
+      const e = DATA.entries.find(x=>x.domain===p.domain && x.grid===g);
+      let cls = 'empty', tip = p.domain+' 第'+g+'格 · 还没讲';
+      if(e){
+        const lv = level(e);
+        cls = lv===0 ? '' : ('l'+lv);
+        tip = p.domain+' 第'+e.grid+'格 · '+e.gridName+' · '+LEVEL_NAME[lv];
+      }
+      const click = e ? ' onclick="openReader(\''+esc(e.date)+'\',\''+esc(e.domain)+'\')" style="cursor:pointer"' : '';
+      cells += '<div class="cell '+cls+'" title="'+esc(tip)+'"'+click+'></div>';
+    }
+    for(let k=p.total; k<18; k++){ cells += '<div class="cell pad"></div>'; }
+    return '<div class="heat-row"><div class="heat-lab">'+esc(p.domain)+'</div>'+cells+'</div>';
+  }).join('');
+
+  html += '<div class="sect"><div class="sect-h"><h2 class="sect-t">193 格热度</h2><span class="sect-n">点格子打开那天的日记</span></div>'
+    + '<div class="heat">' + rows
+    + '<div class="heat-legend">'
+    + '<span class="lg"><span class="cell"></span>讲过未消化</span>'
+    + '<span class="lg"><span class="cell l1"></span>复述·反驳</span>'
+    + '<span class="lg"><span class="cell l2"></span>落地过</span>'
+    + '<span class="lg"><span class="cell l3"></span>用过</span>'
+    + '<span class="lg"><span class="cell empty"></span>未讲</span>'
+    + '</div></div></div>';
+
+  const prow = DATA.progress.map(p=>{
+    const pct = p.total ? Math.round(p.done/p.total*100) : 0;
+    return '<div class="row"><span class="row-t" style="flex:0 0 78px"><strong style="font-weight:500">'+esc(p.domain)+'</strong></span>'
+      + '<span style="flex:1;height:6px;background:#EFEDE7;border-radius:3px;overflow:hidden"><span style="display:block;height:100%;width:'+pct+'%;background:var(--accent2)"></span></span>'
+      + '<span class="page-sub" style="flex:0 0 56px;text-align:right">'+p.done+'/'+p.total+'</span></div>';
+  }).join('');
+  html += '<div class="sect"><div class="sect-h"><h2 class="sect-t">十二领域进度</h2></div><div class="listcard">'+prow+'</div></div>';
+
+  $id('v-profile').innerHTML = html;
+}
+
+function refreshAll(){
+  renderNav();
+  if(S.tab==='today') renderToday();
+  if(S.tab==='library') renderLibrary();
+  if(S.tab==='profile') renderProfile();
+  if(S.tab==='ops') renderOps();
+}
+
+function toggleCheck(k){
+  DB.checks[k] = !DB.checks[k];
+  saveStore(); syncPush('check', k, DB.checks[k]?'1':'0'); refreshAll();
+}
+function markRead(k){
+  const d = new Date().toISOString().slice(0,10);
+  DB.read[k] = d;
+  saveStore(); syncPush('read', k, d); refreshAll();
+}
+function markSkip(k){
+  DB.verdict[k] = DB.verdict[k]==='跳过' ? '' : '跳过';
+  saveStore(); syncPush('verdict', k, DB.verdict[k]); refreshAll();
+}
+function openConcept(name){
+  const c = DATA.concepts.find(x=>x.name===name);
+  openModal('<h3 class="modal-h">'+esc(name)+'</h3><p class="modal-s">'+esc(c?c.domain:'')+' · 首次出现 '+(c?esc(c.firstSeen):'')+'</p>'
+    + '<p class="card-p">概念笔记在 Obsidian 里读全文。这里只记你什么时候能讲出来。</p>'
+    + '<div class="modal-f"><button class="btn" onclick="closeModal()">关闭</button></div>');
+}
+function openReader(date,domain,focusRebut){
+  const e = DATA.entries.find(x=>x.date===date && x.domain===domain);
+  if(!e) return;
+  const k = ekey(e), cur = DB.digest[k] || '', curR = DB.rebut[k] || '';
+  openModal('<h3 class="modal-h">'+esc(e.gridName)+'</h3>'
+    + '<p class="modal-s">'+esc(e.domain)+' · 第 '+e.grid+' 格 · '+esc(e.date)+' · '+esc(e.chapter)+'</p>'
+    + '<p class="card-p" style="margin-top:0">'+esc(e.brief||'')+'</p>'
+    + '<textarea class="ta" id="digestTa" placeholder="用自己的话讲一遍：它解决什么问题、机制是什么、代价是什么。写不出就写「跳过」。">'+esc(cur)+'</textarea>'
+    + '<div class="hint">≥30 字算 L1 复述 · <span id="cnt">'+(cur.replace(/\s/g,'').length)+'</span> 字</div>'
+    + '<div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)">'
+    + '<div class="page-sub" style="margin-bottom:7px">哪一句你不同意？30 秒的事，比复述更值钱</div>'
+    + '<textarea class="ta" id="rebutTa" style="min-height:62px" placeholder="太抽象 / 跟我做过的账不符 / 这个例子不对 —— 写一句理由就够">'+esc(curR)+'</textarea>'
+    + '<div class="hint"><span id="rcnt">'+(curR.replace(/\s/g,'').length)+'</span> 字 · ≥10 字算 L1</div>'
+    + '</div>'
+    + '<div class="modal-f">'
+    + '<button class="btn" onclick="openFile(\''+esc(e.path)+'\')">打开原文件</button>'
+    + '<button class="btn" onclick="closeModal()">取消</button>'
+    + '<button class="btn pri" onclick="saveEntry(\''+k+'\')">保存</button></div>');
+  const ta = $id('digestTa'), rb = $id('rebutTa');
+  ta.oninput = ()=>{ $id('cnt').textContent = ta.value.replace(/\s/g,'').length; };
+  rb.oninput = ()=>{ $id('rcnt').textContent = rb.value.replace(/\s/g,'').length; };
+  if(focusRebut) rb.focus(); else ta.focus();
+}
+function saveEntry(k){
+  const ta = $id('digestTa'), rb = $id('rebutTa');
+  const d = ta ? ta.value.trim() : '';
+  const b = rb ? rb.value.trim() : '';
+  if(d !== (DB.digest[k]||'')){ DB.digest[k] = d; syncPush('digest', k, d); }
+  if(b !== (DB.rebut[k]||'')){ DB.rebut[k] = b; syncPush('rebut', k, b); }
+  if(d || b) DB.read[k] = new Date().toISOString().slice(0,10);
+  saveStore(); closeModal(); refreshAll();
+}
+function openFile(p){
+  openModal('<h3 class="modal-h">原文件路径</h3><p class="modal-s">本机文件，用 Obsidian 或编辑器打开</p>'
+    + '<div style="background:#FBFAF7;border:1px solid var(--line);border-radius:9px;padding:11px;font-size:12px;word-break:break-all;color:var(--ink2)">'+esc(p)+'</div>'
+    + '<div class="modal-f"><button class="btn" onclick="closeModal()">知道了</button></div>');
+}
+function exportBackup(){
+  const payload = {exported:new Date().toISOString(), note:'芽课个人工作库 · 学习痕迹快照', data:DB};
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '芽课学习痕迹-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+}
+
+function openModal(html){
+  $id('modalHost').innerHTML = '<div class="mask" onclick="if(event.target===this)closeModal()"><div class="modal">'+html+'</div></div>';
+}
+function closeModal(){ $id('modalHost').innerHTML = ''; }
+
+function boot(){
+  if(!DATA){ document.body.innerHTML = '<div style="padding:40px;font-family:sans-serif">数据未注入：请先运行 ingest.py 再构建页面。</div>'; return; }
+  $id('buildTime').textContent = '快照 ' + DATA.generated;
+  $id('footBuild').textContent = DATA.generated;
+  const h = (location.hash||'').replace('#','');
+  syncLoad(function(){ switchTab(VIEWS.some(v=>v.id===h) ? h : 'today'); });
+  window.addEventListener('hashchange', ()=>{
+    const x = (location.hash||'').replace('#','');
+    if(VIEWS.some(v=>v.id===x) && x!==S.tab) switchTab(x);
+  });
+}
+document.addEventListener('DOMContentLoaded', boot);
+</script>
+</body>
+</html>

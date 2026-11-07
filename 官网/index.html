@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-nav="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- 域名：现在写的是 EdgeOne 预览域名。绑定正式域名后，一条命令全局替换即可：
+     python -c "import io,glob;[io.open(f,'w',encoding='utf-8').write(io.open(f,encoding='utf-8').read().replace('yake-learning-map-tzywuo7x.edgeone.cool','你的域名')) for f in ['index.html','doc.html','bench.html','privacy.html','robots.txt','sitemap.xml']]"
+     另外 CONTACT_EMAIL 常量在脚本里，换成品牌邮箱。 -->
+<title>芽课 YACLASS — 每天一格，只认你写下的那一句</title>
+<meta name="description" content="芽课是给产品经理的系统化学习工具：六个模块、193 格，每天只推一格。读完只是变个颜色，只有你亲手写下的那句话才算证据。做题不算、用过不记——这是我们写进规则的取舍，不是漏做。">
+<meta name="theme-color" content="#231F20">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://yake-learning-map-tzywuo7x.edgeone.cool/">
+
+<!-- 社交分享卡：不加这段，转发出去就是白板 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="芽课 YACLASS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="芽课 YACLASS — 让学习留下证据">
+<meta property="og:description" content="六个模块、193 格，一天只推一格。四种状态，只有一种算证据：你写下的那一句。读完不算，做题也不算。">
+<meta property="og:url" content="https://yake-learning-map-tzywuo7x.edgeone.cool/">
+<meta property="og:image" content="https://yake-learning-map-tzywuo7x.edgeone.cool/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="芽课 YACLASS — 让学习留下证据">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="芽课 YACLASS — 让学习留下证据">
+<meta name="twitter:description" content="一天只推一格。读完，不算。">
+<meta name="twitter:image" content="https://yake-learning-map-tzywuo7x.edgeone.cool/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23231F20'/%3E%3Ccircle cx='11' cy='11' r='3.4' fill='%23F0EDDD'/%3E%3Ccircle cx='21' cy='11' r='3.4' fill='%23F0EDDD'/%3E%3Ccircle cx='16' cy='21' r='3.4' fill='%23FF4512'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@200;300;400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://yake-learning-map-tzywuo7x.edgeone.cool/#org",
+      "name": "芽课 YACLASS",
+      "url": "https://yake-learning-map-tzywuo7x.edgeone.cool/",
+      "logo": "https://yake-learning-map-tzywuo7x.edgeone.cool/og.png",
+      "description": "芽课是一套每天只推一格的学习系统，只认一种证据：学习者亲手写下的那句话。已读与作答只改变状态，不计入证据。",
+      "areaServed": "CN"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://yake-learning-map-tzywuo7x.edgeone.cool/#site",
+      "url": "https://yake-learning-map-tzywuo7x.edgeone.cool/",
+      "name": "芽课 YACLASS",
+      "inLanguage": "zh-CN",
+      "publisher": { "@id": "https://yake-learning-map-tzywuo7x.edgeone.cool/#org" }
+    },
+    {
+      "@type": "Service",
+      "name": "芽课 · 每日一格",
+      "serviceType": "系统化学习工具",
+      "provider": { "@id": "https://yake-learning-map-tzywuo7x.edgeone.cool/#org" },
+      "description": "六个模块、193 格课程，每天推送一格，并要求学习者用自己的话写下这一格；已读、作答只改变状态色，不计入证据。",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "产品经理、准备转型或求职的人"
+      }
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --ink:#231F20;
+  --ink-2:#2C2728;
+  --cream:#F0EDDD;
+  --paper:#FAF8F2;
+  --grey:#D8D8D8;
+  --accent:#FF4512;
+  --line:rgba(35,31,32,.15);
+  --line-w:rgba(240,237,221,.22);
+  --serif:"Noto Serif SC","Instrument Serif","Songti SC","STSong","SimSun",serif;
+  --latin:"Instrument Serif","Times New Roman",serif;
+  --sans:"Inter","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  --pad:clamp(20px,4.6vw,72px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background-color:var(--cream);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  /* 纸质颗粒：改为 body 背景叠色，去掉全屏 fixed + blend 图层（移动端滚动重绘的主因） */
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+  background-blend-mode:multiply;
+}
+body.lock{overflow:hidden}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+img,svg{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+/* 纸质颗粒：已并入 body 背景，此处保留占位以便回滚 */
+
+.wrap{max-width:1440px;margin:0 auto;padding:0 var(--pad)}
+.lab{
+  font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;
+  color:rgba(35,31,32,.62);
+}
+.on-ink .lab{color:rgba(240,237,221,.66)}
+.hair{height:1px;background:var(--line);width:100%}
+.on-ink .hair{background:var(--line-w)}
+
+/* ── 导航 ─────────────────────────── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:120;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:20px var(--pad);
+  color:var(--ink);
+  transition:color .5s var(--ease), background .45s var(--ease);
+}
+/* 滚动后给导航一层底：否则页面文字会从透明导航下穿过，互相干扰 */
+.nav.solid{
+  background:rgba(240,237,221,.86);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+}
+html[data-nav="dark"] .nav.solid{background:rgba(35,31,32,.84)}
+html[data-nav="dark"] .nav{color:var(--cream)}
+.nav-mail{
+  justify-self:start;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  border-bottom:1px solid currentColor;padding-bottom:2px;opacity:.95;
+}
+.nav-mail:hover{opacity:1}
+.nav-mark{justify-self:center;display:flex;gap:5px;align-items:flex-end}
+.nav-mark i{width:5px;height:5px;border-radius:50%;background:currentColor;display:block}
+.nav-mark i:nth-child(2){width:7px;height:7px}
+.nav-mark i:nth-child(3){background:var(--accent)}
+.nav-right{justify-self:end;display:flex;align-items:center;gap:10px}
+/* 主转化按钮：全站最重要的一个动作，必须一直可见 */
+.nav-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:#fff;border-radius:100px;
+  padding:9px 18px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;
+  transition:transform .4s var(--ease),background .4s var(--ease);
+}
+.nav-cta:hover{transform:translateY(-1px);background:#E03A0E}
+.nav-cta svg{width:11px;height:11px}
+.menu-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--ink);color:var(--cream);border-radius:100px;
+  padding:9px 16px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  transition:background .4s var(--ease),color .4s var(--ease),transform .4s var(--ease);
+}
+html[data-nav="dark"] .menu-btn{background:var(--cream);color:var(--ink)}
+.menu-btn:hover{background:var(--accent);color:#fff;transform:translateY(-1px)}
+.menu-btn svg{width:11px;height:11px}
+
+/* 全屏菜单 */
+.overlay{
+  position:fixed;inset:0;z-index:130;background:var(--ink);color:var(--cream);
+  padding:20px var(--pad);display:flex;flex-direction:column;
+  clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease),visibility 0s linear .7s;
+  pointer-events:none;visibility:hidden;
+}
+.overlay.open{clip-path:inset(0 0 0 0);pointer-events:auto;visibility:visible;transition:clip-path .7s var(--ease),visibility 0s}
+.overlay-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:24px}
+.overlay-list{flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;max-width:1440px;margin:0 auto;width:100%}
+.overlay-list a{
+  display:grid;grid-template-columns:56px 1fr auto;align-items:baseline;gap:20px;
+  padding:14px 0;border-top:1px solid var(--line-w);
+  font-family:var(--serif);font-weight:200;font-size:clamp(30px,5.4vw,64px);line-height:1.15;
+  transition:opacity .4s var(--ease),transform .4s var(--ease);
+}
+.overlay-list a span.n{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;opacity:.45}
+.overlay-list a span.e{font-family:var(--latin);font-style:italic;font-size:.5em;opacity:0;transition:opacity .4s}
+.overlay-list a:hover{transform:translateX(10px)}
+.overlay-list a:hover span.e{opacity:.55}
+.overlay-foot{display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;opacity:.5;padding-top:20px}
+
+/* ── 首屏 ─────────────────────────── */
+.hero{
+  min-height:100svh;background:var(--ink);color:var(--cream);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:calc(84px + 4vh) 0 0;position:relative;overflow:hidden;
+}
+.hero-inner{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 var(--pad)}
+.hero-kicker{
+  font-family:var(--latin);font-style:italic;font-size:clamp(15px,1.5vw,20px);
+  opacity:.6;margin-bottom:clamp(18px,3vh,34px);letter-spacing:.01em;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:200;
+  font-size:clamp(54px,10.6vw,158px);line-height:.98;letter-spacing:.005em;
+  text-wrap:balance;
+}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{
+  margin-top:clamp(26px,4vh,44px);max-width:30em;
+  font-size:15px;line-height:2.05;letter-spacing:.1em;
+  color:rgba(240,237,221,.8);
+}
+.hero-for{margin-top:14px;font-size:13.5px;letter-spacing:.08em;color:rgba(240,237,221,.66)}
+.hero-cta{margin-top:clamp(28px,4.5vh,46px);display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.hero-bottom{
+  border-top:1px solid var(--line-w);
+}
+.hero-bottom .wrap{
+  display:flex;justify-content:space-between;align-items:center;padding-top:16px;padding-bottom:18px;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,221,.62);
+}
+.scroll-cue{display:inline-flex;align-items:center;gap:9px}
+.scroll-cue svg{width:12px;height:12px;animation:bob 2.4s var(--ease) infinite}
+@keyframes bob{0%,100%{transform:translateY(-3px);opacity:.5}50%{transform:translateY(3px);opacity:1}}
+
+/* ── 跑马灯 ───────────────────────── */
+.marquee{
+  border-bottom:1px solid var(--line);background:var(--cream);
+  padding:18px 0;overflow:hidden;white-space:nowrap;
+}
+.marquee-track{display:inline-flex;gap:0;animation:slide 46s linear infinite;will-change:transform}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{
+  font-family:var(--serif);font-weight:200;font-size:clamp(22px,2.6vw,34px);
+  padding:0 clamp(14px,2vw,26px);letter-spacing:.02em;color:rgba(35,31,32,.78);
+}
+.marquee-track i{font-style:normal;color:var(--accent);font-size:12px;align-self:center;opacity:.7}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ── 区块 ─────────────────────────── */
+section{position:relative}
+section[id]{scroll-margin-top:76px}
+.sec{padding:clamp(74px,11vh,142px) 0}
+.sec-head{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:clamp(38px,6vh,70px);
+  flex-wrap:wrap;
+}
+.on-ink .sec-head{border-color:var(--line-w)}
+.sec-head h2{
+  font-family:var(--serif);font-weight:200;
+  font-size:clamp(30px,4.6vw,66px);line-height:1.12;letter-spacing:.01em;max-width:20ch;
+}
+.sec-head .meta{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(35,31,32,.58);text-align:right;line-height:2}
+.on-ink .sec-head .meta{color:rgba(240,237,221,.6)}
+
+/* 三个入口 */
+.rows{border-bottom:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row{
+  display:grid;grid-template-columns:70px minmax(0,1fr) minmax(0,.72fr) 44px;
+  gap:clamp(12px,2.4vw,40px);align-items:center;
+  padding:clamp(22px,3.4vw,34px) 0;border-top:1px solid var(--line);
+  position:relative;isolation:isolate;
+}
+.row::before{
+  content:'';position:absolute;inset:0 calc(-1 * var(--pad));background:var(--ink);
+  transform:scaleY(0);transform-origin:bottom;transition:transform .55s var(--ease);z-index:-1;
+}
+.row:hover::before{transform:scaleY(1)}
+.row>*{transition:color .45s var(--ease),transform .55s var(--ease)}
+.row:hover>*{color:var(--cream)}
+.row:hover .row-t{transform:translateX(12px)}
+.row-n{font-size:11.5px;letter-spacing:.18em;color:rgba(35,31,32,.55);transition:color .45s}
+.row:hover .row-n{color:rgba(240,237,221,.62)}
+.row-t{font-family:var(--serif);font-weight:300;font-size:clamp(24px,3.2vw,44px);line-height:1.2}
+.row-d{font-size:15px;line-height:1.85;color:rgba(35,31,32,.72);letter-spacing:.02em}
+.row-a{justify-self:end;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:.5s var(--ease)}
+.row:hover .row-a{background:var(--accent);border-color:var(--accent);transform:rotate(-45deg)}
+.row-a svg{width:13px;height:13px}
+
+/* 主张（墨黑通栏） */
+.claim{background:var(--ink);color:var(--cream);padding:clamp(96px,15vh,190px) 0}
+.claim-in{max-width:1180px;margin:0 auto;padding:0 var(--pad)}
+.claim p{
+  font-family:var(--serif);font-weight:200;
+  font-size:clamp(26px,4.4vw,62px);line-height:1.45;letter-spacing:.01em;
+}
+.claim p + p{margin-top:clamp(8px,1.2vw,16px)}
+.claim p.em{margin-top:clamp(20px,3vw,40px)}
+.claim .dim{color:rgba(240,237,221,.58)}
+.claim .em{color:var(--accent)}
+.claim-foot{display:flex;gap:clamp(24px,5vw,90px);margin-top:clamp(44px,7vh,84px);padding-top:22px;border-top:1px solid var(--line-w);flex-wrap:wrap}
+.claim-foot div{font-size:11.5px;letter-spacing:.14em;color:rgba(240,237,221,.6);line-height:1.9;min-width:110px}
+.claim-foot b{display:block;font-family:var(--latin);font-size:clamp(26px,2.4vw,34px);letter-spacing:0;color:var(--cream);font-weight:400;margin-bottom:6px}
+
+/* 证据模型：四种状态 */
+.layers{margin-top:0}
+.layer{
+  display:grid;grid-template-columns:84px minmax(0,1fr) minmax(0,1.5fr) 190px;
+  gap:clamp(14px,2.4vw,40px);align-items:start;
+  padding:clamp(26px,3.6vw,40px) 0;border-bottom:1px solid var(--line);
+  transition:background .5s var(--ease);
+}
+.layer:hover{background:rgba(35,31,32,.028)}
+.layer-code{
+  font-family:var(--latin);font-style:italic;font-size:clamp(28px,3vw,40px);line-height:1;
+  color:rgba(35,31,32,.35);
+}
+.layer.on .layer-code{color:var(--accent)}
+.layer-name{font-family:var(--serif);font-weight:300;font-size:clamp(21px,2.4vw,30px);line-height:1.35}
+.layer-name small{display:block;font-family:var(--sans);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(35,31,32,.55);margin-top:8px;font-weight:400}
+.layer-d{font-size:15px;line-height:1.85;color:rgba(35,31,32,.76);max-width:32em}
+.layer-d em{font-style:normal;color:var(--ink);border-bottom:1px solid rgba(255,69,18,.55)}
+.layer-v{padding-top:4px;display:flex;justify-content:flex-end}
+.layer-v .tag{
+  display:inline-block;font-size:11.5px;letter-spacing:.1em;white-space:nowrap;
+  color:rgba(35,31,32,.62);border:1px solid rgba(35,31,32,.22);
+  border-radius:100px;padding:6px 12px;
+}
+.layer-v .tag.hit{background:var(--accent);border-color:var(--accent);color:var(--cream);font-weight:500}
+.layer-v .tag.none{border-style:dashed;color:rgba(35,31,32,.45)}
+.note{
+  margin-top:28px;font-size:14px;line-height:1.95;color:rgba(35,31,32,.7);
+  padding-left:16px;border-left:1px solid var(--line);max-width:62ch;
+}
+.note b{font-weight:500;color:var(--ink)}
+
+/* 数字条 */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-block:1px solid var(--line)}
+.stat{background:var(--cream);padding:clamp(24px,3.4vw,38px) clamp(8px,1.6vw,24px)}
+.stat b{display:block;font-family:var(--latin);font-weight:400;font-size:clamp(38px,5.6vw,84px);line-height:1;letter-spacing:-.01em}
+.stat span{display:block;margin-top:12px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(35,31,32,.62)}
+.stat small{display:block;margin-top:6px;font-size:12.5px;color:rgba(35,31,32,.55);letter-spacing:.02em}
+
+/* 课程地图 */
+/* 课程地图：搜索 + 状态筛选 */
+.map-bar{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;
+  margin:clamp(24px,3.2vh,36px) 0 clamp(18px,2.4vh,26px);
+}
+.map-search{
+  display:flex;align-items:center;gap:10px;flex:1 1 300px;max-width:430px;
+  border-bottom:1px solid rgba(35,31,32,.28);padding-bottom:9px;
+  transition:border-color .4s var(--ease);
+}
+.map-search:focus-within{border-color:var(--accent)}
+.map-search svg{width:14px;height:14px;flex:0 0 auto;color:rgba(35,31,32,.45)}
+.map-search input{width:100%;border:0;background:none;font-family:inherit;font-size:14.5px;color:var(--ink)}
+.map-search input::placeholder{color:rgba(35,31,32,.38)}
+.map-search input:focus{outline:none}
+.map-search input::-webkit-search-cancel-button{cursor:pointer}
+.map-chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(35,31,32,.22);
+  border-radius:100px;padding:7px 13px;font-size:12px;letter-spacing:.04em;
+  color:rgba(35,31,32,.74);transition:.32s var(--ease);
+}
+.chip em{font-style:normal;font-size:10.5px;letter-spacing:.1em;color:rgba(35,31,32,.42)}
+.chip:hover{border-color:rgba(35,31,32,.55);color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.chip.on em{color:rgba(240,237,221,.62)}
+.map-empty{
+  margin-top:18px;padding:26px 0;font-size:14px;color:rgba(35,31,32,.6);
+  border-top:1px solid var(--line);
+}
+.map-empty a{border-bottom:1px solid var(--accent);color:var(--accent)}
+/* 领域降级成筛选维度，主视觉交给 6 模块树 */
+.map-doms{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 clamp(18px,2.4vh,26px)}
+.map-doms .chip{padding:5px 12px;font-size:11.5px}
+.map-doms .chip em{font-size:10px}
+
+.tree{border-top:1px solid var(--ink)}
+.mod{border-bottom:1px solid var(--line)}
+.mod[hidden]{display:none}
+.mod-h{
+  display:grid;grid-template-columns:92px minmax(0,1fr) minmax(124px,168px) 26px;
+  grid-template-areas:"a t p x";
+  gap:clamp(14px,2.2vw,30px);align-items:center;
+  width:100%;padding:17px 0;background:none;border:0;text-align:left;color:inherit;
+  cursor:pointer;
+}
+.mod-h:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mod-art{grid-area:a;display:block;aspect-ratio:4/3;overflow:hidden;background:var(--cream);border:1px solid var(--line)}
+.mod-art svg{width:100%;height:100%;transition:transform .9s var(--ease)}
+.mod:hover .mod-art svg{transform:scale(1.09)}
+.mod-t{grid-area:t;display:block;min-width:0}
+.mod-n{display:block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(35,31,32,.5);margin-bottom:7px}
+.mod-name{display:block;font-family:var(--serif);font-weight:300;font-size:clamp(20px,2.1vw,27px);line-height:1.25;transition:color .35s var(--ease)}
+.mod-desc{display:block;margin-top:6px;font-size:13px;line-height:1.7;color:rgba(35,31,32,.66)}
+.mod-prog{grid-area:p;display:block}
+.mod-prog i{display:block;height:3px;background:rgba(35,31,32,.12);position:relative;overflow:hidden;margin-bottom:9px}
+.mod-prog i b{position:absolute;top:0;bottom:0;left:0;display:block;background:var(--accent)}
+.mod-prog em{display:block;font-style:normal;font-size:11.5px;letter-spacing:.03em;color:rgba(35,31,32,.6);white-space:nowrap;font-variant-numeric:tabular-nums}
+.mod-x{grid-area:x;width:26px;height:26px;border-radius:50%;border:1px solid rgba(35,31,32,.24);display:grid;place-items:center;transition:.45s var(--ease)}
+.mod-x svg{width:11px;height:11px}
+.mod:hover .mod-x{border-color:rgba(35,31,32,.6)}
+.mod.open .mod-x{background:var(--accent);border-color:var(--accent);color:var(--cream);transform:rotate(180deg)}
+.mod.open .mod-name{color:var(--accent)}
+
+/* 展开：知识点行。max-height 而不是 height，行数变了也不会被裁 */
+.mod-b{max-height:0;overflow:hidden;transition:max-height .55s var(--ease)}
+.mod.open .mod-b{max-height:920px}
+/* 子级往右缩进，让「模块 → 知识点」的层级看得出来 */
+.mod-bin{padding:0 0 24px 116px}
+.kps{list-style:none;border-top:1px solid var(--line)}
+.kp{border-bottom:1px solid var(--line)}
+/* 整行都是链接：点标题进文档，不再只是看不动的一行字 */
+.kp-a{
+  position:relative;display:grid;grid-template-columns:16px minmax(0,1fr) minmax(0,110px) minmax(0,104px);
+  gap:clamp(10px,1.4vw,20px);align-items:baseline;
+  padding:11px 22px 11px 0;text-decoration:none;
+  font-size:13.5px;line-height:1.6;color:rgba(35,31,32,.82);
+  transition:color .3s var(--ease);
+}
+.kp-a:hover{color:var(--ink)}
+.kp-a:hover .kp-t{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:rgba(255,69,18,.55)}
+.kp-a:hover .kp-s{border-color:var(--accent)}
+.kp-a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.kp-go{position:absolute;right:0;top:50%;transform:translateY(-50%);opacity:.32;color:rgba(35,31,32,.55);transition:.3s var(--ease)}
+.kp-go svg{width:12px;height:12px;display:block}
+.kp-a:hover .kp-go,.kp-a:focus-visible .kp-go{opacity:1;color:var(--accent);transform:translateY(-50%) translateX(3px)}
+.kp-s{width:7px;height:7px;border-radius:50%;border:1px solid rgba(35,31,32,.32);justify-self:start;align-self:center;margin-top:1px}
+.kp.live .kp-s{background:var(--accent);border-color:var(--accent)}
+.kp-t{min-width:0}
+.kp-d{font-size:11px;letter-spacing:.04em;color:rgba(35,31,32,.48);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kp-c{font-size:11.5px;letter-spacing:.02em;color:rgba(35,31,32,.5);white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums}
+.kp.live .kp-c{color:var(--ink)}
+.mod-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding-top:16px}
+.mod-foot span{font-size:12px;line-height:1.8;color:rgba(35,31,32,.58)}
+.map-note{margin-top:15px;font-size:12px;line-height:1.9;color:rgba(35,31,32,.55);max-width:64ch}
+.urge{
+  margin-top:12px;display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(35,31,32,.28);border-radius:100px;padding:7px 14px;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
+  transition:.35s var(--ease);background:transparent;
+}
+.urge:hover{border-color:var(--accent);color:var(--accent)}
+.urge.done{border-color:var(--accent);color:var(--accent);background:rgba(255,69,18,.06);cursor:default}
+
+/* 系统怎么跑 */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,32px)}
+.step{border-top:1px solid var(--line-w);padding-top:20px}
+.step .t{font-family:var(--latin);font-size:clamp(20px,2.2vw,30px);line-height:1;color:rgba(240,237,221,.55)}
+.step h4{font-family:var(--serif);font-weight:300;font-size:clamp(18px,1.7vw,22px);margin:16px 0 8px}
+.step p{font-size:14px;line-height:1.9;color:rgba(240,237,221,.72)}
+
+/* 工作台 */
+.bench-link{
+  display:inline-flex;align-items:center;gap:10px;margin-top:26px;
+  border:1px solid rgba(240,237,221,.28);border-radius:100px;padding:11px 20px;
+  font-size:12px;letter-spacing:.1em;color:var(--cream);text-decoration:none;
+  transition:.4s var(--ease);
+}
+.bench-link em{font-style:normal;color:rgba(240,237,221,.45);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.bench-link svg{width:12px;height:12px;transition:transform .4s var(--ease)}
+.bench-link:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.bench-link:hover em{color:rgba(35,31,32,.5)}
+.bench-link:hover svg{transform:translateX(3px)}
+.bench{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,5vw,72px);align-items:center}
+.views{list-style:none;border-top:1px solid var(--line-w)}
+.views li{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line-w)}
+.views .n{font-size:11px;letter-spacing:.16em;color:rgba(240,237,221,.58)}
+.views h4{font-family:var(--serif);font-weight:300;font-size:clamp(18px,1.8vw,23px)}
+.views p{font-size:14px;line-height:1.8;color:rgba(240,237,221,.7);margin-top:5px}
+.mock{
+  background:var(--paper);border:1px solid rgba(240,237,221,.2);border-radius:8px;overflow:hidden;
+  box-shadow:0 50px 110px -50px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.04);
+}
+.mock-bar{display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line)}
+.mock-bar i{width:7px;height:7px;border-radius:50%;background:rgba(35,31,32,.18)}
+.mock-bar span{margin-left:auto;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(35,31,32,.55)}
+.mock-body{display:grid;grid-template-columns:78px 1fr;min-height:300px}
+.mock-rail{border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:11px}
+.mock-rail s{display:block;height:5px;border-radius:2px;background:rgba(35,31,32,.14);text-decoration:none}
+.mock-rail s.on{background:var(--ink)}
+.mock-main{padding:18px}
+.mock-main .h{font-family:var(--serif);font-weight:300;font-size:19px;color:var(--ink)}
+.mock-main .s{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(35,31,32,.55);margin-top:6px}
+.mock-cards{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.mc{border:1px solid var(--line);border-radius:5px;padding:11px 12px;background:#fff}
+.mc .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.mc .v{font-family:var(--serif);font-weight:400;font-size:13.5px;color:rgba(35,31,32,.9);margin-top:5px;line-height:1.5}
+.mc .m{font-size:10px;color:rgba(35,31,32,.55);margin-top:5px}
+
+/* ── 试一格（站内 Demo） ─────────────────── */
+.try-grid{
+  display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
+  gap:clamp(24px,4vw,56px);align-items:start;
+}
+/* 换一格：先说清「正在试哪一格」，再给换的入口。
+   26 格摊开太长，所以收在一个可滚动的面板里，按模块分组。 */
+.try-pick{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  padding-bottom:15px;margin-bottom:20px;border-bottom:1px solid var(--line);
+}
+.tp-now{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;min-width:0}
+.tp-lab{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(35,31,32,.46);white-space:nowrap}
+.tp-now b{font-family:var(--serif);font-weight:400;font-size:clamp(17px,1.6vw,20px);line-height:1.35}
+.tp-mod{font-size:11.5px;color:rgba(35,31,32,.52);letter-spacing:.02em}
+.tp-btn{
+  display:inline-flex;align-items:center;gap:8px;flex:none;cursor:pointer;
+  border:1px solid rgba(35,31,32,.22);background:transparent;border-radius:100px;
+  padding:8px 16px;font:inherit;font-size:12px;letter-spacing:.08em;color:var(--ink);
+  transition:.35s var(--ease);
+}
+.tp-btn svg{width:11px;height:11px;transition:transform .35s var(--ease)}
+.tp-btn:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.tp-btn[aria-expanded="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.tp-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+
+.tp-list{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px;
+  border:1px solid var(--line);background:rgba(255,253,246,.6);
+  padding:10px 12px;margin:-6px 0 24px;
+  max-height:min(44vh,380px);overflow:auto;overscroll-behavior:contain;
+  scrollbar-width:thin;scrollbar-color:rgba(35,31,32,.28) transparent;
+  animation:fadeIn .32s var(--ease) both;
+}
+.tp-list::-webkit-scrollbar{width:6px}
+.tp-list::-webkit-scrollbar-thumb{background:rgba(35,31,32,.22)}
+.tp-list[hidden]{display:none}
+.tp-group{padding:6px 0 10px;break-inside:avoid}
+.tp-g-h{
+  display:flex;gap:9px;align-items:baseline;padding:0 8px 6px;
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(35,31,32,.44);
+}
+.tp-g-h em{font-style:normal;font-variant-numeric:tabular-nums}
+.tp-i{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;
+  background:transparent;border:0;border-radius:2px;padding:7px 8px;
+  font:inherit;font-size:13px;line-height:1.5;color:rgba(35,31,32,.76);
+  transition:background .25s var(--ease),color .25s var(--ease);
+}
+.tp-i:hover{background:rgba(35,31,32,.055);color:var(--ink)}
+.tp-i.on{background:var(--ink);color:var(--cream)}
+.tp-i:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.tp-i-n{flex:none;width:15px;font-size:10.5px;color:rgba(35,31,32,.32);font-variant-numeric:tabular-nums}
+.tp-i.on .tp-i-n{color:rgba(240,237,221,.48)}
+.tp-i-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tp-dot{flex:none;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+
+.demo-card{
+  background:var(--paper);border:1px solid var(--line);border-radius:6px;
+  padding:clamp(24px,3.2vw,42px);box-shadow:0 30px 60px -46px rgba(35,31,32,.4);
+}
+/* 右侧面板会随第二步变长，让左边内容跟着停在视口里 */
+@media (min-width:1001px){.demo-card{position:sticky;top:92px}}
+.dc-top{
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(35,31,32,.58);
+  padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:20px;
+}
+.demo-card h3{font-family:var(--serif);font-weight:400;font-size:clamp(20px,2.2vw,27px);line-height:1.5;margin-bottom:16px;text-wrap:pretty}
+.demo-card p{font-size:15px;line-height:1.95;color:rgba(35,31,32,.8);margin-bottom:12px}
+.demo-card p:last-of-type{margin-bottom:0}
+.dc-foot{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-size:13.5px;color:rgba(35,31,32,.62)}
+
+.demo-side{
+  position:relative;padding:clamp(20px,2.4vw,30px);
+  border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,.55);
+}
+.ds-lead{font-size:15px;line-height:1.9;color:rgba(35,31,32,.78);margin-bottom:10px}
+/* 绑定说明：读者必须知道这一句落到哪一格，否则证据是凭空的 */
+.ds-bind{
+  font-size:11.5px;line-height:1.75;color:rgba(35,31,32,.6);margin-bottom:18px;
+  padding-left:10px;border-left:2px solid rgba(255,69,18,.35);
+}
+.ds-bind a{color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(35,31,32,.28);padding-bottom:1px}
+.ds-bind a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.ds-bind b{font-weight:500}
+
+/* 节选来源 + 进全文 */
+.dc-src{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:rgba(35,31,32,.52)}
+.dc-read{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--accent);text-decoration:none;white-space:nowrap;
+  border-bottom:1px solid rgba(255,69,18,.35);padding-bottom:1px;
+}
+.dc-read svg{width:11px;height:11px;transition:transform .35s var(--ease)}
+.dc-read:hover{border-bottom-color:var(--accent)}
+.dc-read:hover svg{transform:translateX(3px)}
+.modes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.mode{
+  border:1px solid rgba(35,31,32,.25);border-radius:100px;padding:9px 15px;
+  font-size:12px;letter-spacing:.06em;color:rgba(35,31,32,.78);
+  transition:.35s var(--ease);background:transparent;
+}
+.mode:hover{border-color:var(--ink);color:var(--ink)}
+.mode.on{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.ds-lab{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(35,31,32,.55);margin-bottom:8px}
+#proofInput{
+  width:100%;background:#fff;border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;font-family:inherit;font-size:15px;line-height:1.8;color:var(--ink);
+  resize:vertical;min-height:94px;transition:border-color .35s var(--ease);
+}
+#proofInput::placeholder{color:rgba(35,31,32,.38)}
+#proofInput:focus{outline:none;border-color:var(--accent)}
+#proofInput:focus-visible{outline:1px solid var(--accent);outline-offset:3px}
+#proofInput:disabled{background:rgba(35,31,32,.03);cursor:not-allowed}
+.ds-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+.ds-hint{font-size:11.5px;color:rgba(35,31,32,.55)}
+.btn.dark{background:var(--ink);color:var(--cream);border:0;padding:12px 20px;font-size:11px}
+.btn.dark:hover{background:var(--accent);color:#fff}
+.btn.dark:disabled{opacity:.45;cursor:not-allowed;transform:none;background:var(--ink);color:var(--cream)}
+
+/* 步骤指示 */
+.ds-steps{display:flex;gap:20px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(35,31,32,.42);margin-bottom:14px}
+.ds-steps span{position:relative;padding-left:11px;transition:color .4s var(--ease)}
+.ds-steps span::before{
+  content:'';position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;
+  background:currentColor;opacity:.35;transition:.4s var(--ease);
+}
+.ds-steps span.on{color:var(--accent)}
+.ds-steps span.on::before{opacity:1}
+.ds-steps span.done{color:rgba(35,31,32,.72)}
+.ds-steps span.done::before{opacity:1;background:var(--ink)}
+
+/* 已留下 */
+.echo{
+  border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:4px;
+  padding:14px 16px;background:rgba(255,255,255,.62);
+}
+.echo-h{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(35,31,32,.52)}
+.echo-edit{font-size:11px;letter-spacing:.08em;color:rgba(35,31,32,.62);border-bottom:1px solid currentColor;padding-bottom:1px}
+.echo-edit:hover{color:var(--accent);border-color:var(--accent)}
+.echo-t{margin-top:9px;font-family:var(--serif);font-size:15.5px;line-height:1.8;color:rgba(35,31,32,.9);text-wrap:pretty}
+
+/* 第二步：答过 */
+.step2{margin-top:22px;padding-top:20px;border-top:1px dashed rgba(35,31,32,.22);animation:rise .6s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.step2{animation:none}}
+.s2-head{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.s2-n{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.s2-head b{font-family:var(--serif);font-weight:400;font-size:17.5px;letter-spacing:.01em}
+.s2-lead{font-size:13.5px;line-height:1.85;color:rgba(35,31,32,.7);margin-bottom:14px}
+.s2-lead em{font-style:normal;color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:1px}
+.acts{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.act{
+  display:flex;gap:11px;align-items:flex-start;text-align:left;width:100%;
+  border:1px solid rgba(35,31,32,.2);border-radius:5px;background:#fff;
+  padding:11px 13px;font-family:inherit;font-size:13.5px;line-height:1.65;color:rgba(35,31,32,.82);
+  transition:.32s var(--ease);
+}
+.act::before{
+  content:'';flex:0 0 auto;width:13px;height:13px;margin-top:3px;border-radius:50%;
+  border:1px solid rgba(35,31,32,.32);transition:.32s var(--ease);
+}
+.act:hover{border-color:rgba(35,31,32,.6)}
+.act.on{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.act.on::before{background:var(--accent);border-color:var(--accent);box-shadow:inset 0 0 0 2.5px var(--ink)}
+#actTarget{
+  width:100%;background:#fff;border:1px solid var(--line);border-radius:6px;
+  padding:11px 14px;font-family:inherit;font-size:14.5px;color:var(--ink);
+  transition:border-color .32s var(--ease);
+}
+#actTarget::placeholder{color:rgba(35,31,32,.34)}
+#actTarget:focus{outline:none;border-color:var(--accent)}
+.s2-plan{
+  margin-top:14px;border:1px solid rgba(255,69,18,.32);background:rgba(255,69,18,.045);
+  border-radius:5px;padding:14px 16px;
+}
+.s2-flag{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+#planText{font-size:13.5px;line-height:1.8;color:rgba(35,31,32,.86)}
+#planText b{font-weight:500;color:var(--ink)}
+.s2-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+
+.evidence{margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.ev-head{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(35,31,32,.58);margin-bottom:10px}
+.ev-track{display:flex;gap:5px}
+.ev-track i{height:7px;flex:1;background:rgba(35,31,32,.1);border-radius:1px;transition:.55s var(--ease)}
+.ev-track i.zero{background:repeating-linear-gradient(90deg,rgba(35,31,32,.2) 0 2px,transparent 2px 5px)}
+.ev-track i.read{background:#A9C3D3}
+.ev-track i.full{background:var(--accent)}
+.ev-track i.pending{background:repeating-linear-gradient(45deg,var(--accent) 0 3px,rgba(255,69,18,.16) 3px 7px)}
+.ev-track i.live{background:var(--accent)}
+.ev-track i.answered{background:repeating-linear-gradient(45deg,rgba(62,107,70,.8) 0 3px,rgba(62,107,70,.12) 3px 7px)}
+.ev-state{
+  font-size:10.5px;letter-spacing:.1em;padding:3px 9px;border-radius:100px;
+  border:1px solid currentColor;white-space:nowrap;
+}
+.ev-state.s0{color:rgba(35,31,32,.58)}
+.ev-state.s1{color:#406F8C;background:rgba(64,111,140,.07)}
+.ev-state.s2{color:var(--accent);background:rgba(255,69,18,.07);border-color:rgba(255,69,18,.45)}
+.ev-state.s3{color:#3E6B46;background:rgba(62,107,70,.07);border-color:rgba(166,196,170,.9)}
+.ev-ticks{display:flex;gap:5px;margin:7px 0 8px;font-size:10px;letter-spacing:.1em;color:rgba(35,31,32,.42)}
+.ev-ticks span{flex:1}
+.ev-sum{margin:0 0 14px;font-size:11.5px;letter-spacing:.04em;color:rgba(35,31,32,.55)}
+.ev-sum b{font-weight:500;color:var(--ink)}
+.ev-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ev-list li{
+  font-size:13.5px;line-height:1.8;color:rgba(35,31,32,.8);
+  padding-left:12px;border-left:2px solid var(--accent);
+}
+.ev-list li small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(35,31,32,.45);margin-top:3px}
+.ev-list li.empty{border-left-color:rgba(35,31,32,.15);color:rgba(35,31,32,.5)}
+.ev-list li.plan{
+  border-left-style:dashed;border-left-color:rgba(255,69,18,.6);
+  padding:9px 12px;border-radius:0 4px 4px 0;background:rgba(255,69,18,.04);
+}
+.ev-list li.plan.done{border-left-style:solid}
+.ev-list li.plan small{color:rgba(255,69,18,.85)}
+.ev-clear{
+  margin-top:12px;font-size:11.5px;letter-spacing:.1em;color:rgba(35,31,32,.55);
+  border-bottom:1px solid currentColor;padding-bottom:1px;
+}
+.ev-clear:hover{color:var(--accent);border-color:var(--accent)}
+.toast{
+  margin-top:12px;font-size:13px;color:var(--accent);min-height:1.4em;
+}
+.toast.bad{color:#B3261E}
+
+/* 每日一封 */
+.letter{
+  background:var(--paper);border:1px solid var(--line);border-radius:6px;
+  padding:clamp(26px,4vw,52px);max-width:660px;
+  box-shadow:0 30px 60px -46px rgba(35,31,32,.4);
+}
+.letter .lh{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(35,31,32,.58);padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.letter p{font-size:15px;line-height:1.9;color:rgba(35,31,32,.78);max-width:30em;text-wrap:pretty}
+.letter .lead{color:rgba(35,31,32,.9)}
+.letter .tag{display:block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-top:26px;margin-bottom:8px}
+.letter h4{font-family:var(--serif);font-size:20px;font-weight:400;line-height:1.55;color:var(--ink);text-wrap:pretty}
+.letter .q{border-left:2px solid var(--accent);padding-left:14px;color:rgba(35,31,32,.72)}
+.letter .sig{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(35,31,32,.55)}
+.email-col{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.email-col h3{font-family:var(--serif);font-weight:200;font-size:clamp(26px,3.6vw,48px);line-height:1.3;margin-bottom:20px}
+.email-col p{font-size:15px;line-height:1.95;color:rgba(35,31,32,.72);max-width:30em}
+
+/* 引用 */
+.quote{background:var(--paper);text-align:center;padding:clamp(90px,14vh,170px) 0;border-block:1px solid var(--line)}
+.quote blockquote{
+  font-family:var(--serif);font-weight:200;font-size:clamp(26px,4.2vw,58px);
+  line-height:1.42;max-width:none;margin:0 auto;text-wrap:balance;
+}
+.quote cite{display:block;margin-top:clamp(26px,4vh,44px);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(35,31,32,.58);font-style:normal}
+
+/* CTA */
+.cta{background:var(--ink);color:var(--cream);padding:clamp(90px,14vh,170px) 0;text-align:center}
+.cta h2{font-family:var(--serif);font-weight:200;font-size:clamp(40px,7.4vw,112px);line-height:1.05}
+.cta h2 em{font-style:normal;color:var(--accent)}
+.cta .p{margin-top:22px;font-size:14.5px;letter-spacing:.1em;color:rgba(240,237,221,.74)}
+.cta-actions{display:flex;gap:14px;justify-content:center;margin-top:clamp(30px,5vh,48px);flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--cream);color:var(--ink);border-radius:100px;
+  padding:15px 28px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  transition:.45s var(--ease);
+}
+.btn:hover{background:var(--accent);color:#fff;transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--cream);border:1px solid rgba(240,237,221,.3)}
+.btn.ghost:hover{border-color:var(--cream);background:transparent;color:var(--cream)}
+.btn svg{width:12px;height:12px;transition:transform .45s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+
+/* 等待名单（唯一的留资入口） */
+.waitlist{margin:clamp(38px,6vh,58px) auto 0;text-align:left;max-width:680px}
+.wl-lab{display:block;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,221,.72);margin-bottom:14px}
+.wl-row{display:flex;gap:9px;flex-wrap:wrap}
+.wl-row input{
+  flex:1 1 200px;min-width:0;background:rgba(240,237,221,.05);
+  border:1px solid rgba(240,237,221,.3);color:var(--cream);border-radius:100px;
+  padding:15px 22px;font-size:15px;font-family:inherit;letter-spacing:.02em;
+  transition:border-color .35s var(--ease),background .35s var(--ease);
+}
+.wl-row input::placeholder{color:rgba(240,237,221,.45)}
+.wl-row input:hover{border-color:rgba(240,237,221,.45)}
+.wl-row input:focus{outline:none;border-color:var(--accent);background:rgba(240,237,221,.09)}
+.wl-row input:focus-visible{outline:1px solid var(--accent);outline-offset:3px}
+.wl-row .btn{flex:0 0 auto;border:0}
+.wl-note{margin-top:14px;font-size:12.5px;line-height:1.9;color:rgba(240,237,221,.72)}
+.wl-note a{text-decoration:underline;text-underline-offset:3px}
+.wl-note a:hover{color:var(--cream)}
+.wl-ok{
+  margin-top:16px;padding:16px 18px;border:1px solid rgba(240,237,221,.25);border-radius:8px;
+  background:rgba(240,237,221,.06);font-size:13.5px;line-height:1.95;color:rgba(240,237,221,.86);
+}
+.wl-ok b{color:var(--cream)}
+.wl-ok .copy{
+  display:inline-flex;align-items:center;gap:7px;margin-top:10px;
+  border-bottom:1px solid currentColor;padding-bottom:2px;font-size:11.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+}
+
+/* 移动端吸底转化条：首屏不出现，滚过半屏才滑出，避免压住首屏信息 */
+.m-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:110;display:none;gap:9px;
+  padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));
+  background:rgba(35,31,32,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-top:1px solid rgba(240,237,221,.16);
+  transform:translateY(120%);transition:transform .45s var(--ease);
+}
+.m-cta.show{transform:none}
+.m-cta .btn{flex:1;justify-content:center;padding:13px 12px;font-size:11px}
+.m-cta .btn.ghost{flex:0 0 auto;padding:13px 16px}
+
+/* 页脚 */
+.foot{background:var(--cream);padding-top:clamp(60px,9vh,110px)}
+.foot-top{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;padding-bottom:clamp(40px,6vh,70px);border-bottom:1px solid var(--line)}
+.foot-top h5{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(35,31,32,.55);margin-bottom:14px;font-weight:500}
+.foot-top a,.foot-top p{display:block;font-size:13.5px;line-height:2;color:rgba(35,31,32,.74)}
+.foot-top a:hover{color:var(--accent)}
+.foot-word{
+  font-family:var(--serif);font-weight:200;font-size:clamp(52px,13.5vw,190px);
+  line-height:.9;letter-spacing:.01em;padding:clamp(26px,4vh,48px) 0 clamp(6px,1.4vh,16px);
+}
+.foot-bot{margin-top:0}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:18px 0 24px;border-top:1px solid var(--line);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(35,31,32,.58)}
+.foot-bot a:hover{color:var(--accent)}
+
+/* 进场动画 */
+html.js [data-rv]{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+html.js [data-rv].in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html.js [data-rv]{opacity:1!important;transform:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* ── 响应式 ────────────────────────── */
+@media (max-width:1000px){
+  .mod-h{grid-template-columns:78px minmax(0,1fr) minmax(110px,140px) 26px}
+  .flow{grid-template-columns:repeat(2,1fr);gap:26px}
+  .bench,.email-col,.try-grid{grid-template-columns:1fr;gap:38px}
+  .layer{grid-template-columns:58px 1fr;grid-template-areas:"c n" ". d" ". v";row-gap:14px}
+  .layer-code{grid-area:c}.layer-name{grid-area:n}.layer-d{grid-area:d}
+  .layer-v{grid-area:v;justify-content:flex-start;padding-top:0}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .foot-top{grid-template-columns:repeat(2,1fr);gap:26px}
+}
+@media (max-width:720px){
+  body{padding-bottom:72px}
+  .m-cta{display:flex}
+  .sec-head{flex-direction:column-reverse;align-items:flex-start;gap:10px}
+  .sec-head .meta{text-align:left}
+  .foot-bot{flex-direction:column;align-items:flex-start;gap:6px}
+  .quote blockquote{font-size:clamp(22px,6.4vw,34px)}
+  .nav{grid-template-columns:1fr auto}
+  .nav-mark{display:none}
+  .nav-mail{display:none}
+  .nav-cta{padding:9px 14px;font-size:11px}
+  .menu-btn{padding:9px 13px;font-size:11px}
+  .hero h1{font-size:clamp(46px,15vw,80px);line-height:1.06}
+  .hero-kicker{font-size:13px}
+  .hero-sub{font-size:13.5px;letter-spacing:.06em;line-height:2}
+  .hero-cta .btn{flex:1 1 auto;justify-content:center}
+  .row{grid-template-columns:1fr;grid-template-areas:"n" "t" "d";row-gap:6px;padding:26px 0}
+  .row-n{grid-area:n}.row-t{grid-area:t}.row-d{grid-area:d;margin-top:2px}
+  .row-a{display:none}
+    /* 模块树在窄屏：缩略图缩小，进度条挪到第二行铺满 */
+  .mod-h{grid-template-columns:58px minmax(0,1fr) 26px;grid-template-areas:"a t x" "p p p";row-gap:12px}
+  .mod-prog{display:flex;align-items:center;gap:10px}
+  .mod-prog i{flex:1;margin-bottom:0}
+  .mod-prog em{flex:0 0 auto}
+  .kp-a{grid-template-columns:14px minmax(0,1fr) auto;row-gap:3px;padding-right:18px}
+  .tp-list{grid-template-columns:1fr;max-height:min(50vh,320px)}
+  .try-pick{gap:12px}
+  .tp-now b{font-size:17px}
+  .tp-btn{padding:7px 14px;font-size:11.5px}
+  .kp-go{display:none}
+  .kp-s{grid-area:1/1}
+  .kp-t{grid-area:1/2}
+  .kp-c{grid-area:1/3}
+  .kp-d{grid-area:2/2/2/4}
+  .mod-bin{padding-left:0}
+  .map-doms{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+  .map-doms::-webkit-scrollbar{display:none}
+  .map-doms .chip{flex:0 0 auto}
+  .flow{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr;gap:22px}
+  .mock-body{grid-template-columns:58px 1fr;min-height:290px}
+  .claim-foot{gap:26px}
+  .section-note{display:none}
+  .waitlist{text-align:left}
+  .wl-row input{flex:1 1 100%}
+  .wl-row .btn{flex:1 1 100%;justify-content:center}
+  .act{font-size:13px;padding:11px 12px;gap:9px}
+  .ds-row .btn.dark,.s2-row .btn.dark{flex:1 1 100%;justify-content:center}
+  .ev-ticks{font-size:9.5px;letter-spacing:.06em}
+  .echo-t{font-size:15px}
+}
+</style>
+</head>
+<body>
+
+<!-- 导航 -->
+<nav class="nav">
+  <a class="nav-mail" href="#waitlist">订阅 · 每周一格</a>
+  <div class="nav-mark" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="nav-right">
+    <a class="nav-cta" href="#try" data-track="cta_nav">开始一格 <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="overlay">
+      菜单
+      <svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><circle cx="2" cy="2" r="1.1"/><circle cx="6" cy="2" r="1.1"/><circle cx="10" cy="2" r="1.1"/><circle cx="2" cy="6" r="1.1"/><circle cx="6" cy="6" r="1.1"/><circle cx="10" cy="6" r="1.1"/><circle cx="2" cy="10" r="1.1"/><circle cx="6" cy="10" r="1.1"/><circle cx="10" cy="10" r="1.1"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- 全屏菜单 -->
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="overlay-top">
+    <span class="lab" style="color:rgba(240,237,221,.5)">YACLASS — INDEX</span>
+    <button class="menu-btn" id="closeBtn" style="background:var(--cream);color:var(--ink)">关闭 ✕</button>
+  </div>
+  <div class="overlay-list">
+    <a href="#enter"><span class="n">01</span>三个入口<span class="e">Entrances</span></a>
+    <a href="#try"><span class="n">02</span>试一格<span class="e">Try One</span></a>
+    <a href="#proof"><span class="n">03</span>证据模型<span class="e">One Proof</span></a>
+    <a href="#map"><span class="n">04</span>课程地图<span class="e">The Map</span></a>
+    <a href="#system"><span class="n">05</span>系统怎么跑<span class="e">How It Runs</span></a>
+    <a href="#letter"><span class="n">06</span>每日一封<span class="e">Daily Letter</span></a>
+  </div>
+  <div class="overlay-foot"><span>Shanghai · GMT+8</span><span>Season 2026</span></div>
+</div>
+
+<!-- 首屏 -->
+<header class="hero" data-nav="dark">
+  <div class="hero-inner">
+    <p class="hero-kicker">A learning system with proof.</p>
+    <h1 data-rv>让学习<br>留下<em>证据</em></h1>
+    <p class="hero-sub" data-rv>芽课不是课程库。它每天只推一格，<br>读完之后，必须留下属于你自己的那一句。</p>
+    <p class="hero-for" data-rv>写给正在找产品岗、不想只会背名词的人。</p>
+    <div class="hero-cta" data-rv>
+      <a class="btn" href="#try" data-track="cta_hero">开始第一格 <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+      <a class="btn ghost" href="#system" data-track="cta_hero_how">先看它怎么跑</a>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="wrap">
+      <span class="scroll-cue">向下 <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 1v10M2 7l4 4 4-4"/></svg></span>
+      <span id="heroMeta">第 12 周 · 2026</span>
+    </div>
+  </div>
+</header>
+
+<!-- 跑马灯 -->
+<div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+
+<!-- 01 三个入口 -->
+<section class="sec" id="enter">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-rv style="max-width:none">今天，从哪一格开始？</h2>
+      <div class="meta">01 — 入口<br>Three ways in</div>
+    </div>
+    <div class="rows">
+      <a class="row" href="#try" data-track="row_start">
+        <span class="row-n">01</span>
+        <span class="row-t">现在试一格</span>
+        <span class="row-d">不用注册，就在这一页。读完，写一句「我不同意」，三十秒就够。</span>
+        <span class="row-a"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 12L12 2M4 2h8v8"/></svg></span>
+      </a>
+      <a class="row" href="#map">
+        <span class="row-n">02</span>
+        <span class="row-t">看课程地图</span>
+        <span class="row-d">六个模块、193 格，每一格都标了「必须掌握」还是「不必深入」。</span>
+        <span class="row-a"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 12L12 2M4 2h8v8"/></svg></span>
+      </a>
+      <a class="row" href="#system">
+        <span class="row-n">03</span>
+        <span class="row-t">看它怎么跑</span>
+        <span class="row-d">早上生成、八点半推送、你自己留痕迹、周日蒸馏成一份自我剖面。</span>
+        <span class="row-a"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 12L12 2M4 2h8v8"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 02 试一格 -->
+<section class="sec" id="try" style="padding-top:clamp(18px,3vh,36px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-rv>先试一格，<br>不用注册。</h2>
+      <div class="meta">02 — 试读<br>Try one grid</div>
+    </div>
+    <div class="try-pick" data-rv>
+      <div class="tp-now">
+        <span class="tp-lab">正在试</span>
+        <b id="tpName">Agent：工具调用与失败恢复</b>
+        <span class="tp-mod" id="tpMod">AI 产品实战 · 第 2 / 5 格</span>
+      </div>
+      <button type="button" class="tp-btn" id="tpBtn" aria-expanded="false" aria-controls="tpList">换一格
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 4.5l4 4 4-4"/></svg>
+      </button>
+    </div>
+    <div class="tp-list" id="tpList" hidden></div>
+
+    <div class="try-grid">
+      <article class="demo-card" data-rv>
+        <div class="dc-top"><span id="tryMeta">示例格</span><span id="tryMin">约 4 分钟</span></div>
+        <h3 id="tryH">工具调用：协议层到底发生了什么</h3>
+        <div id="tryBody">
+          <p>模型只会吐 token。它没有执行能力，也没有「工具」这个概念——它唯一能做的，是按训练时见过的格式，生成一段「我想调用什么」的文本。</p>
+          <p>协议层并不神秘：请求里你声明有哪些工具、每个工具收什么参数；模型返回的不是执行结果，而是一个结构化的调用意图。真正去执行的，是你这一侧的代码。</p>
+          <p>所以「工具调用」这个说法有点误导。更准确的说法是：模型在猜你希望它输出哪个函数的哪组参数，然后由你决定要不要真的按下去。</p>
+        </div>
+        <div class="dc-foot">
+          读完就够了吗？下面这一句，才是这一格真正的分界线。
+          <div class="dc-src">节选自《<span id="tryT">Agent：工具调用与失败恢复</span>》
+            <a class="dc-read" id="tryRead" href="doc.html?k=m5n1">读全文
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <aside class="demo-side" data-rv>
+        <div class="ds-steps" id="dsSteps">
+          <span class="on">01 写过</span><span>02 答过</span>
+        </div>
+        <p class="ds-lead" id="dsLead">用你自己的话说一遍，或者指出哪一句你不信。十个字就算。</p>
+        <p class="ds-bind" id="bindNote"></p>
+
+        <div class="modes" id="modesBox" role="group" aria-label="选择一种留痕方式">
+          <button type="button" class="mode" data-mode="object">我不同意这句</button>
+          <button type="button" class="mode" data-mode="restate">我复述一遍</button>
+          <button type="button" class="mode" data-mode="do">我做过类似的事</button>
+        </div>
+
+        <form id="proofForm" novalidate>
+          <label class="ds-lab" for="proofInput">你的那一句</label>
+          <textarea id="proofInput" rows="3" placeholder="先选上面一种方式，再写" disabled aria-describedby="proofHint"></textarea>
+          <div class="ds-row">
+            <span class="ds-hint" id="proofHint">只保存在这台设备上，不会上传</span>
+            <button class="btn dark" type="submit" id="proofSubmit" disabled>留下痕迹</button>
+          </div>
+        </form>
+        <p class="toast" id="proofToast" role="status"></p>
+
+        <!-- 已留下：折叠成一行，可改 -->
+        <div class="echo" id="proofEcho" hidden>
+          <div class="echo-h">
+            <span>已留下 · <span id="echoMode">写过</span></span>
+            <button type="button" class="echo-edit" id="echoEdit">改一句</button>
+          </div>
+          <p class="echo-t" id="echoText"></p>
+        </div>
+
+        <!-- 第二步：答过 -->
+        <div class="step2" id="step2" hidden>
+          <div class="s2-head"><span class="s2-n">第二步</span><b>把这格的题做一遍</b></div>
+          <p class="s2-lead">挑一件 48 小时内做得到的。做完，节点会挂上<em>绿角标</em>——但证据还是 1 条，做题不计分。</p>
+
+          <div class="acts" role="group" aria-label="选择一个要做的动作" id="acts"></div>
+          <label class="ds-lab" for="actTarget" id="actTargetLab">在哪件事上（选填）</label>
+          <input id="actTarget" type="text" autocomplete="off" placeholder="例：公司的报销查询机器人" maxlength="40">
+          <div class="ds-row" id="planRow">
+            <span class="ds-hint">只记录你的承诺，不代表系统已验证</span>
+            <button class="btn dark" type="button" id="planBtn" disabled>排进我的 48 小时</button>
+          </div>
+
+          <div class="s2-plan" id="s2Plan" hidden>
+            <p class="s2-flag" id="planFlag">答过 · 待你做</p>
+            <p id="planText"></p>
+            <div class="s2-row">
+              <span class="ds-hint" id="planMeta"></span>
+              <button class="btn dark" type="button" id="doneBtn">我做完了</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="evidence">
+          <div class="ev-head"><span>这一格的状态</span><span class="ev-state s0" id="proofState">灰 · 未读</span></div>
+          <div class="ev-track" aria-hidden="true"><i class="zero" id="evL0"></i><i id="evL1"></i><i id="evL2"></i><i></i></div>
+          <div class="ev-ticks" aria-hidden="true"><span>读过</span><span>写过</span><span>答过</span><span>用过</span></div>
+          <p class="ev-sum" id="evSum">证据 <b>0</b> 条 · 只有「写过」计入</p>
+          <ul class="ev-list" id="proofList" aria-live="polite">
+            <li class="empty">还没有痕迹。读过只是变个颜色，不算证据。</li>
+          </ul>
+          <button type="button" class="ev-clear" id="proofClear" hidden>清空这一格在这台设备上的痕迹</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- 主张 -->
+<section class="claim on-ink" data-nav="dark">
+  <div class="claim-in">
+    <p data-rv class="dim">我们不追求讲完 193 格。</p>
+    <p data-rv>我们只认一样东西：<br>你自己写下的那一句。</p>
+    <p data-rv class="em">读完，不算。</p>
+    <div class="claim-foot" data-rv>
+      <div><b>1</b>唯一计分的动作</div>
+      <div><b>0</b>读完的权重</div>
+      <div><b>1</b>一天只推一格</div>
+      <div><b>30″</b>留下那一句的时间</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 证据模型 -->
+<section class="sec" id="proof">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-rv>四种状态，<br>一条证据。</h2>
+      <div class="meta">03 — 证据模型<br>Four states · one proof</div>
+    </div>
+    <div class="layers">
+      <div class="layer">
+        <div class="layer-code">00</div>
+        <div class="layer-name">读过<small>Read</small></div>
+        <div class="layer-d">文档读完，节点变浅蓝。颜色变了，证据没长——这一层的数字最好看，也最不值钱。</div>
+        <div class="layer-v"><span class="tag">浅蓝 · 不计证据</span></div>
+      </div>
+      <div class="layer on">
+        <div class="layer-code">01</div>
+        <div class="layer-name">写过<small>One sentence</small></div>
+        <div class="layer-d">用你自己的话说一遍，或者指出哪一句你不信。十个字就算——「这说法太理想化」也算。整个系统只有在这里记一分。</div>
+        <div class="layer-v"><span class="tag hit">红色 · 唯一证据</span></div>
+      </div>
+      <div class="layer">
+        <div class="layer-code">02</div>
+        <div class="layer-name">答过<small>Answered</small></div>
+        <div class="layer-d">把这格的题做一遍，节点会挂上绿角标。<em>但不计入证据</em>——这是写进规则里的取舍，不是没做完。选择题的对错，证明不了你会不会。</div>
+        <div class="layer-v"><span class="tag">绿角标 · 不计证据</span></div>
+      </div>
+      <div class="layer">
+        <div class="layer-code">03</div>
+        <div class="layer-name">用过<small>Applied</small></div>
+        <div class="layer-d">在真事上用一次、两次、三次。这一层<em>不在产品里</em>：系统没法验证你到底用没用，所以它不记，也不替你记。只有你自己知道。</div>
+        <div class="layer-v"><span class="tag none">产品不记录</span></div>
+      </div>
+    </div>
+    <p class="note" data-rv>为什么四种状态只留一条证据？因为<b>能验证的才敢计分</b>。你写了什么，系统看得见；你做没做，系统看不见。把看不见的那两种也算进分数，这套数字就不可信了。</p>
+  </div>
+</section>
+
+<!-- 数字条 -->
+<div class="stats">
+  <div class="stat" data-rv><b data-count="6">0</b><span>个模块</span><small>认知 · 需求 · 设计 · 交付 · 度量 · 实战</small></div>
+  <div class="stat" data-rv><b data-count="193">0</b><span>格课程</span><small>每格一天，读完有据可查</small></div>
+  <div class="stat" data-rv><b data-count="4">0</b><span>种状态</span><small>读过 / 写过 / 答过 / 用过</small></div>
+  <div class="stat" data-rv><b data-count="1">0</b><span>每天的配额</span><small>不是八篇，是一格</small></div>
+</div>
+
+<!-- 03 学习地图 -->
+<section class="sec" id="map">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-rv>六个模块，<br>一百九十三格。</h2>
+      <div class="meta">04 — 学习地图<br>6 modules · 193 grids</div>
+    </div>
+    <div class="map-bar" data-rv>
+      <label class="map-search" for="mapQ">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M10.8 10.8L14 14"/></svg>
+        <input id="mapQ" type="search" placeholder="搜模块、知识点或关键词" autocomplete="off" aria-label="搜索模块、知识点或关键词">
+      </label>
+      <div class="map-chips" role="group" aria-label="按状态筛选">
+        <button type="button" class="chip on" data-filter="all">全部 <em id="chipAll">26</em></button>
+        <button type="button" class="chip" data-filter="open">已讲全文 <em id="chipOpen">26</em></button>
+        <button type="button" class="chip" data-filter="soon" hidden>还没开 <em id="chipSoon">0</em></button>
+      </div>
+    </div>
+    <div class="map-doms" id="mapDoms" role="group" aria-label="按领域筛选"></div>
+    <div class="tree" id="tree"></div>
+    <p class="map-empty" id="mapEmpty" hidden>没有匹配的知识点。换个词，或者<a href="#waitlist">告诉我你想读什么</a>。</p>
+    <p class="map-note">六个模块是骨架，领域是标签：同一个领域会横跨几个模块，按领域筛就能看见它在整条路线上的位置。上面两排胶囊里，状态数的是知识点（<span id="noteN">26</span> 个），领域数的是格（193 格）；点模块标题展开或收起。</p>
+  </div>
+</section>
+
+<!-- 04 系统怎么跑 -->
+<section class="sec on-ink" id="system" data-nav="dark" style="background:var(--ink);color:var(--cream)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-rv>一天，四个动作。</h2>
+      <div class="meta">05 — 运行方式<br>A day in the system</div>
+    </div>
+    <div class="flow" data-rv>
+      <div class="step"><div class="t">07:00</div><h4>生成</h4><p>12 个任务各自跑一格，联网取源、写完归档，落进素材包。</p></div>
+      <div class="step"><div class="t">08:30</div><h4>推送</h4><p>只挑出今天最该读的那一格，连同一个问题，发到你邮箱。</p></div>
+      <div class="step"><div class="t">随时</div><h4>留痕</h4><p>你读，然后写一句反驳、勾一个动作。这几句是你唯一不可替代的产出。</p></div>
+      <div class="step"><div class="t">21:30</div><h4>蒸馏</h4><p>周日汇总一周痕迹，长出能力剖面、判断原则和缺口清单。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 工作台 -->
+<section class="sec on-ink" data-nav="dark" style="background:var(--ink);color:var(--cream);padding-top:0">
+  <div class="wrap">
+    <div class="bench">
+      <div>
+        <span class="lab">THE WORKBENCH</span>
+        <h2 style="font-family:var(--serif);font-weight:200;font-size:clamp(28px,3.8vw,52px);line-height:1.25;margin:16px 0 30px">四个视图，<br>只解决四件事。</h2>
+        <ul class="views">
+          <li><span class="n">01</span><div><h4>今日</h4><p>固定三张卡：读哪一格、做哪个动作、复习哪个概念。</p></div></li>
+          <li><span class="n">02</span><div><h4>题库</h4><p>所有日记与概念可搜可筛，每一条都能直接写下你的判断。</p></div></li>
+          <li><span class="n">03</span><div><h4>能力剖面</h4><p>193 格热力图。灰色是读过，红色才是你写过。</p></div></li>
+          <li><span class="n">04</span><div><h4>运维</h4><p>12 个任务跑没跑、停几天，异常自动置顶，不再静默失败。</p></div></li>
+        </ul>
+        <a class="bench-link" href="bench.html" data-track="open_bench">打开工作台 <em>演示版</em> <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+      </div>
+      <div class="mock" data-rv>
+        <div class="mock-bar"><i></i><i></i><i></i><span>芽课工作台 · 今日</span></div>
+        <div class="mock-body">
+          <div class="mock-rail">
+            <s class="on"></s><s></s><s></s><s></s><s style="width:60%"></s><s style="margin-top:auto;width:40%"></s>
+          </div>
+          <div class="mock-main">
+            <div class="h">今天只做三件事</div>
+            <div class="s">2026 · 第 12 周 · 第 07 格</div>
+            <div class="mock-cards">
+              <div class="mc"><div class="k">必读 · 01</div><div class="v">结构化输出：schema 约束到底约束了什么</div><div class="m">AI-Agent · 第 3/16 格 · 3,075 字</div></div>
+              <div class="mc"><div class="k">动手 · 02</div><div class="v">写清「什么时候用 / 什么时候别用」</div><div class="m">3 条可勾选标准 · 做完挂绿角标</div></div>
+              <div class="mc"><div class="k">复习 · 03</div><div class="v">价外税</div><div class="m">财税 · 间隔 1 天</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 每日一封 -->
+<section class="sec" id="letter">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-rv>一天只推一封，<br>只说一件事。</h2>
+      <div class="meta">06 — 每日一封<br>The daily letter</div>
+    </div>
+    <div class="email-col">
+      <div data-rv>
+        <h3>不靠自觉，<br>靠每天八点半。</h3>
+        <p>一个要你主动想起来的工具，前三天新鲜，第四天就废。所以真正的主路径不是网页，是那封邮件——它替你记住「今天还有一格」。</p>
+        <p style="margin-top:16px">五段，一屏读完：一篇该读的、一句该问的、一个该做的、一个该复习的、一条断供告警。</p>
+      </div>
+      <div class="letter" data-rv>
+        <div class="lh"><span>芽课 · 每日一封</span><span>08:30</span></div>
+        <p class="lead">今天只做一件事：读下面这一格，然后说一句你不同意的话。</p>
+        <span class="tag">一篇 · AI-Agent · 第 4/16 格</span>
+        <h4>工具调用机制：function calling 在协议层到底发生了什么</h4>
+        <p style="margin-top:12px">模型只会吐 token，没有执行能力，也没有「工具」这个概念——它唯一能做的是按训练时见过的格式，生成一段「我想调什么」的文本。</p>
+        <span class="tag">今天问你一句</span>
+        <p class="q">这篇里哪一句你觉得「太理想化 / 跟我做过的对不上 / 太抽象」？想到就回一句，三十秒的事。</p>
+        <div class="sig"><a href="bench.html">打开工作台 →</a>　快照 11-04</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 引用 -->
+<section class="quote">
+  <div class="wrap">
+    <blockquote data-rv>没有「你」的痕迹，<br>蒸馏就没有原料可蒸。</blockquote>
+    <cite data-rv>芽课 · 设计笔记</cite>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta on-ink" data-nav="dark" id="waitlist">
+  <div class="wrap">
+    <h2 data-rv>今天读<em>一格</em>。</h2>
+    <p class="p" data-rv>剩下的，交给系统。</p>
+    <div class="cta-actions" data-rv>
+      <a class="btn" href="#try" data-track="cta_bottom">开始第一格 <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 6h10M7 2l4 4-4 4"/></svg></a>
+      <a class="btn ghost" href="mailto:1302498027@qq.com?subject=%E6%88%91%E6%83%B3%E9%97%AE%E4%B8%80%E9%97%AE%E8%8A%BD%E8%AF%BE" data-track="mail">写封信给我</a>
+    </div>
+
+    <!-- 订阅：全站唯一留资入口。无后端时走邮件兜底，接后端只改 SUBMIT_ENDPOINT 一处 -->
+    <form class="waitlist" id="wlForm" novalidate>
+      <label class="wl-lab" for="wlEmail">想每周收到一格？留个邮箱</label>
+      <div class="wl-row">
+        <input id="wlEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="你的邮箱" required aria-describedby="wlNote">
+        <input id="wlTopic" name="topic" type="text" autocomplete="off" placeholder="最近在学什么（选填）" aria-label="最近在学什么，选填">
+        <button class="btn" type="submit" id="wlSubmit">订阅</button>
+      </div>
+      <p class="wl-note" id="wlNote">一周最多一封，只讲芽课本身，随时可退订。提交即表示你已读过<a href="privacy.html">隐私说明</a>。</p>
+      <div class="wl-ok" id="wlOk" role="status" hidden></div>
+    </form>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div><h5>站点</h5><a href="bench.html">打开工作台 ↗</a><a href="#enter">三个入口</a><a href="#proof">证据模型</a><a href="#map">课程地图</a><a href="#system">运行方式</a><a href="#waitlist">订阅更新</a></div>
+      <div><h5>领域</h5><a href="#map">财税 · 商业 · 国际</a><a href="#map">AI-Agent · 计算机</a><a href="#map">需求 · 度量 · 表达</a><a href="#map">健康 · 面试 · 学习路径</a></div>
+      <div><h5>联系</h5><a href="mailto:1302498027@qq.com" data-track="mail_footer">1302498027@qq.com</a><p>上海 · GMT+8</p><p>回信通常在一天内</p></div>
+      <div><h5>说明</h5><p>本页所有数字来自真实运行记录，不是示意。</p><p><span id="ftGrids">193</span> 格中已讲 <span id="ftRead">28</span> 格 · 截至 2026-11</p></div>
+    </div>
+    <div class="foot-word">芽课</div>
+    <div class="foot-bot">
+      <span>© 2026 Yaclass</span>
+      <span>让学习留下证据</span>
+      <span><a href="privacy.html">隐私说明</a> · <a href="mailto:1302498027@qq.com?subject=%E9%80%80%E8%AE%A2">退订</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- 移动端吸底：手机上主 CTA 永远在拇指区 -->
+<div class="m-cta" role="region" aria-label="快速入口">
+  <a class="btn" href="#try" data-track="cta_sticky">开始第一格</a>
+  <a class="btn ghost" href="#waitlist" data-track="cta_sticky_waitlist">留邮箱</a>
+</div>
+
+<script src="data.js"></script>
+<script src="docs.js"></script>
+<script>
+
+
+/* ── 埋点 ─────────────────────────────────
+   现在没有后端：事件先落浏览器本地队列（最多 200 条），
+   接上后端后只填 TRACK_ENDPOINT，埋点代码一行不用改。 */
+const TRACK_ENDPOINT = '';                  // TODO 例：/api/collect
+const CONTACT_EMAIL  = '1302498027@qq.com'; // TODO 换成品牌邮箱
+const SUBMIT_ENDPOINT = '';                 // TODO 留资接口，留空则走邮件兜底
+
+function track(name, props = {}){
+  const ev = {name, props, t: new Date().toISOString(), path: location.pathname, ref: document.referrer || null};
+  try{
+    const q = JSON.parse(localStorage.getItem('yc_ev') || '[]');
+    q.push(ev);
+    localStorage.setItem('yc_ev', JSON.stringify(q.slice(-200)));
+  }catch(e){}
+  if (TRACK_ENDPOINT){
+    try{
+      const body = JSON.stringify(ev);
+      if (navigator.sendBeacon){
+        navigator.sendBeacon(TRACK_ENDPOINT, new Blob([body], {type:'application/json'}));
+      } else {
+        fetch(TRACK_ENDPOINT, {method:'POST', body, keepalive:true, headers:{'Content-Type':'application/json'}}).catch(()=>{});
+      }
+    }catch(e){}
+  }
+  if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) console.log('[track]', name, props);
+}
+window.ycEvents = () => JSON.parse(localStorage.getItem('yc_ev') || '[]'); // 控制台可导出
+
+/* 任何带 data-track 的元素被点击都记一笔 */
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-track]');
+  if (el) track(el.dataset.track, {text: (el.textContent || '').trim().slice(0, 24)});
+}, true);
+
+/* 滚动深度：判断用户在第二屏还是第五屏流失 */
+(function(){
+  const marks = [25, 50, 75, 100], fired = new Set();
+  let raf = 0;
+  function calc(){
+    raf = 0;
+    const h = document.documentElement.scrollHeight - innerHeight;
+    const p = h > 0 ? Math.min(100, Math.round(scrollY / h * 100)) : 100;
+    marks.forEach(m => { if (p >= m && !fired.has(m)){ fired.add(m); track('scroll_' + m); } });
+  }
+  addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(calc); }, {passive:true});
+})();
+
+/* ── 生成抽象图形 ───────────────────────── */
+function mulberry(seed){
+  let a = seed >>> 0;
+  return function(){
+    a += 0x6D2B79F5;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function art(seed, pal){
+  const r = mulberry(seed * 7919 + 13);
+  const W = 400, H = 300;
+  const bg = pal[3] || '#F0EDDD';
+  const c1 = pal[0], c2 = pal[1], c3 = pal[2];
+  let s = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="抽象图形">`;
+  s += `<rect width="${W}" height="${H}" fill="${bg}"/>`;
+  const cols = [c1, c2, c3].filter(c => c.toLowerCase() !== bg.toLowerCase());
+  if (cols.length < 2) cols.push('#231F20');
+  const pick = a => a[Math.floor(r() * a.length)];
+  // 大圆
+  const cx = 60 + r() * 280, cy = 60 + r() * 180, rr = 46 + r() * 54;
+  s += `<circle cx="${cx.toFixed(0)}" cy="${cy.toFixed(0)}" r="${rr.toFixed(0)}" fill="${pick(cols)}"/>`;
+  // 圆环
+  s += `<circle cx="${(40 + r() * 320).toFixed(0)}" cy="${(40 + r() * 220).toFixed(0)}" r="${(26 + r() * 34).toFixed(0)}" fill="none" stroke="${pick(cols)}" stroke-width="${(7 + r() * 7).toFixed(0)}"/>`;
+  // 三角
+  for (let k = 0; k < 2; k++){
+    const x = r() * 300, y = r() * 200, d = 70 + r() * 90;
+    s += `<polygon points="${x.toFixed(0)},${(y + d).toFixed(0)} ${(x + d * .62).toFixed(0)},${y.toFixed(0)} ${(x + d).toFixed(0)},${(y + d).toFixed(0)}" fill="${pick(cols)}"/>`;
+  }
+  // 旋转色带
+  const bx = r() * 200, by = r() * 160;
+  s += `<g transform="rotate(${(r() * 60 - 30).toFixed(0)} ${bx} ${by})"><rect x="${bx.toFixed(0)}" y="${by.toFixed(0)}" width="${(120 + r() * 90).toFixed(0)}" height="${(14 + r() * 16).toFixed(0)}" fill="${pick(cols)}"/></g>`;
+  // 半圆
+  const ax = r() * 330, ay = r() * 240, ar = 30 + r() * 40;
+  s += `<path d="M${ax.toFixed(0)} ${ay.toFixed(0)} a${ar.toFixed(0)} ${ar.toFixed(0)} 0 0 1 ${(ar * 2).toFixed(0)} 0 z" fill="${pick(cols)}"/>`;
+  // 点阵
+  const dx = 20 + r() * 220, dy = 20 + r() * 200;
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 3; j++){
+    if (r() > .72) continue;
+    s += `<circle cx="${(dx + i * 14).toFixed(0)}" cy="${(dy + j * 14).toFixed(0)}" r="3.4" fill="${pick(cols)}"/>`;
+  }
+  s += `</svg>`;
+  return s;
+}
+
+/* ── 渲染学习地图：6 模块树 ─────────────────
+   PRD 规定「点顶层模块只展开/收起，不进详情」，这里正好一致。 */
+const tree = document.getElementById('tree');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+tree.innerHTML = MODULES.map((m, i) => `
+  <article class="mod${i === 0 ? ' open' : ''}" data-mod="${i}">
+    <button class="mod-h" type="button" aria-expanded="${i === 0}" aria-controls="modb${i}">
+      <span class="mod-art">${art(i + 3, m.pal)}</span>
+      <span class="mod-t">
+        <span class="mod-n">${String(i + 1).padStart(2, '0')} — ${m.en}</span>
+        <span class="mod-name">${m.name}</span>
+        <span class="mod-desc">${esc(m.desc)}</span>
+      </span>
+      <span class="mod-prog">
+        <i><b style="width:${Math.round(m.read / m.n * 100)}%"></b></i>
+        <em>已讲 ${m.read} / ${m.n} 格</em>
+      </span>
+      <span class="mod-x" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4.2L6 8l4-3.8"/></svg></span>
+    </button>
+    <div class="mod-b" id="modb${i}">
+      <div class="mod-bin">
+        <ul class="kps">
+          ${m.nodes.map(n => `
+          <li class="kp${n.read ? ' live' : ''}" data-read="${n.read}" data-dom="${esc(n.dom)}" data-kp="${n.id}"
+              data-hay="${esc((n.t + ' ' + n.kw + ' ' + n.dom).toLowerCase())}">
+            <a class="kp-a" href="doc.html?k=${n.id}" data-track="open_doc" data-doc="${n.id}">
+              <span class="kp-s" aria-hidden="true"></span>
+              <span class="kp-t">${esc(n.t)}</span>
+              <span class="kp-d">${esc(n.dom)}</span>
+              <span class="kp-c">${n.read ? '已讲 ' + n.read + ' / ' + n.n : n.n + ' 格 · 未开'}</span>
+              <span class="kp-go" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg></span>
+            </a>
+          </li>`).join('')}
+        </ul>
+        <div class="mod-foot">
+          <span>这个模块还有 ${m.n - m.read} 格没讲。想先看哪一块，说一声。</span>
+          <button class="urge" type="button" data-urge="${i}" data-track="urge_module">催更这个模块</button>
+        </div>
+      </div>
+    </div>
+  </article>`).join('');
+
+function setOpen(mod, v){
+  mod.classList.toggle('open', v);
+  mod.querySelector('.mod-h').setAttribute('aria-expanded', String(v));
+}
+
+/* 催更：本地记一笔 + 埋点，正式版按票数排期 */
+function markUrged(btn){
+  btn.classList.add('done');
+  btn.textContent = '已记下 · 谢谢';
+  btn.disabled = true;
+}
+tree.addEventListener('click', e => {
+  const btn = e.target.closest('.urge');
+  if (btn){
+    const i = +btn.dataset.urge;
+    try{
+      const list = JSON.parse(localStorage.getItem('yc_urge_m') || '[]');
+      if (!list.includes(i)) list.push(i);
+      localStorage.setItem('yc_urge_m', JSON.stringify(list));
+    }catch(err){}
+    markUrged(btn);
+    track('urge_done', {module: MODULES[i].name});
+    return;
+  }
+  const head = e.target.closest('.mod-h');
+  if (!head) return;
+  const mod = head.closest('.mod');
+  const open = !mod.classList.contains('open');
+  setOpen(mod, open);
+  track('module_open', {module: MODULES[+mod.dataset.mod].name, open});
+});
+try{
+  JSON.parse(localStorage.getItem('yc_urge_m') || '[]').forEach(i => {
+    const b = tree.querySelector(`.urge[data-urge="${i}"]`);
+    if (b) markUrged(b);
+  });
+}catch(err){}
+
+/* ── 学习地图：搜索 + 状态筛选 + 领域筛选 ─────
+   领域从「章节」降级成「标签」：先按标签收窄，再决定读不读。 */
+(function(){
+  const q = document.getElementById('mapQ');
+  const emptyEl = document.getElementById('mapEmpty');
+  const domsEl = document.getElementById('mapDoms');
+  if (!q || !domsEl) return;
+  const mods = [...tree.querySelectorAll('.mod')];
+  const statusChips = [...document.querySelectorAll('.map-chips .chip')];
+
+  // 计数从数据来，不写死
+  const nNodes = MODULES.reduce((s, m) => s + m.nodes.length, 0);
+  const nLive = MODULES.reduce((s, m) => s + m.nodes.filter(n => n.read > 0).length, 0);
+  document.getElementById('chipAll').textContent = nNodes;
+  document.getElementById('chipOpen').textContent = nLive;
+  // 全部写完时，「还没开」这个筛选没有意义，直接收起来，不留一个恒为 0 的按钮
+  const soonEl = document.getElementById('chipSoon');
+  soonEl.textContent = nNodes - nLive;
+  soonEl.parentElement.hidden = nNodes - nLive === 0;
+  document.getElementById('noteN').textContent = nNodes;
+  document.getElementById('ftGrids').textContent = TOTAL_GRIDS;
+  document.getElementById('ftRead').textContent = TOTAL_READ;
+
+  domsEl.innerHTML = `<button type="button" class="chip on" data-dom="all">全部领域 <em>${TOTAL_GRIDS}</em></button>`
+    + DOMS.map(d => `<button type="button" class="chip" data-dom="${d.name}" title="跨 ${d.mods.size} 个模块">${d.name} <em>${d.n}</em></button>`).join('');
+  const domChips = [...domsEl.querySelectorAll('.chip')];
+
+  const state = {kw:'', status:'all', dom:'all'};
+  let tick = 0, wasActive = false;
+  const active = () => !!state.kw.trim() || state.status !== 'all' || state.dom !== 'all';
+
+  function apply(record){
+    const kw = state.kw.trim().toLowerCase();
+    let shownMods = 0;
+    mods.forEach(mod => {
+      const m = MODULES[+mod.dataset.mod];
+      // 模块名命中时，整个模块的内容都算命中
+      const mHit = !!kw && (m.name + ' ' + m.en + ' ' + m.desc).toLowerCase().includes(kw);
+      let vis = 0;
+      mod.querySelectorAll('.kp').forEach(kp => {
+        const d = kp.dataset;
+        const okQ = !kw || mHit || d.hay.includes(kw);
+        const okS = state.status === 'all' || (state.status === 'open' ? +d.read > 0 : +d.read === 0);
+        const okD = state.dom === 'all' || d.dom === state.dom;
+        const ok = okQ && okS && okD;
+        kp.hidden = !ok;
+        if (ok) vis++;
+      });
+      mod.hidden = vis === 0;
+      mod.querySelector('.mod-prog em').textContent = active()
+        ? `命中 ${vis} 个知识点`
+        : `已讲 ${m.read} / ${m.n} 格`;
+      if (!mod.hidden){ shownMods++; if (active()) setOpen(mod, true); }
+    });
+    emptyEl.hidden = shownMods > 0;
+    // 筛选清空后回到初始形态（只开第一个），别留一屏展开
+    if (wasActive && !active()) mods.forEach((mod, i) => setOpen(mod, i === 0));
+    wasActive = active();
+    if (record && (state.kw.trim().length >= 2 || state.status !== 'all' || state.dom !== 'all')){
+      track('map_filter', {q: state.kw.trim(), f: state.status, d: state.dom, shown: shownMods});
+    }
+    if (record && !shownMods) track('map_empty', {q: state.kw.trim(), d: state.dom});
+  }
+
+  q.addEventListener('input', () => {
+    state.kw = q.value;
+    clearTimeout(tick);
+    tick = setTimeout(() => apply(true), 260);
+    apply(false);
+  });
+  q.addEventListener('keydown', e => { if (e.key === 'Escape'){ q.value = ''; state.kw = ''; apply(true); } });
+
+  statusChips.forEach(c => c.addEventListener('click', () => {
+    state.status = c.dataset.filter;
+    statusChips.forEach(x => x.classList.toggle('on', x === c));
+    apply(true);
+  }));
+
+  domChips.forEach(c => c.addEventListener('click', () => {
+    // 再点一次取消，符合"筛选器"的直觉
+    const same = state.dom === c.dataset.dom;
+    state.dom = same ? 'all' : c.dataset.dom;
+    domChips.forEach(x => x.classList.toggle('on', x.dataset.dom === state.dom));
+    apply(true);
+  }));
+})();
+
+/* ── 跑马灯 ─────────────────────────────── */
+const ticker = MODULES.map(m => `<span>${m.name}</span><i>◆</i>`).join('');
+document.getElementById('marquee').innerHTML = ticker + ticker;
+
+/* ── 汉堡菜单（含焦点陷阱：键盘用户不会 Tab 到背后页面） ── */
+const ov = document.getElementById('overlay');
+const menuBtn = document.getElementById('menuBtn');
+const closeBtn = document.getElementById('closeBtn');
+let lastFocus = null;
+
+function focusables(){
+  return [...ov.querySelectorAll('a[href],button:not([disabled])')];
+}
+function openMenu(v){
+  ov.classList.toggle('open', v);
+  ov.setAttribute('aria-hidden', String(!v));
+  menuBtn.setAttribute('aria-expanded', String(v));
+  document.body.classList.toggle('lock', v);
+  if (v){
+    lastFocus = document.activeElement;
+    (focusables()[0] || ov).focus();
+  } else if (lastFocus){
+    lastFocus.focus();
+    lastFocus = null;
+  }
+}
+menuBtn.addEventListener('click', () => openMenu(true));
+closeBtn.addEventListener('click', () => openMenu(false));
+ov.querySelectorAll('a').forEach(a => a.addEventListener('click', () => openMenu(false)));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && ov.classList.contains('open')) openMenu(false);
+  if (e.key !== 'Tab' || !ov.classList.contains('open')) return;
+  const f = focusables();
+  if (!f.length) return;
+  const first = f[0], last = f[f.length - 1];
+  if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+});
+
+/* ── 导航配色随区块切换（只在结果变化时写 DOM，避免无谓重排） ── */
+/* 注意：必须排除 <html> 本身——它初始也带 data-nav="dark"，
+   否则 rect 覆盖整页，判断永远为深色，配色切换会彻底失效。 */
+const darkZones = [...document.querySelectorAll('[data-nav="dark"]:not(html)')];
+const navEl = document.querySelector('.nav');
+const mCta = document.querySelector('.m-cta');
+function navTheme(){
+  const y = 60;
+  let dark = false;
+  for (const z of darkZones){
+    const r = z.getBoundingClientRect();
+    if (r.top <= y && r.bottom > y){ dark = true; break; }
+  }
+  const next = dark ? 'dark' : 'light';
+  if (document.documentElement.dataset.nav !== next) document.documentElement.dataset.nav = next;
+  navEl.classList.toggle('solid', scrollY > 40);
+  if (mCta) mCta.classList.toggle('show', scrollY > innerHeight * 0.75);
+}
+addEventListener('scroll', navTheme, {passive: true});
+addEventListener('resize', navTheme, {passive: true});
+navTheme();
+
+/* ── 进场动画 ───────────────────────────── */
+document.documentElement.classList.add('js');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((en, i) => {
+    if (!en.isIntersecting) return;
+    const el = en.target;
+    const sibs = [...(el.parentElement?.children || [])].filter(c => c.hasAttribute('data-rv'));
+    const idx = Math.max(0, sibs.indexOf(el));
+    el.style.transitionDelay = Math.min(idx, 6) * 70 + 'ms';
+    el.classList.add('in');
+    io.unobserve(el);
+  });
+}, {threshold: .12, rootMargin: '0px 0px -8% 0px'});
+document.querySelectorAll('[data-rv]').forEach(el => io.observe(el));
+
+/* ── 数字滚动 ───────────────────────────── */
+const counters = document.querySelectorAll('[data-count]');
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    const el = en.target, to = +el.dataset.count, sfx = el.dataset.suffix || '';
+    let t0 = null;
+    const step = ts => {
+      if (!t0) t0 = ts;
+      const p = Math.min(1, (ts - t0) / 1400);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(to * e) + sfx;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+    cio.unobserve(el);
+  });
+}, {threshold: .6});
+// 减少动效或浏览器不支持观察器时，直接给最终值——不能停在 0，那等于数字是坏的
+if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches){
+  counters.forEach(c => c.textContent = (+c.dataset.count) + (c.dataset.suffix || ''));
+} else {
+  counters.forEach(c => cio.observe(c));
+}
+
+/* 兜底：无论观察器是否生效，2.5 秒后全部显示 */
+setTimeout(() => {
+  document.querySelectorAll('[data-rv]:not(.in)').forEach(el => el.classList.add('in'));
+}, 2500);
+
+/* ── 周数 ───────────────────────────────── */
+(function(){
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 1);
+  const week = Math.ceil(((now - start) / 86400000 + start.getDay() + 1) / 7);
+  document.getElementById('heroMeta').textContent = `第 ${week} 周 · ${now.getFullYear()}`;
+})();
+
+/* ── 试一格：读过 → 写过 → 答过 ─────────────
+   全部在本机完成：不登录、不上传、关掉页面也还在。
+   状态机照 PRD 6.3：灰（未读）→ 浅蓝（读过）→ 红（写过，唯一证据）→ 绿角标（答过，不计证据）。
+   「用过」不在这里点亮——系统没法验证，所以它不记，也不替用户记。 */
+(function(){
+  const form = document.getElementById('proofForm');
+  if (!form) return;
+  const $ = id => document.getElementById(id);
+  const ta = $('proofInput'), submit = $('proofSubmit'), listEl = $('proofList');
+  const stateEl = $('proofState'), sumEl = $('evSum'), toast = $('proofToast'), clear = $('proofClear');
+  const evL0 = $('evL0'), evL1 = $('evL1'), evL2 = $('evL2');
+  const echo = $('proofEcho'), echoText = $('echoText'), echoMode = $('echoMode'), echoEdit = $('echoEdit');
+  const step2 = $('step2'), acts = $('acts'), target = $('actTarget'), targetLab = $('actTargetLab');
+  const planRow = $('planRow'), planBtn = $('planBtn'), s2Plan = $('s2Plan');
+  const planText = $('planText'), planFlag = $('planFlag'), planMeta = $('planMeta'), doneBtn = $('doneBtn');
+  const steps = $('dsSteps'), lead = $('dsLead'), modesBox = $('modesBox');
+  const modes = [...document.querySelectorAll('.mode')];
+  const actBtns = () => [...acts.querySelectorAll('.act')];
+
+  /* ── 绑定到知识点 ──────────────────────────
+     首页写的这一句，写进 yc_notes_v1 —— 工作台和文档页读的就是这个键。
+     两个键分工：yc_proof_v3 管首页自己的两步状态（按格分开存），yc_notes_v1 管证据。
+     每条证据带 src:'home'，改和删都按这个标记定位，
+     不会误删用户在详情页里写过的句子。 */
+  const NK = 'yc_notes_v1';
+  const MODE_CN = {object: '不同意', restate: '复述', do: '做过'};   // 与 doc.html 的用词一致
+
+  /* 当前在试哪一格。默认 m5n1，可被 ?k= 或「换一格」改写。
+     换格只动这一个变量：写入目标、抬头、节选、动作、链接全从它派生。 */
+  let curId = (typeof TRY_NODE_ID === 'string' && typeof NODE_BY_ID === 'object' && NODE_BY_ID[TRY_NODE_ID])
+    ? TRY_NODE_ID : 'm5n1';
+  const nodeOf = id => (typeof NODE_BY_ID === 'object' && NODE_BY_ID[id]) || {t: 'Agent：工具调用与失败恢复'};
+  const modOf = id => (typeof MODULES !== 'undefined' ? MODULES.find(m => m.nodes.some(n => n.id === id)) : null) || null;
+
+  const nRead = () => { try { return JSON.parse(localStorage.getItem(NK) || '{}'); } catch (e) { return {}; } };
+  const nWrite = o => { try { localStorage.setItem(NK, JSON.stringify(o)); } catch (e) {} };
+
+  /* 新增：按文本去重，重复提交和迁移都不会多出一条 */
+  function evAdd(text, mode, ts){
+    const o = nRead();
+    const list = o[curId] || (o[curId] = []);
+    if (list.some(x => x.src === 'home' && x.t === text)) return false;
+    list.push({t: text, mode: MODE_CN[mode] || mode, ts: ts || Date.now(), src: 'home'});
+    nWrite(o);
+    return true;
+  }
+  /* 改：把上一次那句换成新的，条数不变（这是「不改证据数」的关键） */
+  function evReplace(oldText, text, mode){
+    const o = nRead();
+    const list = o[curId] || [];
+    let at = -1;
+    list.forEach((x, i) => { if (x.src === 'home' && x.t === oldText) at = i; });
+    if (at < 0){ evAdd(text, mode); return; }
+    list[at] = Object.assign({}, list[at], {t: text, mode: MODE_CN[mode] || mode});
+    nWrite(o);
+  }
+  /* 清空：只删这一格、且是首页写的；详情页里写的句子留着 */
+  function evClear(){
+    const o = nRead();
+    if (!o[curId]) return;
+    const left = o[curId].filter(x => x.src !== 'home');
+    if (left.length) o[curId] = left; else delete o[curId];
+    nWrite(o);
+  }
+
+  /* 节选 = 这一格正文的导语 + 第一节首段。
+     不另写一份节选文案 —— 两份东西迟早对不上，读者点「读全文」会发现前言不搭后语。 */
+  function snippetOf(id){
+    const d = (typeof DOCS === 'object' && DOCS[id]) || null;
+    if (!d) return [];
+    const out = (d.lede || []).slice(0, 2).map(String);
+    const sec = (d.secs || []).find(x => (x.p && x.p.length) || (x.ul && x.ul.length));
+    if (sec){
+      const t = (sec.p && sec.p[0]) || (sec.ul && sec.ul[0]);
+      if (t) out.push(String(t));
+    }
+    return out.slice(0, 3);
+  }
+  const actsOf = id => (typeof TRY_ACTS === 'object' && Array.isArray(TRY_ACTS[id]))
+    ? TRY_ACTS[id]
+    : ['把这一格讲给一个人听，看他卡在哪一句', '写下这一格里你最不同意的一句', '在你手上的事里找一个用得上的地方'];
+
+  /* 卡片正文 / 抬头 / 第二步动作，全部跟着 curId 走 */
+  function paintNode(){
+    const n = nodeOf(curId), mod = modOf(curId);
+    if ($('tryH')) $('tryH').textContent = n.t;
+    if ($('tpName')) $('tpName').textContent = n.t;
+    const tEl = $('tryT'), rEl = $('tryRead');
+    if (tEl) tEl.textContent = n.t;
+    if (rEl) rEl.href = 'doc.html?k=' + curId;
+
+    const paras = snippetOf(curId), bodyEl = $('tryBody');
+    if (bodyEl && paras.length) bodyEl.innerHTML = paras.map(x => '<p>' + esc(x) + '</p>').join('');
+
+    if (mod){
+      const idx = mod.nodes.findIndex(x => x.id === curId);
+      // 顶部那行已经写了模块与位置，卡片抬头不再重复，只留「第几格」
+      if ($('tryMeta')) $('tryMeta').textContent = '这一格的节选 · 第 ' + (idx + 1) + ' / ' + mod.nodes.length + ' 格';
+      if ($('tpMod')) $('tpMod').textContent = mod.name + ' · 第 ' + (idx + 1) + ' / ' + mod.nodes.length + ' 格';
+    }
+    const d = (typeof DOCS === 'object' && DOCS[curId]) || null;
+    if ($('tryMin')) $('tryMin').textContent = '约 ' + ((d && d.minutes) || 4) + ' 分钟';
+
+    // 第二步三个动作：按格给，不再写死 m5n1 那三件事
+    if (acts){
+      acts.innerHTML = actsOf(curId).map((t, i) =>
+        `<button type="button" class="act" data-act="a${i}">${esc(t)}</button>`).join('');
+    }
+    paintPicker();
+  }
+
+  /* 26 格的选择面板：按模块分组，写过痕迹的格带一个橙点 */
+  function paintPicker(){
+    const box = $('tpList');
+    if (!box || typeof MODULES === 'undefined') return;
+    const by = allRead().by;
+    box.innerHTML = MODULES.map((m, mi) => `
+      <div class="tp-group">
+        <div class="tp-g-h"><em>${String(mi + 1).padStart(2, '0')}</em>${esc(m.name)}</div>
+        ${m.nodes.map((n, j) => {
+          const has = (by[n.id] && (by[n.id].items || []).length) ? '<i class="tp-dot" aria-hidden="true"></i>' : '';
+          const on = n.id === curId;
+          return `<button type="button" class="tp-i${on ? ' on' : ''}" data-tp="${n.id}"${on ? ' aria-current="true"' : ''}>` +
+            `<span class="tp-i-n">${j + 1}</span><span class="tp-i-t">${esc(n.t)}</span>${has}</button>`;
+        }).join('')}
+      </div>`).join('');
+  }
+
+  /* 侧栏那句说明：写之前告知会算进哪一格，写之后变成「已算进」 */
+  function paintBind(shown){
+    const bEl = $('bindNote');
+    if (!bEl) return;
+    const a = '<a href="doc.html?k=' + curId + '"><b>' + esc(nodeOf(curId).t) + '</b></a>';
+    bEl.innerHTML = shown
+      ? '已算进 ' + a + ' 的证据 —— 去工作台能看到同一条。'
+      : '这一句会算进 ' + a + ' 的证据 —— 和工作台里写的是同一条。';
+  }
+
+  /* 首页两步状态按格分开存：v3 = {by:{格id:{items,plan}}}。
+     旧版（v2 / v1）是单格结构，读的时候落到默认格，不丢东西。 */
+  const KEY = 'yc_proof_v3', OLD = 'yc_proof', PREV = 'yc_proof_v2';
+  function allRead(){
+    try{
+      const raw = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (raw && raw.by && typeof raw.by === 'object') return raw;
+    }catch(e){}
+    const by = {};
+    let legacy = false;             // 只有真的从旧键读到东西，才值得固化
+    const home = (typeof TRY_NODE_ID === 'string' && NODE_BY_ID[TRY_NODE_ID]) ? TRY_NODE_ID : 'm5n1';
+    try{
+      const v2 = JSON.parse(localStorage.getItem(PREV) || 'null');
+      if (v2 && Array.isArray(v2.items) && (v2.items.length || v2.plan)){
+        by[home] = {items: v2.items, plan: v2.plan || null}; legacy = true;
+      }
+    }catch(e){}
+    try{
+      const v1 = JSON.parse(localStorage.getItem(OLD) || '[]');
+      if (Array.isArray(v1) && v1.length && !by[home]){ by[home] = {items: v1, plan: null}; legacy = true; }
+    }catch(e){}
+    return {by, legacy};
+  }
+  function allWrite(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
+  const LABEL = {object:'我不同意', restate:'我的复述', do:'我做过'};
+  const ACT = {
+    schema:'给一个工具写一份 schema',
+    split:'把一次调用拆成两段：意图 → 执行',
+    log:'记一行调用日志：返回什么、我判了什么'
+  };
+
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const today = () => new Date().toLocaleDateString('zh-CN');
+
+  // 读写的永远是「当前这一格」，别的格不受影响
+  function read(){ const o = allRead(); return o.by[curId] || {items: [], plan: null}; }
+  function write(s){ const o = allRead(); o.by[curId] = s; allWrite(o); }
+  function dropCur(){ const o = allRead(); delete o.by[curId]; allWrite(o); }
+
+  /* 动作文案：新数据存 a0/a1/a2（按格取），旧数据存 schema/split/log，两套都认 */
+  function actLabel(a){
+    if (ACT[a]) return ACT[a];
+    const m = /^a(\d)$/.exec(a || '');
+    const list = actsOf(curId);
+    return (m && list[+m[1]]) || '一件具体的事';
+  }
+
+  /* 换格：状态清干净，再按新格重画。不刷新页面 —— 换格不该丢滚动位置。 */
+  function switchTo(id){
+    if (!id || typeof NODE_BY_ID !== 'object' || !NODE_BY_ID[id]) return;
+    curId = id;
+    mode = null; act = null; editing = -1; armed = false;
+    ta.value = ''; ta.disabled = true; submit.disabled = true;
+    target.value = '';
+    modes.forEach(b => b.classList.remove('on'));
+    toast.className = 'toast'; toast.textContent = '';
+    clear.textContent = '清空这一格在这台设备上的痕迹';
+    paintNode();
+    render();
+    try{ history.replaceState(null, '', '?k=' + id + '#try'); }catch(e){}
+    track('try_switch', {k: id});
+  }
+
+  let mode = null, act = null, armed = false, editing = -1;
+
+  function render(){
+    const s = read();
+    const hasWrite = s.items.length > 0;
+    const p = s.plan;
+    const shown = hasWrite && editing < 0;
+
+    // 状态机：灰 → 浅蓝（读过）→ 红（写过）→ 绿角标（答过）；「用过」不记录
+    const STATE = [['灰 · 未读', 's0'], ['浅蓝 · 读过', 's1'], ['红色 · 写过', 's2'], ['绿角标 · 答过', 's3']];
+    const si = (p && p.done) ? 3 : (hasWrite ? 2 : 0);
+    stateEl.textContent = STATE[si][0];
+    stateEl.className = 'ev-state ' + STATE[si][1];
+    // 证据永远只有一条：写得再满，也不加第二分
+    sumEl.innerHTML = `证据 <b>${hasWrite ? 1 : 0}</b> 条 · 只有「写过」计入`;
+    // 逐级点亮：写过就说明读过了，答过又必然写过——状态是链式的，不能跳级
+    evL0.className = (hasWrite || p) ? 'read' : 'zero';
+    evL1.className = hasWrite ? 'full' : '';
+    evL2.className = p ? (p.done ? 'answered' : 'pending') : '';
+
+    const rows = s.items.slice(-3).map(i =>
+      `<li>${esc(i.text)}<small>${LABEL[i.mode] || ''} · ${esc(i.date)}</small></li>`);
+    if (p){
+      rows.push(
+        `<li class="plan${p.done ? ' done' : ''}">${esc(actLabel(p.act))}${p.target ? ' · ' + esc(p.target) : ''}` +
+        `<small>答过 · ${p.done ? '你说做完了 · ' + esc(p.doneAt || '') : '待你做 · 排于 ' + esc(p.at)}</small></li>`);
+    }
+    listEl.innerHTML = rows.length ? rows.join('') : '<li class="empty">还没有痕迹。读过只是变个颜色，不算证据。</li>';
+
+    // 表单 ↔ 已留下
+    form.hidden = shown;
+    modesBox.hidden = shown;
+    echo.hidden = !shown;
+    submit.textContent = editing >= 0 ? '保存改动' : '留下痕迹';
+    if (shown){
+      const last = s.items[s.items.length - 1];
+      echoText.textContent = last.text;
+      echoMode.textContent = LABEL[last.mode] || '';
+    }
+
+    // 第二步
+    step2.hidden = !hasWrite;
+    acts.hidden = !!p;
+    target.hidden = !!p;
+    targetLab.hidden = !!p;
+    planRow.hidden = !!p;
+    s2Plan.hidden = !p;
+    if (p){
+      planFlag.textContent = p.done ? '答过 · 已完成（自己确认的）' : '答过 · 待你做';
+      planText.innerHTML = `<b>${esc(actLabel(p.act))}</b>${p.target ? ' —— 在「' + esc(p.target) + '」上' : ''}`;
+      planMeta.textContent = p.done ? '完成于 ' + p.doneAt : '排于 ' + p.at + ' · 48 小时内';
+      doneBtn.hidden = !!p.done;
+    }
+
+    // 步骤条与引导语跟着状态走
+    steps.innerHTML =
+      `<span class="${hasWrite ? 'done' : 'on'}">01 写过</span>` +
+      `<span class="${p ? 'done' : (hasWrite ? 'on' : '')}">02 答过</span>`;
+    lead.textContent = !hasWrite
+      ? '用你自己的话说一遍，或者指出哪一句你不信。十个字就算。'
+      : (p
+          ? (p.done
+              ? '绿角标亮了。证据还是 1 条——做题不计分，这是我们自己定的规则。'
+              : '排在 48 小时里了。做完回来点一次「我做完了」，绿角标才会亮。')
+          : '红色亮了，这是唯一算分的那一层。再走一步：把这格的题做一遍。');
+
+    clear.hidden = !hasWrite && !p;
+    if (!hasWrite && !p){ armed = false; clear.textContent = '清空这一格在这台设备上的痕迹'; }
+    paintBind(shown);
+  }
+
+  modes.forEach(btn => btn.addEventListener('click', () => {
+    mode = btn.dataset.mode;
+    modes.forEach(b => b.classList.toggle('on', b === btn));
+    ta.disabled = false;
+    submit.disabled = false;
+    ta.placeholder = {
+      object: '哪一句你不信？为什么。十个字也算。',
+      restate: '不用看原文，用你自己的话把这格讲一遍。',
+      do: '你在哪个项目里碰过这件事？结果怎样？'
+    }[mode];
+    ta.focus({preventScroll:true});
+    track('proof_mode', {mode});
+  }));
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const text = ta.value.trim();
+    if (!mode){
+      toast.className = 'toast bad';
+      toast.textContent = '先选一种方式：不同意 / 复述 / 做过。';
+      return;
+    }
+    if (text.length < 6){
+      toast.className = 'toast bad';
+      toast.textContent = '再多写两个字。十个字就算一条证据。';
+      ta.focus();
+      return;
+    }
+    const s = read();
+    if (editing >= 0){
+      const oldText = s.items[editing].text;
+      s.items[editing] = {text, mode, date: today()};
+      write(s);
+      evReplace(oldText, text, mode);          // 改一句 = 换掉那一条，不新增
+    } else {
+      s.items.push({text, mode, date: today()});
+      write(s);
+      evAdd(text, mode);                       // 同时落进这一格的证据
+    }
+    const first = s.items.length === 1 && editing < 0;
+    editing = -1;
+    ta.value = '';
+    ta.disabled = true;
+    submit.disabled = true;
+    modes.forEach(b => b.classList.remove('on'));
+    mode = null;
+    render();
+    toast.className = 'toast';
+    toast.textContent = first
+      ? '红色亮了。这是唯一算分的那一层，这一格现在有你的东西了。'
+      : '改好了。旧的那句已经换掉。';
+    track('proof_submit', {mode: s.items[0].mode, len: text.length, total: s.items.length, first});
+    if (first) track('proof_step2_view');
+  });
+
+  echoEdit.addEventListener('click', () => {
+    const s = read();
+    editing = s.items.length - 1;
+    const it = s.items[editing];
+    ta.value = it.text;
+    mode = it.mode;
+    modes.forEach(b => b.classList.toggle('on', b.dataset.mode === mode));
+    ta.disabled = false;
+    submit.disabled = false;
+    render();
+    ta.focus({preventScroll:true});
+    track('proof_edit');
+  });
+
+  // 三个动作按钮随格重建，所以用委托而不是逐个绑定
+  acts.addEventListener('click', e => {
+    const btn = e.target.closest('.act');
+    if (!btn) return;
+    act = btn.dataset.act;
+    actBtns().forEach(b => b.classList.toggle('on', b === btn));
+    planBtn.disabled = false;
+    track('proof_act', {act, k: curId});
+  });
+
+  planBtn.addEventListener('click', () => {
+    if (!act) return;
+    const s = read();
+    s.plan = {act, target: target.value.trim(), at: today(), done: false};
+    write(s);
+    render();
+    toast.className = 'toast';
+    toast.textContent = '排进 48 小时了。做完点「我做完了」，绿角标会亮——但证据还是 1 条。';
+    track('proof_plan', {act, hasTarget: !!s.plan.target});
+  });
+
+  doneBtn.addEventListener('click', () => {
+    const s = read();
+    if (!s.plan) return;
+    s.plan.done = true;
+    s.plan.doneAt = today();
+    write(s);
+    render();
+    toast.className = 'toast';
+    toast.textContent = '绿角标亮了。证据没变——做题不计分，这条规则我们不给自己开后门。';
+    track('proof_done', {act: s.plan.act});
+  });
+
+  // 清空：两步确认，不做弹窗
+  clear.addEventListener('click', () => {
+    if (!armed){
+      armed = true;
+      clear.textContent = '再点一次确认清空（不可恢复）';
+      return;
+    }
+    dropCur();                                  // 这一格的痕迹整条移除，不留空壳
+    evClear();                                  // 首页写进这一格的证据一并收回
+    try{ localStorage.removeItem(OLD); }catch(e){}
+    armed = false;
+    editing = -1;
+    mode = null;
+    ta.value = '';
+    ta.disabled = true;
+    submit.disabled = true;
+    modes.forEach(b => b.classList.remove('on'));
+    render();
+    toast.className = 'toast';
+    toast.textContent = '已清空。这台设备上没有你的痕迹了。';
+    track('proof_clear');
+  });
+
+  /* 选格面板：按钮开合、点外部或 Esc 关闭 */
+  const tpBtn = $('tpBtn'), tpList = $('tpList');
+  function pickerOpen(on){
+    if (!tpBtn || !tpList) return;
+    tpList.hidden = !on;
+    tpBtn.setAttribute('aria-expanded', String(on));
+    if (!on) return;
+    paintPicker();
+    // 面板只露出两三组，打开时先让当前格居中 —— 否则用户找不到自己在哪
+    const cur = tpList.querySelector('.tp-i.on');
+    if (cur){
+      const box = tpList.getBoundingClientRect(), r = cur.getBoundingClientRect();
+      tpList.scrollTop += (r.top - box.top) - (box.height - r.height) / 2;
+    }
+  }
+  if (tpBtn && tpList){
+    tpBtn.addEventListener('click', () => {
+      const next = tpList.hidden;
+      pickerOpen(next);
+      track('try_picker', {open: next});
+    });
+    tpList.addEventListener('click', e => {
+      const b = e.target.closest('.tp-i');
+      if (!b) return;
+      switchTo(b.dataset.tp);
+      pickerOpen(false);
+      const card = document.querySelector('.demo-card');
+      if (card) card.scrollIntoView({block: 'start', behavior: 'smooth'});
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !tpList.hidden){ pickerOpen(false); tpBtn.focus({preventScroll: true}); }
+    });
+    document.addEventListener('click', e => {
+      if (tpList.hidden) return;
+      if (e.target.closest('#tpList') || e.target.closest('#tpBtn')) return;
+      pickerOpen(false);
+    });
+  }
+
+  /* 从详情页跳过来：index.html?k=m0n3#try —— 直接试这一格 */
+  try{
+    const want = new URLSearchParams(location.search).get('k');
+    if (want && typeof NODE_BY_ID === 'object' && NODE_BY_ID[want]) curId = want;
+  }catch(e){}
+
+  /* 老数据迁移：v2 时代只在首页写过的句子，补写进证据表并固化到 v3。
+     evAdd 按文本去重，刷新多少次都不会变成两条。 */
+  (function migrate(){
+    const snap = allRead();
+    if (!snap.legacy) return;   // 没有旧数据就什么都不写，免得把空壳固化下来
+    const keep = curId;
+    const home = (typeof TRY_NODE_ID === 'string' && NODE_BY_ID[TRY_NODE_ID]) ? TRY_NODE_ID : 'm5n1';
+    curId = home;
+    ((read().items) || []).forEach(i => evAdd(i.text, i.mode));
+    curId = keep;
+    allWrite({by: snap.by});    // 把旧结构落到 v3，下次不再重读旧键
+  })();
+
+  paintNode();
+  render();
+})();
+
+/* ── 订阅表单 ─────────────────────────────
+   没有后端时不假装成功：要么发到 SUBMIT_ENDPOINT，
+   要么生成一封预填好的邮件，并给出可复制的兜底方案。 */
+(function(){
+  const form = document.getElementById('wlForm');
+  if (!form) return;
+  const email = document.getElementById('wlEmail');
+  const topic = document.getElementById('wlTopic');
+  const btn = document.getElementById('wlSubmit');
+  const ok = document.getElementById('wlOk');
+
+  function show(html){
+    ok.hidden = false;
+    ok.innerHTML = html;
+    ok.scrollIntoView({block:'nearest', behavior:'smooth'});
+  }
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const addr = email.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(addr)){
+      email.setAttribute('aria-invalid', 'true');
+      email.focus();
+      show('这个邮箱看起来不太对，再检查一下？');
+      return;
+    }
+    email.removeAttribute('aria-invalid');
+    const payload = {email: addr, topic: topic.value.trim(), t: new Date().toISOString(), from: location.href};
+    track('subscribe_submit', {topic: payload.topic});
+
+    btn.disabled = true;
+    btn.textContent = '提交中…';
+
+    if (SUBMIT_ENDPOINT){
+      try{
+        const res = await fetch(SUBMIT_ENDPOINT, {
+          method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error(res.status);
+        track('subscribe_ok', {via:'endpoint'});
+        btn.textContent = '已订阅';
+        show('<b>收到。</b>下一格发出时会带上你。');
+        form.reset();
+        return;
+      }catch(err){
+        track('subscribe_fail', {via:'endpoint'});
+      }
+    }
+
+    // 兜底：生成一封预填邮件，用户点发送即可
+    const subject = '订阅芽课 · 每周一格';
+    const body = `邮箱：${addr}\n最近在学：${payload.topic || '（未填）'}\n提交时间：${payload.t}`
+      + `\n\n（这一行不用管，是我从官网订阅时自动生成的）`;
+    const href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    btn.disabled = false;
+    btn.textContent = '订阅';
+    track('subscribe_mailto');
+    show(
+      `<b>还差最后一步。</b>我们这边还没接后端，所以用邮件确认：点下面按钮会打开你的邮箱，` +
+      `内容已填好，直接发送即可。若没有自动打开，把邮箱发到 <b>${CONTACT_EMAIL}</b> 也一样。` +
+      `<br><a class="copy" href="${href}">打开邮件客户端发送 ↗</a>` +
+      `<br><button class="copy" type="button" id="wlCopy">或复制邮箱地址</button>`
+    );
+    const copy = document.getElementById('wlCopy');
+    if (copy) copy.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText(addr + ' ' + CONTACT_EMAIL);
+        copy.textContent = '已复制';
+      }catch(err){
+        copy.textContent = '复制失败，请手动选中';
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

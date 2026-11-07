@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>工作台 · 芽课</title>
+<meta name="description" content="芽课工作台：今天只做三件事。读一格、做一个动作、复习一个概念。">
+<meta name="theme-color" content="#231F20">
+<meta name="robots" content="noindex,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23231F20'/%3E%3Ccircle cx='11' cy='11' r='3.4' fill='%23F0EDDD'/%3E%3Ccircle cx='21' cy='11' r='3.4' fill='%23F0EDDD'/%3E%3Ccircle cx='16' cy='21' r='3.4' fill='%23FF4512'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@200;300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+:root{
+  --ink:#231F20;
+  --ink-2:#2C2728;
+  --cream:#F0EDDD;
+  --paper:#FAF8F2;
+  --accent:#FF4512;
+  --green:#5CBC6C;
+  --dim:rgba(240,237,221,.5);
+  --line:rgba(240,237,221,.14);
+  --serif:"Noto Serif SC","Instrument Serif","Songti SC","STSong","SimSun",serif;
+  --sans:"Inter","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  --pad:clamp(18px,3.4vw,44px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink);color:var(--cream);
+  font-family:var(--sans);font-size:14px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--accent);color:var(--cream)}
+[hidden]{display:none!important}
+
+/* ── 外壳 ─────────────────────────────── */
+.shell{display:grid;grid-template-columns:236px minmax(0,1fr);min-height:100vh}
+
+/* 左侧栏 */
+.rail{
+  border-right:1px solid var(--line);padding:26px 20px 22px;
+  display:flex;flex-direction:column;gap:30px;
+  position:sticky;top:0;height:100vh;
+}
+.brand{font-family:var(--serif);font-size:17px;letter-spacing:.34em;color:var(--cream)}
+.brand span{color:var(--accent)}
+.brand small{display:block;margin-top:7px;font-family:var(--sans);font-size:9.5px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase}
+.nav{display:flex;flex-direction:column;gap:2px;margin-top:-6px}
+.nav button{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:10px 12px;font-size:13px;color:var(--dim);text-align:left;
+  border-radius:2px;transition:.3s var(--ease);
+}
+.nav button:hover{color:var(--cream);background:rgba(240,237,221,.05)}
+.nav button.on{color:var(--cream);background:rgba(240,237,221,.08)}
+.nav button.on::before{content:"";position:absolute;left:0;width:2px;height:16px;background:var(--accent)}
+.nav button{position:relative}
+.nav em{font-style:normal;font-size:10px;letter-spacing:.06em;color:var(--dim);font-variant-numeric:tabular-nums}
+.nav button.on em{color:var(--accent)}
+.rail-foot{margin-top:auto;display:flex;flex-direction:column;gap:10px;font-size:11px;color:var(--dim);letter-spacing:.04em}
+.rail-foot a:hover{color:var(--cream)}
+.rail-foot .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--green);margin-right:6px;vertical-align:middle}
+
+/* 主区 */
+.main{padding:26px var(--pad) 60px;max-width:1080px;width:100%}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.top .who{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.top .who b{color:var(--cream);font-weight:400}
+.top .ev{
+  display:inline-flex;align-items:center;gap:9px;font-size:11.5px;letter-spacing:.06em;
+  border:1px solid var(--line);border-radius:100px;padding:7px 14px;color:var(--dim);
+}
+.top .ev b{color:var(--accent);font-weight:500;font-size:14px;font-variant-numeric:tabular-nums}
+
+/* ── 今日 ─────────────────────────────── */
+.h1{
+  font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,38px);
+  line-height:1.4;margin:34px 0 0;letter-spacing:-.01em;
+}
+.sub{margin-top:12px;font-size:13px;color:var(--dim);letter-spacing:.04em}
+.cards{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:34px}
+.card{background:var(--ink);padding:clamp(18px,2.4vw,26px);position:relative;transition:background .4s var(--ease)}
+.card:hover{background:var(--ink-2)}
+.card-h{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.card-k{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.card-k b{color:var(--accent);font-weight:400}
+.card-k i{width:20px;height:1px;background:var(--line);display:inline-block}
+.card h3{font-family:var(--serif);font-weight:300;font-size:clamp(18px,2.1vw,23px);line-height:1.55;margin-top:14px}
+.card .m{margin-top:10px;font-size:11.5px;letter-spacing:.04em;color:var(--dim);font-variant-numeric:tabular-nums}
+.card .go{
+  display:inline-flex;align-items:center;gap:8px;margin-top:18px;
+  font-size:11.5px;letter-spacing:.1em;color:var(--cream);
+  border-bottom:1px solid rgba(240,237,221,.3);padding-bottom:3px;transition:.35s var(--ease);
+}
+.card .go:hover{color:var(--accent);border-color:var(--accent)}
+.card .go svg{width:11px;height:11px}
+.card.tag-line{border-left:2px solid var(--accent)}
+
+/* 动作卡里的勾选 */
+.acts{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:1px;background:var(--line)}
+.acts li{background:var(--ink)}
+.acts label{
+  display:flex;align-items:flex-start;gap:12px;padding:12px 2px;
+  font-size:13px;line-height:1.65;color:rgba(240,237,221,.82);cursor:pointer;
+}
+.acts input{appearance:none;width:15px;height:15px;border:1px solid rgba(240,237,221,.35);flex:0 0 auto;margin-top:3px;position:relative;transition:.3s var(--ease)}
+.acts input:checked{background:var(--green);border-color:var(--green)}
+.acts input:checked::after{content:"";position:absolute;left:4px;top:1px;width:5px;height:9px;border:1.5px solid var(--ink);border-top:0;border-left:0;transform:rotate(42deg)}
+.acts input:checked ~ span{color:var(--dim);text-decoration:line-through}
+.acts span{flex:1}
+
+/* 复习 */
+.review{margin-top:16px;border:1px solid var(--line);padding:18px}
+.review .q{font-family:var(--serif);font-size:17px;line-height:1.7}
+.review .btns{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.pill{
+  border:1px solid rgba(240,237,221,.22);border-radius:100px;padding:7px 14px;
+  font-size:11.5px;letter-spacing:.06em;color:rgba(240,237,221,.8);transition:.3s var(--ease);
+}
+.pill:hover{border-color:var(--cream);color:var(--cream)}
+.pill.on{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+
+/* 本周条 */
+.week{margin-top:34px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--line)}
+.week .lab{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.bars{display:flex;gap:5px}
+.bars i{width:26px;height:5px;background:rgba(240,237,221,.16);display:block}
+.bars i.f{background:var(--accent)}
+.bars i.now{background:var(--green)}
+.week .n{font-size:11.5px;color:var(--dim);font-variant-numeric:tabular-nums}
+
+/* ── 题库 ─────────────────────────────── */
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:28px}
+.search{
+  display:flex;align-items:center;gap:9px;flex:1 1 260px;max-width:380px;
+  border:1px solid var(--line);padding:9px 13px;
+}
+.search svg{width:13px;height:13px;color:var(--dim);flex:0 0 auto}
+.search input{
+  background:none;border:0;outline:none;color:var(--cream);font-size:13px;width:100%;
+}
+.search input::placeholder{color:rgba(240,237,221,.32)}
+.tools .pill{font-size:11px}
+.qlist{margin-top:24px;border-top:1px solid var(--line)}
+.qrow{border-bottom:1px solid var(--line)}
+.qrow a{
+  display:grid;grid-template-columns:8px minmax(0,1fr) 108px 84px;gap:12px;align-items:center;
+  padding:13px 2px;font-size:13.5px;color:rgba(240,237,221,.84);transition:.3s var(--ease);
+}
+.qrow a:hover{color:var(--cream);background:rgba(240,237,221,.04)}
+.qrow s{width:6px;height:6px;border-radius:50%;border:1px solid rgba(240,237,221,.3)}
+.qrow.live s{background:var(--accent);border-color:var(--accent)}
+.qrow .dom{font-size:10.5px;letter-spacing:.06em;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qrow .st{font-size:10.5px;letter-spacing:.04em;color:var(--dim);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.qrow.live .st{color:var(--cream)}
+.qrow .mine{color:var(--green)}
+.empty{padding:40px 0;font-size:13px;color:var(--dim)}
+
+/* ── 能力剖面 ─────────────────────────── */
+.profile{margin-top:30px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
+.prow{background:var(--ink);padding:18px clamp(14px,2vw,22px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,332px);gap:22px;align-items:center}
+.prow .pn{font-size:12.5px;letter-spacing:.04em;color:rgba(240,237,221,.8)}
+.prow .pd{font-size:10.5px;color:var(--dim);margin-top:4px;letter-spacing:.04em}
+.grid{display:flex;flex-wrap:wrap;gap:3px}
+.grid i{width:10px;height:10px;background:rgba(240,237,221,.14);display:block}
+.grid i.r{background:rgba(240,237,221,.46)}
+.grid i.w{background:var(--accent)}
+.legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px;font-size:11px;color:var(--dim);letter-spacing:.04em}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend b{width:10px;height:10px;display:block;background:rgba(240,237,221,.14)}
+.legend b.r{background:rgba(240,237,221,.46)}
+.legend b.w{background:var(--accent)}
+.prow .pn b{color:var(--cream);font-weight:500;font-variant-numeric:tabular-nums}
+@media (max-width:820px){.prow{grid-template-columns:1fr;gap:14px}.grid i{width:9px;height:9px}}
+
+/* ── 运维 ─────────────────────────────── */
+.ops{margin-top:30px;border:1px solid var(--line)}
+.ops-h{display:grid;grid-template-columns:minmax(0,1fr) 120px 92px;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.op{display:grid;grid-template-columns:minmax(0,1fr) 120px 92px;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);font-size:13px;align-items:center}
+.op:last-child{border-bottom:0}
+.op .t{color:rgba(240,237,221,.86)}
+.op .t small{display:block;font-size:10.5px;color:var(--dim);margin-top:3px;letter-spacing:.03em}
+.op .when{font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums}
+.op .st{font-size:10.5px;letter-spacing:.08em;text-align:right}
+.st.ok{color:var(--green)}
+.st.warn{color:var(--accent)}
+.st.idle{color:var(--dim)}
+.op.bad{background:rgba(255,69,18,.06);border-left:2px solid var(--accent)}
+@media (max-width:720px){
+  .ops-h{display:none}
+  .op{grid-template-columns:1fr auto;row-gap:4px}
+  .op .when{grid-column:1;font-size:10.5px}
+}
+
+/* 演示提示条 */
+.demo{
+  margin-top:36px;border:1px dashed rgba(240,237,221,.24);padding:14px 16px;
+  font-size:11.5px;line-height:1.8;color:var(--dim);
+}
+.demo b{color:rgba(240,237,221,.8);font-weight:400}
+
+/* 窄屏：栏改成顶部 */
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .rail{position:static;height:auto;flex-direction:row;align-items:center;gap:14px;
+    padding:14px var(--pad);border-right:0;border-bottom:1px solid var(--line);overflow-x:auto}
+  .nav{flex-direction:row;gap:6px;margin:0}
+  .nav button{padding:8px 11px;white-space:nowrap;font-size:12px}
+  .nav button.on::before{display:none}
+  .nav em{display:none}
+  .brand small,.rail-foot{display:none}
+  .main{padding-top:18px}
+  .qrow a{grid-template-columns:8px minmax(0,1fr) 76px}
+  .qrow .dom{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <div class="rail">
+    <div class="brand">芽课<span>。</span><small>workbench · demo</small></div>
+    <nav class="nav" id="nav">
+      <button data-view="today" class="on">今日 <em>08:30</em></button>
+      <button data-view="bank">题库 <em id="navBank">26</em></button>
+      <button data-view="profile">能力剖面 <em id="navProf">28</em></button>
+      <button data-view="ops">运维 <em>6</em></button>
+    </nav>
+    <div class="rail-foot">
+      <span><span class="dot"></span>周 12 · 2026</span>
+      <a href="index.html#map">← 回到课程地图</a>
+      <a href="index.html">官网首页</a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="top">
+      <div class="who">芽课工作台 · <b id="todayLabel">今日</b></div>
+      <div class="ev"><b id="evNum">0</b> 条证据 · 你亲手写下的</div>
+    </div>
+
+    <!-- 今日 -->
+    <section id="v-today">
+      <h1 class="h1">今天只做三件事。<br>读一格、做一个动作、复习一个概念。</h1>
+      <p class="sub">2026 · 第 12 周 · 第 07 格 · 预计 24 分钟</p>
+      <div class="cards" id="cards"></div>
+      <div class="week">
+        <span class="lab">本周</span>
+        <div class="bars" id="weekBars"></div>
+        <span class="n" id="weekN">3 / 5 天有证据</span>
+      </div>
+      <div class="demo">
+        <b>这是演示版。</b>所有状态存在你自己的浏览器里，不联网、不上传。
+        在任意一格写下句子，右上角的证据数才会变——这正是这套产品唯一的计分方式。
+      </div>
+    </section>
+
+    <!-- 题库 -->
+    <section id="v-bank" hidden>
+      <h1 class="h1">题库</h1>
+      <p class="sub">所有知识点可搜可筛。点开就是正文，读完写一句才算过。</p>
+      <div class="tools">
+        <label class="search">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="5"/><path d="M10.8 10.8L14 14"/></svg>
+          <input id="q" type="search" placeholder="搜知识点、领域或关键词" autocomplete="off" aria-label="搜索知识点">
+        </label>
+        <button class="pill on" data-f="all">全部 <em id="cAll">26</em></button>
+        <button class="pill" data-f="live">已讲 <em id="cLive">18</em></button>
+        <button class="pill" data-f="mine">我写过的 <em id="cMine">0</em></button>
+        <button class="pill" data-f="soon">还没开 <em id="cSoon">8</em></button>
+      </div>
+      <div class="qlist" id="qlist"></div>
+      <p class="empty" id="qEmpty" hidden>没有匹配的知识点。换个词试试。</p>
+    </section>
+
+    <!-- 能力剖面 -->
+    <section id="v-profile" hidden>
+      <h1 class="h1">能力剖面</h1>
+      <p class="sub">193 格全在这儿。灰色是读过，红色是你写过。空的是还没碰。</p>
+      <div class="legend">
+        <span><b></b>还没碰</span>
+        <span><b class="r"></b>读过 · 不算证据</span>
+        <span><b class="w"></b>写过 · 唯一证据</span>
+      </div>
+      <div class="profile" id="profile"></div>
+      <div class="demo">
+        <b>为什么只有红色算数。</b>读过会忘，答过会猜，用过不进系统。
+        只有你写下的那一句，能证明你真的想过——所以剖面里只给它上色。
+      </div>
+    </section>
+
+    <!-- 运维 -->
+    <section id="v-ops" hidden>
+      <h1 class="h1">运维</h1>
+      <p class="sub">12 个任务跑没跑、停几天。异常自动置顶，不静默失败。</p>
+      <div class="ops">
+        <div class="ops-h"><span>任务</span><span>上次</span><span>状态</span></div>
+        <div class="op bad">
+          <div class="t">索引重建 · 知识库<small>上次成功后文档有 3 处更新，新内容还搜不到</small></div>
+          <div class="when">昨天 03:00</div><div class="st warn">待跑</div>
+        </div>
+        <div class="op"><div class="t">08:30 每日一封<small>已发 214 人 · 打开率 41%</small></div><div class="when">今天 08:30</div><div class="st ok">已完成</div></div>
+        <div class="op"><div class="t">21:30 蒸馏<small>汇总当天痕迹，更新能力剖面</small></div><div class="when">昨天 21:30</div><div class="st ok">已完成</div></div>
+        <div class="op"><div class="t">复习排期<small>间隔 1 / 3 / 7 / 21 天</small></div><div class="when">今天 08:30</div><div class="st ok">已完成</div></div>
+        <div class="op"><div class="t">备份 · 全量<small>保留 30 天</small></div><div class="when">今天 02:00</div><div class="st ok">已完成</div></div>
+        <div class="op"><div class="t">周报生成<small>周一 09:00 触发</small></div><div class="when">周一 09:00</div><div class="st idle">未到时间</div></div>
+      </div>
+      <div class="demo">
+        <b>这一页的存在理由：</b>AI 功能最常见的失败不是效果差，是某个环节静默停了三天没人知道。
+        所以异常必须自己浮到最上面。
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $ = id => document.getElementById(id);
+
+/* ── 本地状态 ───────────────────────────── */
+const BK = 'yc_bench_v1';
+const ND = 'yc_notes_v1';
+const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k) || 'null') ?? d; } catch (e) { return d; } };
+const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+let bench = load(BK, {acts: {}, review: ''});
+const notes = load(ND, {});
+const savedUp = n => (notes[n.id] || []).length;
+
+/* 证据总数：只数你写下的句子 */
+const evTotal = Object.values(notes).reduce((s, l) => s + l.length, 0);
+$('evNum').textContent = evTotal;
+
+/* 今日的三张卡：挑第一格「已讲但你没写过」的 */
+const PICK = NODES.find(n => n.read > 0 && !savedUp(n)) || NODES[0];
+const REVIEW = NODES.find(n => n.read > 0 && n.id !== PICK.id && !savedUp(n)) || NODES[1];
+
+$('cards').innerHTML = `
+  <div class="card tag-line">
+    <div class="card-h">
+      <div class="card-k"><b>必读</b> <i></i> ${esc(PICK.mod)}</div>
+      <div class="card-k">${savedUp(PICK) ? '你写过 ' + savedUp(PICK) + ' 句' : '还没写'}</div>
+    </div>
+    <h3>${esc(PICK.t)}</h3>
+    <div class="m">第 ${PICK.idx + 1} / ${MODULES[PICK.mid].nodes.length} 格 · ${PICK.n} 格 · 约 8 分钟 · ${esc(PICK.dom)}</div>
+    <a class="go" href="doc.html?k=${PICK.id}">开始读
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 6h10M7 2l4 4-4 4"/></svg>
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-h">
+      <div class="card-k"><b>动手</b> <i></i> 三十分钟内能做完</div>
+      <div class="card-k" id="actCount"></div>
+    </div>
+    <h3>把这一格翻译成你自己的判断</h3>
+    <ul class="acts" id="acts">
+      <li><label><input type="checkbox" data-i="0"><span>用一句话写下这一格的主张，不超过 30 字</span></label></li>
+      <li><label><input type="checkbox" data-i="1"><span>举一个你见过的、跟它相反的例子</span></label></li>
+      <li><label><input type="checkbox" data-i="2"><span>说清「什么时候别用」，而不是「什么时候能用」</span></label></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-h">
+      <div class="card-k"><b>复习</b> <i></i> 间隔 1 天</div>
+      <div class="card-k">${esc(REVIEW.dom)}</div>
+    </div>
+    <h3>${esc(REVIEW.t)}</h3>
+    <div class="m">还记不记得这一格讲什么？想不起来就点开，不丢人。</div>
+    <div class="review">
+      <div class="q">先别点开。用一句话说出它的结论。</div>
+      <div class="btns" id="revBtns">
+        <button class="pill" data-r="忘了">想不起来</button>
+        <button class="pill" data-r="模糊">有点印象</button>
+        <button class="pill" data-r="记得">说得出</button>
+        <a class="pill" href="doc.html?k=${REVIEW.id}">点开看</a>
+      </div>
+    </div>
+  </div>`;
+
+/* 勾选状态 */
+const acts = [...document.querySelectorAll('#acts input')];
+function paintActs(){
+  acts.forEach(i => { i.checked = !!bench.acts[i.dataset.i]; });
+  const n = acts.filter(i => i.checked).length;
+  $('actCount').textContent = n ? n + ' / 3 已完成' : '0 / 3';
+  save(BK, bench);
+}
+acts.forEach(i => i.addEventListener('change', () => { bench.acts[i.dataset.i] = i.checked; paintActs(); }));
+paintActs();
+
+/* 复习评价 */
+document.querySelectorAll('#revBtns .pill[data-r]').forEach(b => {
+  if (bench.review === b.dataset.r) b.classList.add('on');
+  b.addEventListener('click', () => {
+    bench.review = b.dataset.r;
+    document.querySelectorAll('#revBtns .pill[data-r]').forEach(x => x.classList.toggle('on', x === b));
+    save(BK, bench);
+  });
+});
+
+/* 本周条：写了几天算几天，其余留空 */
+const days = Math.min(7, 3 + (evTotal > 0 ? 1 : 0) + (acts.filter(i => i.checked).length === 3 ? 1 : 0));
+$('weekBars').innerHTML = Array.from({length: 7}, (_, i) =>
+  `<i class="${i < days ? (i === 6 ? 'now' : 'f') : ''}"></i>`).join('');
+$('weekN').textContent = days + ' / 7 天有动作';
+
+/* ── 题库 ───────────────────────────────── */
+const listEl = $('qlist');
+let filter = 'all', kw = '';
+function paintList(){
+  const k = kw.trim().toLowerCase();
+  let shown = 0;
+  listEl.innerHTML = NODES.filter(n => {
+    const okK = !k || (n.t + ' ' + n.kw + ' ' + n.dom + ' ' + n.mod).toLowerCase().includes(k);
+    const okF = filter === 'all' ? true
+      : filter === 'live' ? n.read > 0
+      : filter === 'mine' ? savedUp(n) > 0
+      : n.read === 0;
+    return okK && okF;
+  }).map(n => {
+    shown++;
+    const mine = savedUp(n);
+    return `<div class="qrow ${n.read ? 'live' : ''}">
+      <a href="doc.html?k=${n.id}">
+        <s aria-hidden="true"></s>
+        <span>${esc(n.t)}</span>
+        <span class="dom">${esc(n.dom)}</span>
+        <span class="st ${mine ? 'mine' : ''}">${mine ? '写过 ' + mine : (n.read ? '已讲 ' + n.read + '/' + n.n : n.n + ' 格 · 未开')}</span>
+      </a>
+    </div>`;
+  }).join('');
+  $('qEmpty').hidden = shown > 0;
+}
+paintList();
+$('q').addEventListener('input', e => { kw = e.target.value; paintList(); });
+document.querySelectorAll('.tools .pill').forEach(b => b.addEventListener('click', () => {
+  filter = b.dataset.f;
+  document.querySelectorAll('.tools .pill').forEach(x => x.classList.toggle('on', x === b));
+  paintList();
+}));
+const nMine = NODES.filter(n => savedUp(n) > 0).length;
+$('cAll').textContent = NODES.length;
+$('cLive').textContent = NODES.filter(n => n.read > 0).length;
+$('cMine').textContent = nMine;
+const nSoon = NODES.filter(n => n.read === 0).length;
+$('cSoon').textContent = nSoon;
+// 全部写完时这个筛选恒为 0，收起来
+document.querySelector('.tools .pill[data-f="soon"]').hidden = nSoon === 0;
+$('navBank').textContent = NODES.length;
+$('navProf').textContent = TOTAL_READ;
+
+/* ── 能力剖面：每格一个小方块 ────────────── */
+$('profile').innerHTML = MODULES.map(m => `
+  <div class="prow">
+    <div>
+      <div class="pn">${esc(m.name)} <b>${m.read}</b> / ${m.n} 格</div>
+      <div class="pd">${esc(m.en)} · ${m.nodes.length} 个知识点</div>
+    </div>
+    <div class="grid">${m.nodes.flatMap(n => {
+      const written = savedUp(n) > 0;
+      return Array.from({length: n.n}, (_, i) =>
+        `<i class="${written && i < Math.min(n.n, n.read + 1) ? 'w' : (i < n.read ? 'r' : '')}"></i>`).join('');
+    }).join('')}</div>
+  </div>`).join('');
+
+/* ── 视图切换 ───────────────────────────── */
+const TITLES = {today: '今日', bank: '题库', profile: '能力剖面', ops: '运维'};
+$('nav').addEventListener('click', e => {
+  const b = e.target.closest('button[data-view]');
+  if (!b) return;
+  const v = b.dataset.view;
+  document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('on', x === b));
+  ['today', 'bank', 'profile', 'ops'].forEach(x => $('v-' + x).hidden = x !== v);
+  $('todayLabel').textContent = TITLES[v];
+  scrollTo({top: 0, behavior: 'smooth'});
+  history.replaceState(null, '', 'bench.html#' + v);
+});
+const hash = (location.hash || '').replace('#', '');
+if (TITLES[hash] && hash !== 'today') document.querySelector(`.nav button[data-view="${hash}"]`).click();
+</script>
+</body>
+</html>
