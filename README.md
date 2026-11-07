@@ -8,11 +8,13 @@
 
 ---
 
-## 线上预览
+## 线上地址
 
-<https://yake-learning-map-tzywuo7x.edgeone.cool>
+<https://yake-learning-map.app.workbuddy.host/?sharecode=YACEN34NZV>
 
-部署在 EdgeOne Pages。**该域名为预览域名，可直接访问时需带 token，且 token 会过期。** 绑定正式域名后无需 token（见下方「发布」）。
+托管在 WorkBuddy 应用托管（永久链接，无 token 过期）。首次访问带 `?sharecode=` 建立会话 Cookie，之后同源的 `data.js` / `docs.js` 等静态资源正常加载；裸域名不带 sharecode 会返回 403，属正常访问控制。
+
+> 早期曾用 EdgeOne Pages 预览域名（带 `eo_token`，数小时过期），已弃用。
 
 | 页面 | 说明 |
 | --- | --- |
@@ -90,12 +92,12 @@ rm -rf _pub && mkdir -p _pub
 cp index.html doc.html bench.html data.js docs.js privacy.html og.png robots.txt sitemap.xml _pub/
 ```
 
-然后用 EdgeOne Pages 部署 `_pub/` 目录。
+然后用「应用发布」把 `_pub/` 目录发布上线（会沿用已有的分享链接，内容原地覆盖）。
 
-**绑定正式域名后**，一条命令全局替换域名（`index.html` 头部注释里也留了同一段可复制命令）：
+若将来换域名，一条命令全局替换（`index.html` 头部注释里也留了同一段可复制命令）：
 
 ```bash
-cd 官网 && python -c "import io;[io.open(f,'w',encoding='utf-8').write(io.open(f,encoding='utf-8').read().replace('yake-learning-map-tzywuo7x.edgeone.cool','你的域名')) for f in ['index.html','doc.html','bench.html','privacy.html','robots.txt','sitemap.xml']]"
+cd 官网 && python -c "import io;[io.open(f,'w',encoding='utf-8').write(io.open(f,encoding='utf-8').read().replace('yake-learning-map.app.workbuddy.host','你的域名')) for f in ['index.html','doc.html','bench.html','privacy.html','robots.txt','sitemap.xml']]"
 ```
 
 另需把脚本里的 `CONTACT_EMAIL` 换成品牌邮箱。

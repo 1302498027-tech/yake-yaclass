@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yake-learning-map-tzywuo7x.edgeone.cool/sitemap.xml
+Sitemap: https://yake-learning-map.app.workbuddy.host/sitemap.xml
